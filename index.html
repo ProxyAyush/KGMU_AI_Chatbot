@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGMU Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main website content would go here -->
+    <div class="main-content">
+        <h1>King George's Medical University</h1>
+        <p>Welcome to the official website of King George's Medical University, Lucknow, India.</p>
+        <!-- Your existing website content -->
+    </div>
+
+    <!-- Chatbot button -->
+    <div class="chat-button" id="chat-button">
+        <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Chat">
+    </div>
+
+    <!-- Chatbot container -->
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <div class="header-content">
+                <img src="https://kgmu.org/kgmu_website/static/img/logo.png" alt="KGMU Logo" class="logo">
+                <div class="header-text">
+                    <h3>KGMU Assistant</h3>
+                    <p>King George's Medical University</p>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <button id="new-chat-btn" title="New Chat">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button id="minimize-btn" title="Minimize">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button id="close-btn" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello! I'm the KGMU Assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <textarea id="chat-input" placeholder="Type your message..." rows="1"></textarea>
+            <button id="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js"></script>
+</body>
+</html>
