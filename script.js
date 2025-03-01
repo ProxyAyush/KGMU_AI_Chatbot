@@ -10,6 +10,33 @@ const newChatButton = document.getElementById('new-chat-btn');
 
 // Initialize the chat
 let chatHistory = [];
+const API_KEY = "AIzaSyD7xj6hW34Bdg9A2BuTVZR88M_vJac0CbU"; // Your Gemini API key
+const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+
+// System message for context
+const systemMessage = {
+    role: "system",
+    parts: [{
+        text: `You are KGMU Assistant, the official chatbot for King George's Medical University in Lucknow, India. 
+        
+Provide helpful, accurate, and concise information about:
+- Admissions process and requirements
+- Course offerings (MBBS, MD, MS, etc.)
+- Faculty information
+- Campus facilities
+- Research opportunities
+- Hospital services
+- Contact information
+- University history and achievements
+
+Be polite, professional, and helpful. Respond as an official representative of the university.
+Keep responses concise but informative. When mentioning URLs, use format: https://kgmu.org/[relevant-page]
+For complex inquiries, suggest contacting relevant departments directly with their contact information.
+
+When uncertain about specific details, acknowledge limitations and suggest official resources rather than providing potentially incorrect information.`
+    }]
+};
+
 let isOpen = false;
 
 // Event Listeners
@@ -71,7 +98,7 @@ function handleSendMessage() {
     showTypingIndicator();
     
     // Process message with AI
-    processMessageWithAI(message);
+    processMessageWithGemini(message);
 }
 
 // Add message to the chat
@@ -102,11 +129,18 @@ function appendMessage(sender, message) {
     // Scroll to bottom
     chatBody.scrollTop = chatBody.scrollHeight;
     
-    // Update chat history
-    chatHistory.push({
-        role: sender === 'user' ? 'user' : 'model',
-        parts: [{ text: message }]
-    });
+    // Store message in chat history
+    if (sender === 'user') {
+        chatHistory.push({
+            role: "user",
+            parts: [{ text: message }]
+        });
+    } else if (sender === 'bot') {
+        chatHistory.push({
+            role: "model",
+            parts: [{ text: message }]
+        });
+    }
 }
 
 // Convert URLs to clickable links
@@ -153,7 +187,7 @@ function removeTypingIndicator() {
 
 // Start a new chat
 function startNewChat() {
-    // Clear chat history
+    // Clear chat history (but keep system message)
     chatHistory = [];
     
     // Clear chat body
@@ -163,35 +197,32 @@ function startNewChat() {
     appendMessage('bot', 'Hello! I\'m the KGMU Assistant. How can I help you today?');
 }
 
-// Process message with Gemini AI
-async function processMessageWithAI(userMessage) {
+// Process message with Gemini API
+async function processMessageWithGemini(userMessage) {
     try {
-        // This is where you would integrate with the Gemini API
-        // For now, we'll use a mock response
-
-        // In a real implementation, you would call your backend here
-        // which would use the code template you provided for Gemini
+        // Prepare the message history for the API request
+        // First add the system message, then the chat history
+        const contents = [systemMessage];
         
-        // Simulate API delay (remove in production)
-        setTimeout(() => {
-            // Remove typing indicator
-            removeTypingIndicator();
-            
-            // Sample response (replace with actual API call)
-            const aiResponse = generateMockResponse(userMessage);
-            appendMessage('bot', aiResponse);
-        }, 1500);
+        // Add chat history for context
+        chatHistory.forEach(msg => {
+            contents.push(msg);
+        });
         
-        // In production, your code would look more like:
-        /*
-        const response = await fetch('/api/chat', {
+        // Make request to Gemini API
+        const response = await fetch(`${API_URL}?key=${API_KEY}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                message: userMessage,
-                history: chatHistory.slice(0, -1) // Exclude the just-added user message
+                contents: contents,
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 2048,
+                }
             }),
         });
         
@@ -200,45 +231,26 @@ async function processMessageWithAI(userMessage) {
         // Remove typing indicator
         removeTypingIndicator();
         
-        // Add AI response to chat
-        appendMessage('bot', data.response);
-        */
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            // Extract the AI response text
+            const aiResponseText = data.candidates[0].content.parts[0].text;
+            
+            // Add AI response to chat
+            appendMessage('bot', aiResponseText);
+        } else {
+            // Handle error case
+            console.error('Unexpected API response format:', data);
+            appendMessage('bot', 'Sorry, I encountered an error processing your request. Please try again later.');
+        }
         
     } catch (error) {
-        console.error('Error processing message:', error);
+        console.error('Error processing message with Gemini API:', error);
         
         // Remove typing indicator
         removeTypingIndicator();
         
         // Show error message
-        appendMessage('bot', 'Sorry, I encountered an error. Please try again later.');
-    }
-}
-
-// Mock response generator (remove in production)
-function generateMockResponse(message) {
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-        return 'Hello! How can I assist you with King George\'s Medical University information today?';
-    } else if (lowerMessage.includes('admission') || lowerMessage.includes('apply')) {
-        return 'For admissions at KGMU, you need to visit our admissions office or check the details at <a href="https://kgmu.org/admission" target="_blank">https://kgmu.org/admission</a>. Applications for the next academic year typically open in April.';
-    } else if (lowerMessage.includes('course') || lowerMessage.includes('program')) {
-        return 'KGMU offers various undergraduate and postgraduate medical courses including MBBS, MD, MS, and specialized courses. You can find the complete list at <a href="https://kgmu.org/courses" target="_blank">https://kgmu.org/courses</a>';
-    } else if (lowerMessage.includes('location') || lowerMessage.includes('address')) {
-        return 'King George\'s Medical University is located in Lucknow, Uttar Pradesh, India. The full address is: King George\'s Medical University, Shah Mina Road, Chowk, Lucknow, Uttar Pradesh 226003.';
-    } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone')) {
-        return 'You can contact KGMU at the following numbers: +91-522-2257540, +91-522-2258543. Alternatively, you can email at registrar@kgmu.ac.in';
-    } else if (lowerMessage.includes('faculty') || lowerMessage.includes('professor')) {
-        return 'KGMU has highly qualified faculty members across various departments. You can view the faculty directory at <a href="https://kgmu.org/faculty" target="_blank">https://kgmu.org/faculty</a>';
-    } else if (lowerMessage.includes('hostel') || lowerMessage.includes('accommodation')) {
-        return 'KGMU provides hostel facilities for both undergraduate and postgraduate students. The allocation is usually done based on merit and availability. For more details, please contact the hostel warden office.';
-    } else if (lowerMessage.includes('fee') || lowerMessage.includes('payment')) {
-        return 'The fee structure varies based on the course you are applying for. You can find the detailed fee structure on our website under the admissions section. KGMU accepts payments online through the student portal.';
-    } else if (lowerMessage.includes('history')) {
-        return 'King George\'s Medical University was established in 1911 and has a rich history of medical education and research. It was originally named King George\'s Medical College and was later upgraded to a university in 2002.';
-    } else {
-        return 'Thank you for your question. As a KGMU assistant, I can help you with information about admissions, courses, facilities, faculty, and other aspects of King George\'s Medical University. Could you please provide more details about what you\'re looking for?';
+        appendMessage('bot', 'Sorry, I encountered an error connecting to my knowledge base. Please try again later.');
     }
 }
 
@@ -247,4 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adjust textarea height on load
     chatInput.style.height = 'auto';
     chatInput.style.height = (chatInput.scrollHeight) + 'px';
+    
+    // Add system message to the context (not displayed to user)
+    // chatHistory.push(systemMessage);
 });
