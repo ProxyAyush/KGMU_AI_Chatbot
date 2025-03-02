@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Direct call to Google's Generative AI API
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateMessage?key=${API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
             
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
             
