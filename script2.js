@@ -118,89 +118,84 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    // Function to call Gemini API
-    async function callGeminiAPI(userMessage) {
-        try {
-            // Create request content
-            const requestBody = {
-                contents: [
-                    {
-                        parts: [
-                            {
-                                text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously. Keep responses concise and relevant."
-                            }
-                        ]
-                    }
-                ],
-                generationConfig: {
-                    temperature: 0.7,
-                    topP: 0.95,
-                    topK: 40,
-                    maxOutputTokens: 1024
-                }
-            };
+// Function to call Gemini API
+async function callGeminiAPI(userMessage) {
+    try {
+        // Create an array to hold all the messages
+        const parts = [];
+        
+        // Add the instructions as a user message
+        parts.push({
+            text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously. Keep responses concise and relevant."
+        });
+        
+        // Add conversation history if available
+        if (messages.length > 0) {
+            let contextText = "Previous conversation:\n";
             
-            // Add message history for context if available
-            if (messages.length > 0) {
-                // Add the conversation history to the request
-                let contextContent = {
-                    parts: [{ text: "Previous conversation:\n" }]
-                };
-                
-                // Add each message to the context
-                messages.forEach(msg => {
-                    const role = msg.role === "user" ? "User" : "Assistant";
-                    contextContent.parts[0].text += `${role}: ${msg.parts[0].text}\n`;
-                });
-                
-                // Add current user message
-                contextContent.parts[0].text += `\nUser's current question: ${userMessage}\n\nRespond to the user's current question based on this context:`;
-                
-                // Add this context to the request
-                requestBody.contents.push(contextContent);
-            } else {
-                // If no history, just add the current question
-                requestBody.contents.push({
-                    parts: [{ text: userMessage }]
-                });
-            }
-            
-            // Direct call to Google's Generative AI API
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-            
-            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
-            
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestBody)
+            // Add each message to the context
+            messages.forEach(msg => {
+                const role = msg.role === "user" ? "User" : "Assistant";
+                contextText += `${role}: ${msg.parts[0].text}\n`;
             });
             
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error Details:', errorData);
-                throw new Error(`API request failed: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            console.log("API Response:", data);
-            
-            // Extract text from the response
-            if (data.candidates && data.candidates[0] && data.candidates[0].content && 
-                data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Unexpected API response format');
-            }
-            
-        } catch (error) {
-            console.error('API call error:', error);
-            throw error;
+            // Add this context
+            parts.push({ text: contextText });
         }
+        
+        // Add current user message
+        parts.push({ text: `User's current question: ${userMessage}` });
+        
+        // Build the request body
+        const requestBody = {
+            contents: [
+                {
+                    parts: parts
+                }
+            ],
+            generationConfig: {
+                temperature: 0.7,
+                topP: 0.95,
+                topK: 40,
+                maxOutputTokens: 1024
+            }
+        };
+        
+        // Direct call to Google's Generative AI API
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+        
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('API Error Details:', errorData);
+            throw new Error(`API request failed: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("API Response:", data);
+        
+        // Extract text from the response
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && 
+            data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+            return data.candidates[0].content.parts[0].text;
+        } else {
+            throw new Error('Unexpected API response format');
+        }
+        
+    } catch (error) {
+        console.error('API call error:', error);
+        throw error;
     }
-
+}
     // Function to add user message to UI
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
