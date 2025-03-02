@@ -4,62 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KGMU Chatbot</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' https://cdn-icons-png.flaticon.com https://kgmu.org data:; connect-src https://generativelanguage.googleapis.com;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Main website content would go here -->
-    <div class="main-content">
-        <h1>King George's Medical University</h1>
-        <p>Welcome to the official website of King George's Medical University, Lucknow, India.</p>
-        <!-- Your existing website content -->
-    </div>
-
-    <!-- Chatbot button -->
+    <!-- Chat Button -->
     <div class="chat-button" id="chat-button">
-        <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Chat">
+        <i class="fas fa-comments"></i>
     </div>
 
-    <!-- Chatbot container -->
+    <!-- Chat Container -->
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
             <div class="header-content">
-                <img src="https://kgmu.org/kgmu_website/static/img/logo.png" alt="KGMU Logo" class="logo">
+                <img src="https://kgmu.org/kgmu_media/2023/08/uplogo1-removebg-preview-150x150.png" alt="KGMU Logo" class="logo">
                 <div class="header-text">
                     <h3>KGMU Assistant</h3>
-                    <p>King George's Medical University</p>
+                    <p>King George's Medical University, Lucknow</p>
                 </div>
             </div>
-            <div class="header-buttons">
-                <button id="new-chat-btn" title="New Chat">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button id="minimize-btn" title="Minimize">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button id="close-btn" title="Close">
-                    <i class="fas fa-times"></i>
-                </button>
+            <div class="header-actions">
+                <button id="new-chat-btn" class="action-btn"><i class="fas fa-plus"></i></button>
+                <button id="close-chat-btn" class="action-btn"><i class="fas fa-times"></i></button>
             </div>
         </div>
+
         <div class="chat-body" id="chat-body">
-            <div class="message bot-message">
+            <div class="chat-message bot">
                 <div class="message-content">
-                    <p>Hello! I'm the KGMU Assistant. How can I help you today?</p>
+                    <p>Hello! I'm KGMU Assistant. How can I help you today?</p>
                 </div>
             </div>
         </div>
-        <div class="chat-input-container">
-            <textarea id="chat-input" placeholder="Type your message..." rows="1"></textarea>
-            <button id="send-btn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+
+        <div class="chat-footer">
+            <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="script1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/6.0.1/autosize.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
