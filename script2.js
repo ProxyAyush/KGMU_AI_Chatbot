@@ -11,16 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // API Key - In production, this should be secured
     const API_KEY = "AIzaSyD7xj6hW34Bdg9A2BuTVZR88M_vJac0CbU";
     
-    // System Prompt - Customize this for your university chatbot
-    const SYSTEM_PROMPT = {
-        role: "system",
-        parts: [{
-            text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously to all inquiries. Keep responses concise and relevant. If you don't know something specific about KGMU, be honest about your limitations but try to provide general guidance when possible."
-        }]
-    };
-    
-    // Chat History - Initialize with system prompt
-    let chatHistory = [SYSTEM_PROMPT];
+    // Chat History - Store messages for context
+    let messages = [];
     
     // Initialize autosize for textarea
     autosize(userInput);
@@ -39,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // New chat functionality
     newChatButton.addEventListener('click', () => {
-        // Reset chat history to only contain system prompt
-        chatHistory = [SYSTEM_PROMPT];
+        // Reset chat history
+        messages = [];
         
         // Clear chat UI
         chatBody.innerHTML = '';
@@ -80,6 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add user message to UI
         addUserMessage(message);
         
+        // Add to messages array for context
+        messages.push({
+            role: "user",
+            parts: [{ text: message }]
+        });
+        
         // Clear input field
         userInput.value = '';
         autosize.update(userInput);
@@ -90,15 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show typing indicator
         showTypingIndicator();
         
-        // Add to chat history (only user messages get added here)
-        chatHistory.push({
-            role: "user",
-            parts: [{ text: message }]
-        });
-        
         try {
             // Call the Gemini API
-            const response = await callGeminiAPI();
+            const response = await callGeminiAPI(message);
             
             // Remove typing indicator
             removeTypingIndicator();
@@ -106,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add bot response to UI
             addBotMessage(response);
             
-            // Add model response to history
-            chatHistory.push({
+            // Add response to messages array
+            messages.push({
                 role: "model",
                 parts: [{ text: response }]
             });
@@ -127,30 +119,73 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to call Gemini API
-    async function callGeminiAPI() {
+    async function callGeminiAPI(userMessage) {
         try {
+            // Create request content
+            const requestBody = {
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously. Keep responses concise and relevant."
+                            }
+                        ]
+                    }
+                ],
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 1024
+                }
+            };
+            
+            // Add message history for context if available
+            if (messages.length > 0) {
+                // Add the conversation history to the request
+                let contextContent = {
+                    parts: [{ text: "Previous conversation:\n" }]
+                };
+                
+                // Add each message to the context
+                messages.forEach(msg => {
+                    const role = msg.role === "user" ? "User" : "Assistant";
+                    contextContent.parts[0].text += `${role}: ${msg.parts[0].text}\n`;
+                });
+                
+                // Add current user message
+                contextContent.parts[0].text += `\nUser's current question: ${userMessage}\n\nRespond to the user's current question based on this context:`;
+                
+                // Add this context to the request
+                requestBody.contents.push(contextContent);
+            } else {
+                // If no history, just add the current question
+                requestBody.contents.push({
+                    parts: [{ text: userMessage }]
+                });
+            }
+            
             // Direct call to Google's Generative AI API
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
             
-            // Filter out system messages from display history, but keep them in the API call
-            // This creates the payload according to the Gemini API format
+            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+            
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    contents: chatHistory.filter(msg => msg.role !== "system" || chatHistory.indexOf(msg) === 0)
-                })
+                body: JSON.stringify(requestBody)
             });
             
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('API Error:', errorData);
+                console.error('API Error Details:', errorData);
                 throw new Error(`API request failed: ${response.status}`);
             }
             
             const data = await response.json();
+            console.log("API Response:", data);
             
             // Extract text from the response
             if (data.candidates && data.candidates[0] && data.candidates[0].content && 
