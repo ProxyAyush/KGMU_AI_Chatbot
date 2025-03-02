@@ -118,84 +118,84 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-// Function to call Gemini API
-async function callGeminiAPI(userMessage) {
-    try {
-        // Create an array to hold all the messages
-        const parts = [];
-        
-        // Add the instructions as a user message
-        parts.push({
-            text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously. Keep responses concise and relevant."
-        });
-        
-        // Add conversation history if available
-        if (messages.length > 0) {
-            let contextText = "Previous conversation:\n";
+    async function callGeminiAPI(userMessage) {
+        try {
+            // Create request with proper role structure
+            const requestBody = {
+                contents: [],
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 1024
+                }
+            };
             
-            // Add each message to the context
-            messages.forEach(msg => {
-                const role = msg.role === "user" ? "User" : "Assistant";
-                contextText += `${role}: ${msg.parts[0].text}\n`;
+            // Add instruction as a user message
+            requestBody.contents.push({
+                role: "user",
+                parts: [{ 
+                    text: "You are the official virtual assistant for King George's Medical University in Lucknow, India. Your purpose is to provide helpful, accurate information about the university's programs, admissions, facilities, faculty, and student services. Respond professionally and courteously. Keep responses concise and relevant."
+                }]
             });
             
-            // Add this context
-            parts.push({ text: contextText });
-        }
-        
-        // Add current user message
-        parts.push({ text: `User's current question: ${userMessage}` });
-        
-        // Build the request body
-        const requestBody = {
-            contents: [
-                {
-                    parts: parts
-                }
-            ],
-            generationConfig: {
-                temperature: 0.7,
-                topP: 0.95,
-                topK: 40,
-                maxOutputTokens: 1024
+            // Add a model response to acknowledge the instructions
+            requestBody.contents.push({
+                role: "model",
+                parts: [{ 
+                    text: "I understand. I'll act as the KGMU virtual assistant and provide helpful information about the university."
+                }]
+            });
+            
+            // Add conversation history if available
+            if (messages.length > 0) {
+                // Add each message with its proper role
+                messages.forEach(msg => {
+                    requestBody.contents.push(msg);
+                });
             }
-        };
-        
-        // Direct call to Google's Generative AI API
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-        
-        console.log("Sending request:", JSON.stringify(requestBody, null, 2));
-        
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
-        });
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('API Error Details:', errorData);
-            throw new Error(`API request failed: ${response.status}`);
+            
+            // Add current user message
+            requestBody.contents.push({
+                role: "user",
+                parts: [{ text: userMessage }]
+            });
+            
+            // Direct call to Google's Generative AI API
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+            
+            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('API Error Details:', errorData);
+                throw new Error(`API request failed: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log("API Response:", data);
+            
+            // Extract text from the response
+            if (data.candidates && data.candidates[0] && data.candidates[0].content && 
+                data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                return data.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error('Unexpected API response format');
+            }
+            
+        } catch (error) {
+            console.error('API call error:', error);
+            throw error;
         }
-        
-        const data = await response.json();
-        console.log("API Response:", data);
-        
-        // Extract text from the response
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && 
-            data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-            return data.candidates[0].content.parts[0].text;
-        } else {
-            throw new Error('Unexpected API response format');
-        }
-        
-    } catch (error) {
-        console.error('API call error:', error);
-        throw error;
     }
-}
     // Function to add user message to UI
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
