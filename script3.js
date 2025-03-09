@@ -17,25 +17,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Premade responses for common inputs to avoid API calls
     const premadeResponses = {
         greetings: {
-            "hi": "Hello! How can I assist you with KGMU information today?",
-            "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University?",
-            "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you?",
-            "good morning": "Good morning! How may I assist you with KGMU information today?",
-            "good afternoon": "Good afternoon! What information about KGMU can I help you with?",
-            "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help?",
-            "howdy": "Howdy! I'm your KGMU Assistant. What would you like to know about the university?"
+            "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
+            "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?\"",
+            "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | \"हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?\"",
+            "good morning": "Good morning! How may I assist you with KGMU information today? | \"सुप्रभात! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?\"",
+            "good afternoon": "Good afternoon! What information about KGMU can I help you with? | \"शुभ दोपहर! मैं KGMU के बारे में किस जानकारी में आपकी सहायता कर सकता हूँ?\"",
+            "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help? | \"शुभ संध्या! मैं KGMU के बारे में आपके प्रश्नों का उत्तर देने के लिए यहाँ हूँ। मैं आपकी कैसे मदद कर सकता हूँ?\"",
         },
         farewells: {
-            "bye": "Goodbye! Feel free to return if you have more questions about KGMU.",
-            "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here.",
-            "see you": "See you later! Have a great day!",
-            "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask.",
-            "thanks": "You're welcome! I'm here anytime you need information about KGMU."
+            "bye": "Goodbye! Feel free to return if you have more questions about KGMU. | \"अलविदा! यदि आपके पास KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।\"",
+            "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here. | \"बातचीत के लिए धन्यवाद! यदि आपको KGMU के बारे में और जानकारी चाहिए, तो मैं यहाँ रहूँगा।\"",
+            "ok": "See you later! Have a great day! | \"फिर मिलेंगे! आपका दिन शुभ हो!\"",
+            "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | \"आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।\"",
+            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\""
         },
         basics: {
-            "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow.",
-            "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more.",
-            "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics."
+            "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow. | \"मैं KGMU सहायक हूँ, जिसे किंग जॉर्ज मेडिकल यूनिवर्सिटी, लखनऊ के बारे में जानकारी खोजने में आपकी मदद करने के लिए डिज़ाइन किया गया है।\"",
+            "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more. | \"मैं KGMU के विभागों, कार्यक्रमों, सुविधाओं, प्रवेश प्रक्रियाओं, संपर्क विवरण और बहुत कुछ के बारे में जानकारी प्रदान कर सकता हूँ।\"",
+            "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics. | \"मैं KGMU के बारे में जानकारी खोजने में आपकी मदद कर सकता हूँ। आप विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं या विश्वविद्यालय से संबंधित किसी भी अन्य विषय के बारे में पूछ सकते हैं।\""
         }
     };
 
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear chat UI
         chatBody.innerHTML = '';
         // Add welcome message
-        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today?");
+        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
         // Focus on input
         userInput.focus();
     });
