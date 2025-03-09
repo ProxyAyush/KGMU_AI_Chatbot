@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 removeTypingIndicator();
                 
                 // Show error message
-                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again later.");
+                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again later. | \"मुझे खेद है, मुझे अभी कनेक्ट करने में परेशानी हो रही है। कृपया बाद में पुनः प्रयास करें।\"");
                 console.error('Error calling Gemini API:', error);
             }
         }
