@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear chat UI
         chatBody.innerHTML = '';
         // Add welcome message
-        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | \"नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?\"");
+        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
         // Focus on input
         userInput.focus();
     });
