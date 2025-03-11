@@ -50,33 +50,6 @@ body {
     color: var(--primary-dark);
 }
 
-/* Info Button */
-.info-button {
-    position: fixed;
-    bottom: 30px;
-    right: 100px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--primary-light);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    z-index: 999;
-    transition: var(--transition);
-}
-
-.info-button i {
-    font-size: 24px;
-}
-
-.info-button:hover {
-    background-color: var(--primary-dark);
-    transform: scale(1.05);
-}
 
 /* Info Modal */
 .info-modal {
@@ -400,10 +373,7 @@ body {
         right: 20px;
     }
     
-    .info-button {
-        bottom: 20px;
-        right: 90px;
-    }
+
     
     .info-content {
         width: 90%;
