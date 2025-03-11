@@ -203,7 +203,7 @@ body {
     color: white;
     margin-left: 15px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     transition: var(--transition);
 }
 
