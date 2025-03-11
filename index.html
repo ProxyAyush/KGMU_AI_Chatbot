@@ -8,13 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!--Demo Image -->
-     <p>KGMU Demo Site</p>
+    <!--Demo Image Background -->
+    <div class="background-image"></div>
+    <p class="demo-title">KGMU Demo Site</p>
+    
+    <!-- Info Button -->
+    <div class="info-button" id="info-button">
+        <i class="fas fa-info"></i>
+    </div>
+    
+    <!-- Info Modal -->
+    <div class="info-modal" id="info-modal">
+        <div class="info-content">
+            <span class="close-info">&times;</span>
+            <h2>About the Developer</h2>
+            <p>Hi, I am Dr. Ayush Yadav from MBBS batch of 2019 KGMU and a part time Developer. This bot was my hobby project to improve KGMU website's SEO and ease of access for Patients, Faculty and Students.</p>
+            <p>We can connect on:</p>
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/ayush-yadav-kgmu" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/ayush.ism" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ProxyAyush" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    
     <!-- Chat Button -->
     <div class="chat-button" id="chat-button">
         <i class="fas fa-comments"></i>
     </div>
-
+    
     <!-- Chat Container -->
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
@@ -22,7 +44,7 @@
                 <img src="./iconsred.png" alt="KGMU Logo" class="logo">
                 <div class="header-text">
                     <h3>KGMU Assistant</h3>
-                    <p>King George's Medical University, Lucknow</p>
+                    <p class="university-name">King George's Medical University, Lucknow</p>
                 </div>
             </div>
             <div class="header-actions">
@@ -30,21 +52,18 @@
                 <button id="close-chat-btn" class="action-btn"><i class="fas fa-times"></i></button>
             </div>
         </div>
-
         <div class="chat-body" id="chat-body">
             <div class="chat-message bot">
                 <div class="message-content">
-                    <p>Hello! I'm KGMU Assistant. How can I help you today?</p>
+                    <p>Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?</p>
                 </div>
             </div>
         </div>
-
         <div class="chat-footer">
             <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
-            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+            <button id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/6.0.1/autosize.min.js"></script>
     <script src="script3.js"></script>
 </body>
