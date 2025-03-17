@@ -358,6 +358,22 @@ body {
     cursor: not-allowed;
 }
 
+/* Timer Styles */
+#timer-display {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-right: 10px; /* Space between timer and send button */
+    visibility: hidden; /* Initially hidden */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+    padding: 10px;
+}
+#timer-display.active{
+    visibility: visible;
+    opacity: 1;
+
+}
+
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .chat-container.active {
@@ -372,9 +388,10 @@ body {
         bottom: 20px;
         right: 20px;
     }
-    
 
-    
+
+
+
     .info-content {
         width: 90%;
         margin: 20% auto;
