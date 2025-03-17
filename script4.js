@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 removeTypingIndicator();
-                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again later.");
+                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
                 console.error('Error calling Gemini API:', error);
                 awaitingResponse = false; // Reset even on error
             }
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         timerInterval = setInterval(() => {
             timeLeft--;
-            timerDisplay.textContent = `Time left: ${timeLeft}s`;
+            timerDisplay.textContent = `Next reply in: ${timeLeft}s`;
             if (timeLeft <= 0) {
                 stopTimer();
             }
