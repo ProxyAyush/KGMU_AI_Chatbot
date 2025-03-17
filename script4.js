@@ -15,15 +15,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // API Key
     const API_KEY = "AIzaSyD7xj6hW34Bdg9A2BuTVZR88M_vJac0CbU";
 
-    // Chat History & Timer
+    // Chat State
     let messages = [];
     let timerInterval;
     let timerStarted = false;
     let awaitingResponse = false;
+    let isTimerRunning = false; // Flag to track if the timer is actively running
 
     // Premade responses
     const premadeResponses = {
-        greetings: {
+       greetings: {
             "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
             "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?\"",
             "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | \"हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?\"",
@@ -77,33 +78,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     newChatButton.addEventListener('click', () => {
-        messages = [];
-        chatBody.innerHTML = '';
-        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
-        userInput.focus();
-        resetTimer();  // Clear any existing timer
-        timerStarted = false;
-        awaitingResponse = false;
-        sendButton.disabled = true; // Disable initially
+        resetChat();
     });
 
     sendButton.addEventListener('click', sendMessage);
 
-     userInput.addEventListener('keydown', (e) => {
+    userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            if (!awaitingResponse) {
+            if (!awaitingResponse && !isTimerRunning) { // Check BOTH flags
                 sendMessage();
             }
         }
     });
 
     userInput.addEventListener('input', () => {
-        // Disable send button if: input is empty OR awaiting response
-        sendButton.disabled = userInput.value.trim() === '' || awaitingResponse;
+        updateSendButtonState(); // Call a function to update the button state
         autosize.update(userInput);
     });
 
+
+    // --- Helper Functions ---
 
     function checkPremadeResponse(message) {
       const lowerMessage = message.toLowerCase().trim();
@@ -120,30 +115,51 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
+    function resetChat() {
+        messages = [];
+        chatBody.innerHTML = '';
+        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
+        userInput.focus();
+        stopTimer();          // Stop any running timer
+        timerStarted = false;
+        awaitingResponse = false;
+        isTimerRunning = false; // Reset timer running flag
+        updateSendButtonState(); // Update button state after reset
+    }
+
+    function updateSendButtonState() {
+        // Disable if: awaiting response OR timer is running OR input is empty
+        sendButton.disabled = awaitingResponse || isTimerRunning || userInput.value.trim() === '';
+    }
+
+    // --- Main Message Handling ---
+
     async function sendMessage() {
         const message = userInput.value.trim();
-        if (message === '' || awaitingResponse) return; // Don't send if awaiting or empty
+        if (message === '' || awaitingResponse || isTimerRunning) return; // Check BOTH flags
 
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
-        userInput.value = ''; // Clear input *after* saving the message
+        userInput.value = '';
         autosize.update(userInput);
-        sendButton.disabled = true; // Disable send button immediately
         awaitingResponse = true;    // Set awaiting response flag
+        updateSendButtonState();     // Update button *after* setting flags
 
         const premadeResponse = checkPremadeResponse(message);
         if (premadeResponse) {
             setTimeout(() => {
                 addBotMessage(premadeResponse);
                 messages.push({ role: "model", parts: [{ text: premadeResponse }] });
-                awaitingResponse = false;  // Reset awaiting response
-                 if (!timerStarted) {
+                 awaitingResponse = false;
+                if (!timerStarted) {
                     startTimer();
                     timerStarted = true;
                 } else {
-                    resetTimer(); // Reset the timer
+                    resetTimer();
                 }
                 scrollToBottom();
+               updateSendButtonState();
+
             }, 500);
         } else {
             showTypingIndicator();
@@ -152,20 +168,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 removeTypingIndicator();
                 addBotMessage(response);
                 messages.push({ role: "model", parts: [{ text: response }] });
-                 awaitingResponse = false;  // Reset awaiting response
+                 awaitingResponse = false;
                 if (!timerStarted) {
                     startTimer();
                     timerStarted = true;
                 } else {
-                    resetTimer(); // Reset the timer
+                    resetTimer();
                 }
             } catch (error) {
                 removeTypingIndicator();
                 addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again later.");
                 console.error('Error calling Gemini API:', error);
-                 awaitingResponse = false; // Reset awaiting response even on error
+                awaitingResponse = false; // Reset even on error
             }
-            scrollToBottom();
+              scrollToBottom();
+              updateSendButtonState();
         }
     }
 
@@ -181,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     maxOutputTokens: 1024
                 }
             };
-
             requestBody.contents.push({
                 role: "user",
                 parts: [{
@@ -192,18 +208,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 role: "model",
                 parts: [{ text: "I understand. I'll act as the KGMU virtual assistant and provide helpful information about the university." }]
             });
-
             if (messages.length > 0) {
                 messages.forEach(msg => {
                     requestBody.contents.push(msg);
                 });
             }
-
             requestBody.contents.push({
                 role: "user",
                 parts: [{ text: userMessage }]
             });
-
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
 
@@ -231,11 +244,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('API call error:', error);
-            throw error; // Re-throw to be caught in sendMessage
+            throw error;
         }
     }
 
-    // --- Utility Functions (addBotMessage, etc.) ---
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message user';
@@ -260,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatBody.appendChild(messageDiv);
         scrollToBottom();
     }
-  function parseMarkdown(text) {
+    function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
         let formattedText = text;
         formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
@@ -298,7 +310,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }).join('\n');
         return formattedText;
     }
-
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
         typingDiv.className = 'typing-indicator';
@@ -344,32 +355,30 @@ document.addEventListener('DOMContentLoaded', function() {
     function startTimer() {
         let timeLeft = 30;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
-        timerDisplay.classList.add('active'); // Show timer
-        sendButton.disabled = true; // Keep send button disabled during countdown
+        timerDisplay.classList.add('active');
+        isTimerRunning = true; // Set timer running flag
+        updateSendButtonState(); // Update immediately
 
         timerInterval = setInterval(() => {
             timeLeft--;
             timerDisplay.textContent = `Time left: ${timeLeft}s`;
             if (timeLeft <= 0) {
                 stopTimer();
-                timerStarted = false; // Reset timerStarted on timeout
             }
         }, 1000);
     }
 
     function resetTimer() {
-        stopTimer(); // Stop any existing timer
-        startTimer(); // Start a new timer
+        stopTimer();
+        startTimer();
     }
 
     function stopTimer() {
         clearInterval(timerInterval);
-        timerDisplay.classList.remove('active'); // Hide timer
-        if (!awaitingResponse) { // Only re-enable if not awaiting a response
-            sendButton.disabled = false;
-        }
+        timerDisplay.classList.remove('active');
+        isTimerRunning = false; // Reset timer running flag
+        updateSendButtonState(); // Update after stopping
     }
-
 
     if (window.innerWidth <= 768) {
         chatContainer.classList.add('mobile');
