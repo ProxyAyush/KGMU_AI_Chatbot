@@ -7,42 +7,76 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatBody = document.getElementById('chat-body');
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-btn');
+    const infoButton = document.getElementById('info-button');
+    const infoModal = document.getElementById('info-modal');
+    const closeInfoBtn = document.querySelector('.close-info');
+    const timerDisplay = document.getElementById('timer-display');
 
-    // API Key - In production, this should be secured
+    // API Key
     const API_KEY = "AIzaSyD7xj6hW34Bdg9A2BuTVZR88M_vJac0CbU";
-    
-    // Chat History - Store messages for context
+
+    // Chat State
     let messages = [];
-    
-    // System prompt that will be loaded from file
-    let systemPrompt = "";
-    
-    // Initialize autosize for textarea
+    let timerInterval;
+    let timerStarted = false;
+    let awaitingResponse = false;
+    let isTimerRunning = false; // Flag to track if the timer is actively running
+    let systemPrompt = ""; // Variable to store the system prompt
+
+    // Load system prompt from file
+    fetch('system_prompt.txt')
+        .then(response => response.text())
+        .then(text => {
+            systemPrompt = text;
+            console.log("System prompt loaded successfully");
+        })
+        .catch(error => {
+            console.error('Error loading system prompt:', error);
+            systemPrompt = "You're an AI assistant for KGMU"; // Fallback prompt
+        });
+
+    // Premade responses
+    const premadeResponses = {
+        greetings: {
+            "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
+            "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?\"",
+            "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | \"हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?\"",
+            "good morning": "Good morning! How may I assist you with KGMU information today? | \"सुप्रभात! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?\"",
+            "good afternoon": "Good afternoon! What information about KGMU can I help you with? | \"शुभ दोपहर! मैं KGMU के बारे में किस जानकारी में आपकी सहायता कर सकता हूँ?\"",
+            "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help? | \"शुभ संध्या! मैं KGMU के बारे में आपके प्रश्नों का उत्तर देने के लिए यहाँ हूँ। मैं आपकी कैसे मदद कर सकता हूँ?\"",
+        },
+        farewells: {
+            "bye": "Goodbye! Feel free to return if you have more questions about KGMU. | \"अलविदा! यदि आपके पास KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।\"",
+            "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here. | \"बातचीत के लिए धन्यवाद! यदि आपको KGMU के बारे में और जानकारी चाहिए, तो मैं यहाँ रहूँगा।\"",
+            "ok": "See you later! Have a great day! | \"फिर मिलेंगे! आपका दिन शुभ हो!\"",
+            "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | \"आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।\"",
+            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\""
+        },
+        basics: {
+            "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow. | \"मैं KGMU सहायक हूँ, जिसे किंग जॉर्ज मेडिकल यूनिवर्सिटी, लखनऊ के बारे में जानकारी खोजने में आपकी मदद करने के लिए डिज़ाइन किया गया है।\"",
+            "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more. | \"मैं KGMU के विभागों, कार्यक्रमों, सुविधाओं, प्रवेश प्रक्रियाओं, संपर्क विवरण और बहुत कुछ के बारे में जानकारी प्रदान कर सकता हूँ।\"",
+            "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics. | \"मैं KGMU के बारे में जानकारी खोजने में आपकी मदद कर सकता हूँ। आप विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं या विश्वविद्यालय से संबंधित किसी भी अन्य विषय के बारे में पूछ सकते हैं।\""
+        }
+    };
+
+    // Initialize autosize
     autosize(userInput);
 
-    // Load system prompt from txt file
-    async function loadSystemPrompt() {
-        try {
-            const response = await fetch('system-prompt.txt');
-            if (!response.ok) {
-                throw new Error(`Failed to load system prompt: ${response.status}`);
-            }
-            systemPrompt = await response.text();
-            console.log("System prompt loaded successfully");
-            
-            // Initialize chat with welcome message after prompt is loaded
-            addBotMessage("Hello! I'm KGMU Assistant. How can I help you today?");
-        } catch (error) {
-            console.error('Error loading system prompt:', error);
-            systemPrompt = "You're an AI Assistant";  // Fallback prompt
-            addBotMessage("Hello! How can I help you today?");
-        }
-    }
-    
-    // Load the system prompt when the page loads
-    loadSystemPrompt();
+    // --- Event Listeners ---
+    infoButton.addEventListener('click', () => {
+        infoModal.style.display = 'block';
+    });
 
-    // Toggle chat window
+    closeInfoBtn.addEventListener('click', () => {
+        infoModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === infoModal) {
+            infoModal.style.display = 'none';
+        }
+    });
+
     chatButton.addEventListener('click', () => {
         chatContainer.classList.add('active');
         chatButton.style.display = 'none';
@@ -52,100 +86,116 @@ document.addEventListener('DOMContentLoaded', function() {
     closeButton.addEventListener('click', () => {
         chatContainer.classList.remove('active');
         chatButton.style.display = 'flex';
+        stopTimer();
     });
 
-    // New chat functionality
     newChatButton.addEventListener('click', () => {
-        // Reset chat history
-        messages = [];
-        
-        // Clear chat UI
-        chatBody.innerHTML = '';
-        
-        // Add welcome message
-        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today?");
-        
-        // Focus on input
-        userInput.focus();
+        resetChat();
     });
 
-    // Send message on button click
     sendButton.addEventListener('click', sendMessage);
 
-    // Send message on Enter key (but allow Shift+Enter for new line)
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            sendMessage();
+            if (!awaitingResponse && !isTimerRunning) { // Check BOTH flags
+                sendMessage();
+            }
         }
     });
 
-    // Auto-disable send button when input is empty
     userInput.addEventListener('input', () => {
-        sendButton.disabled = userInput.value.trim() === '';
-        
-        // Adjust textarea height
+        updateSendButtonState(); // Call a function to update the button state
         autosize.update(userInput);
     });
 
-    // Function to send user message
+    // --- Helper Functions ---
+    function checkPremadeResponse(message) {
+        const lowerMessage = message.toLowerCase().trim();
+        for (const category in premadeResponses) {
+            for (const key in premadeResponses[category]) {
+                if (lowerMessage === key || lowerMessage === key + "!") {
+                    return premadeResponses[category][key];
+                }
+            }
+        }
+        if (lowerMessage.includes("thank") && lowerMessage.includes("you")) {
+            return premadeResponses.farewells["thank you"];
+        }
+        return null;
+    }
+
+    function resetChat() {
+        messages = [];
+        chatBody.innerHTML = '';
+        addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
+        userInput.focus();
+        stopTimer();          // Stop any running timer
+        timerStarted = false;
+        awaitingResponse = false;
+        isTimerRunning = false; // Reset timer running flag
+        updateSendButtonState(); // Update button state after reset
+    }
+
+    function updateSendButtonState() {
+        // Disable if: awaiting response OR timer is running OR input is empty
+        sendButton.disabled = awaitingResponse || isTimerRunning || userInput.value.trim() === '';
+    }
+
+    // --- Main Message Handling ---
     async function sendMessage() {
         const message = userInput.value.trim();
-        
-        if (message === '') return;
-        
-        // Add user message to UI
+        if (message === '' || awaitingResponse || isTimerRunning) return; // Check BOTH flags
+
         addUserMessage(message);
-        
-        // Add to messages array for context
-        messages.push({
-            role: "user",
-            parts: [{ text: message }]
-        });
-        
-        // Clear input field
+        messages.push({ role: "user", parts: [{ text: message }] });
         userInput.value = '';
         autosize.update(userInput);
-        
-        // Disable send button
-        sendButton.disabled = true;
-        
-        // Show typing indicator
-        showTypingIndicator();
-        
-        try {
-            // Call the Gemini API
-            const response = await callGeminiAPI(message);
-            
-            // Remove typing indicator
-            removeTypingIndicator();
-            
-            // Add bot response to UI
-            addBotMessage(response);
-            
-            // Add response to messages array
-            messages.push({
-                role: "model",
-                parts: [{ text: response }]
-            });
-            
-        } catch (error) {
-            // Remove typing indicator
-            removeTypingIndicator();
-            
-            // Show error message
-            addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again later.");
-            
-            console.error('Error calling Gemini API:', error);
+        awaitingResponse = true;    // Set awaiting response flag
+        updateSendButtonState();     // Update button *after* setting flags
+
+        const premadeResponse = checkPremadeResponse(message);
+        if (premadeResponse) {
+            setTimeout(() => {
+                addBotMessage(premadeResponse);
+                messages.push({ role: "model", parts: [{ text: premadeResponse }] });
+                awaitingResponse = false;
+                if (!timerStarted) {
+                    startTimer();
+                    timerStarted = true;
+                } else {
+                    resetTimer();
+                }
+                scrollToBottom();
+                updateSendButtonState();
+            }, 500);
+        } else {
+            showTypingIndicator();
+            try {
+                const response = await callGeminiAPI(message);
+                removeTypingIndicator();
+                addBotMessage(response);
+                messages.push({ role: "model", parts: [{ text: response }] });
+                awaitingResponse = false;
+                if (!timerStarted) {
+                    startTimer();
+                    timerStarted = true;
+                } else {
+                    resetTimer();
+                }
+            } catch (error) {
+                removeTypingIndicator();
+                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
+                console.error('Error calling Gemini API:', error);
+                awaitingResponse = false; // Reset even on error
+            }
+            scrollToBottom();
+            updateSendButtonState();
         }
-        
-        // Scroll to bottom
-        scrollToBottom();
     }
 
     async function callGeminiAPI(userMessage) {
         try {
-            // Create request with proper role structure
             const requestBody = {
                 contents: [],
                 generationConfig: {
@@ -155,38 +205,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     maxOutputTokens: 1024
                 }
             };
-            
-            // Add system prompt as a user message
+
+            // Add system prompt from loaded file
             requestBody.contents.push({
                 role: "user",
                 parts: [{ text: systemPrompt }]
             });
-            
-            // Add a model response to acknowledge the instructions
+
             requestBody.contents.push({
                 role: "model",
                 parts: [{ text: "I understand. I'll act as the KGMU virtual assistant and provide helpful information about the university." }]
             });
-            
-            // Add conversation history if available
+
             if (messages.length > 0) {
-                // Add each message with its proper role
                 messages.forEach(msg => {
                     requestBody.contents.push(msg);
                 });
             }
-            
-            // Add current user message
+
             requestBody.contents.push({
                 role: "user",
                 parts: [{ text: userMessage }]
             });
-            
-            // Direct call to Google's Generative AI API
+
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
-            
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
-            
+
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -194,17 +238,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(requestBody)
             });
-            
+
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('API Error Details:', errorData);
                 throw new Error(`API request failed: ${response.status}`);
             }
-            
+
             const data = await response.json();
             console.log("API Response:", data);
-            
-            // Extract text from the response
+
             if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
                 return data.candidates[0].content.parts[0].text;
             } else {
@@ -216,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to add user message to UI
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message user';
@@ -229,24 +271,58 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    // Function to add bot message to UI
     function addBotMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message bot';
-        
-        // Process message to make links clickable
-        const processedMessage = makeLinksClickable(message);
-        
+        const processedMessage = parseMarkdown(message);
         messageDiv.innerHTML = `
             <div class="message-content">
-                <p>${processedMessage}</p>
+                ${processedMessage}
             </div>
         `;
         chatBody.appendChild(messageDiv);
         scrollToBottom();
     }
 
-    // Function to show typing indicator
+    function parseMarkdown(text) {
+        if (typeof text !== 'string') return '';
+        let formattedText = text;
+        formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        formattedText = formattedText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+        formattedText = formattedText.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+        formattedText = formattedText.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+        formattedText = formattedText.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+        formattedText = formattedText.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+        formattedText = formattedText.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+        formattedText = formattedText.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+        formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+        formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
+        formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        formattedText = formattedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+        formattedText = formattedText.replace(/^\s*---\s*$/gm, '<hr>');
+        const lines = formattedText.split('\n');
+        let inList = false;
+        let inCodeBlock = false;
+        formattedText = lines.map(line => {
+            if (line.trim() === '' ||
+                line.match(/^<(h[1-6]|ul|ol|li|pre|hr)/) ||
+                line.match(/<\/(h[1-6]|ul|ol|li|pre)>$/) ||
+                inList || inCodeBlock) {
+                if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
+                if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
+                if (line.includes('<pre>')) inCodeBlock = true;
+                if (line.includes('</pre>')) inCodeBlock = false;
+                return line;
+            }
+            return `<p>${line}</p>`;
+        }).join('\n');
+        return formattedText;
+    }
+
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
         typingDiv.className = 'typing-indicator';
@@ -260,7 +336,6 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    // Function to remove typing indicator
     function removeTypingIndicator() {
         const typingIndicator = document.getElementById('typing-indicator');
         if (typingIndicator) {
@@ -268,30 +343,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to make links in text clickable
-    function makeLinksClickable(text) {
-        // URL regex pattern
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        
-        // Replace URLs with clickable links
-        return text.replace(urlRegex, function(url) {
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-        });
-    }
-
-    // Function to escape HTML to prevent XSS
     function escapeHTML(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
 
-    // Function to scroll chat to bottom
     function scrollToBottom() {
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // Add resize event listener to handle mobile view
     window.addEventListener('resize', () => {
         if (window.innerWidth <= 768 && chatContainer.classList.contains('active')) {
             chatContainer.style.width = '100%';
@@ -302,8 +363,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Check if we need to apply mobile styles on load
+    // --- Timer Functions ---
+    function startTimer() {
+        let timeLeft = 30;
+        timerDisplay.textContent = `Time left: ${timeLeft}s`;
+        timerDisplay.classList.add('active');
+        isTimerRunning = true; // Set timer running flag
+        updateSendButtonState(); // Update immediately
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Next reply in: ${timeLeft}s`;
+            if (timeLeft <= 0) {
+                stopTimer();
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        stopTimer();
+        startTimer();
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerDisplay.classList.remove('active');
+        isTimerRunning = false; // Reset timer running flag
+        updateSendButtonState(); // Update after stopping
+    }
+
     if (window.innerWidth <= 768) {
         chatContainer.classList.add('mobile');
     }
+
+    // Initialize chat
+    resetChat();
 });
