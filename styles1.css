@@ -87,23 +87,7 @@ body {
     color: black;
 }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 
-.social-icons a {
-    font-size: 24px;
-    margin: 0 15px;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.social-icons a:hover {
-    transform: scale(1.2);
-    color: var(--primary-dark);
-}
 
 /* Chat Button */
 .chat-button {
