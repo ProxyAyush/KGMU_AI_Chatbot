@@ -1,5 +1,12 @@
 // script6.js
+      // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, FieldValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
 
+    
+        
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
@@ -25,7 +32,64 @@ document.addEventListener('DOMContentLoaded', function() {
     let isTimerRunning = false; // Flag to track if the timer is actively running
     let systemPrompt = ""; // Variable to store the system prompt
 
-
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
+        authDomain: "kgmu-ai-chatbot.firebaseapp.com",
+        projectId: "kgmu-ai-chatbot",
+        storageBucket: "kgmu-ai-chatbot.firebasestorage.app",
+        messagingSenderId: "1052783262438",
+        appId: "1:1052783262438:web:1ebc1720b1dc6346921927",
+        measurementId: "G-PK9K94MB8X"
+      };
+    
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    const chatbotCollection = collection(db, "QA-CHATBOT");
+    
+        // Function to save Q&A to Firestore
+    async function saveToFirestore(question, answer) {
+         try {
+                // Get today's date in YYYY-MM-DD format
+                const today = new Date();
+                const dateString = today.toISOString().split('T')[0];
+                
+                // Generate a random field name
+                const randomField = generateRandomFieldName();
+                
+                // Create the data object with Q&A
+                const qaData = {
+                    question: question,
+                    answer: answer,
+                    timestamp: FieldValue.serverTimestamp()
+                };
+                
+                // Reference to today's document
+                const docRef = doc(db, chatbotCollection.path, dateString);
+                
+                // Use update with dot notation to add the new field
+                // This creates the document if it doesn't exist or updates it if it does
+                await setDoc(docRef, {
+                    [randomField]: qaData
+                }, { merge: true });
+                
+                console.log("Q&A saved to Firestore successfully");
+            } catch (error) {
+                console.error("Error saving Q&A to Firestore:", error);
+            }
+        }
+    
+        // Generate random field name
+    function generateRandomFieldName() {
+            const timestamp = Date.now();
+            const randomString = Math.random().toString(36).substring(2, 10);
+            return `qa_${timestamp}_${randomString}`;
+        }
     // Load system prompt from file
     fetch('system_prompt.txt')
         .then(response => response.text())
@@ -376,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Timer Functions ---
     function startTimer() {
-        let timeLeft = 30;
+        let timeLeft = 20;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
         timerDisplay.classList.add('active');
         isTimerRunning = true; // Set timer running flag
