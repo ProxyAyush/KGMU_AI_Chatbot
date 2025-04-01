@@ -12,6 +12,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const infoModal = document.getElementById('info-modal');
     const closeInfoBtn = document.querySelector('.close-info');
     const timerDisplay = document.getElementById('timer-display');
+        // Notification Cloud Element
+    function createNotificationCloud() {
+        const notification = document.createElement('div');
+        notification.className = 'notification-cloud';
+        notification.textContent = '1';
+        chatButton.appendChild(notification);
+        
+        // Check if this is the first visit
+        const hasVisited = localStorage.getItem('hasVisitedBefore');
+        if (!hasVisited) {
+            // Show notification after 2 seconds
+            setTimeout(() => {
+                notification.classList.add('visible');
+            }, 2000);
+            
+            // Mark as visited for future
+            localStorage.setItem('hasVisitedBefore', 'true');
+        }
+        
+        // Hide notification when chatbot opens
+        chatButton.addEventListener('click', () => {
+            notification.classList.remove('visible');
+        });
+        
+        return notification;
+    }
+    
+    // Create the notification
+    const notificationCloud = createNotificationCloud();
 
     // API Key
     const API_KEY = "AIzaSyD7xj6hW34Bdg9A2BuTVZR88M_vJac0CbU";
