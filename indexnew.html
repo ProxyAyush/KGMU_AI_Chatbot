@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGMU Chatbot</title>
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <!--Demo Image Background -->
+    <div class="background-image"></div>
+    <p class="demo-title">KGMU Demo Site</p>
+<!-- Info Modal -->
+<div class="info-modal" id="info-modal">
+    <div class="info-content">
+        <span class="close-info">×</span>
+        <div class="developer-profile">
+            <div class="profile-image-container">
+                <img src="./your-profile-image.JPG" alt="Dr. Ayush Yadav" class="profile-image">
+            </div>
+            <h2>Made by Dr. Ayush Yadav</h2>
+            <p class="credentials">MBBS, King George's Medical University (Batch of 2019)</p>
+        </div>
+        <div class="developer-bio">
+            <p>As a physician and developer, I've combined my medical knowledge with programming skills to create this KGMU Assistant. This project aims to enhance the university website's accessibility and provide seamless information access for patients, students, and faculty members.</p>
+            <p>This chatbot is designed to simplify navigation through KGMU's extensive resources and answer common queries about departments, courses, facilities, and procedures.</p>
+        </div>
+        <div class="connect-section">
+            <h3>Connect with me</h3>
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/ayush-yadav-kgmu"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/ayush.ism"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ProxyAyush"><i class="fab fa-x"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Chat Button -->
+    <div class="chat-button" id="chat-button">
+        <i class="fas fa-comments"></i>
+    </div>
+    <!-- Chat Container -->
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <div class="header-content">
+                <img src="./iconsred.png" alt="KGMU Logo" class="logo">
+                <div class="header-text">
+                    <h3>KGMU Assistant</h3>
+                    <p class="university-name">King George's Medical University, Lucknow</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="info-button" class="action-btn"><i class="fas fa-info"></i></button>
+                <button id="new-chat-btn" class="action-btn"><i class="fas fa-plus"></i></button>
+                <button id="close-chat-btn" class="action-btn"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+            <div id="timer-display"></div> <!-- Timer display -->
+            <button id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/6.0.1/autosize.min.js"></script>
+    <script src="script5.js"></script>
+</body>
+</html>
