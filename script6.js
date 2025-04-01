@@ -1,6 +1,4 @@
 // script6.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getFirestore, collection, doc, setDoc, FieldValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
