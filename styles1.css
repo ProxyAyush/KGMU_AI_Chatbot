@@ -50,7 +50,6 @@ body {
     color: var(--primary-dark);
 }
 
-
 /* Info Modal */
 .info-modal {
     display: none;
@@ -87,9 +86,7 @@ body {
     color: black;
 }
 
-
-
-/* Chat Button */
+/* Chat Button & Animation Effects */
 .chat-button {
     position: fixed;
     bottom: 30px;
@@ -115,6 +112,79 @@ body {
 .chat-button:hover {
     background-color: var(--primary-dark);
     transform: scale(1.05);
+}
+
+/* Concentric Rings Animation */
+.chat-button::before,
+.chat-button::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 86, 179, 0.3); /* Using primary color with opacity */
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+
+.chat-button::before {
+    width: 80px;
+    height: 80px;
+    animation-delay: 0.5s;
+}
+
+.chat-button::after {
+    width: 100px;
+    height: 100px;
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Notification Cloud */
+.notification-cloud {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background-color: #FF5252;
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 3px 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.notification-cloud.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Speech bubble shape for the cloud */
+.notification-cloud::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: #FF5252;
+    transform: rotate(45deg);
+    z-index: -1;
 }
 
 /* Enhanced Info Modal Styles */
@@ -234,6 +304,7 @@ body {
     font-size: 24px;
     color: var(--primary-color);
     transition: var(--transition);
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -245,23 +316,6 @@ body {
     transform: scale(1.2);
     color: var(--primary-dark);
     background-color: #d9e9ff;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .info-content {
-        width: 95%;
-        margin: 10% auto;
-        padding: 20px;
-    }
-    
-    .links-container {
-        flex-direction: column;
-    }
-    
-    .kgmu-link {
-        flex: 1 0 100%;
-    }
 }
 
 /* Chat Container */
@@ -432,7 +486,6 @@ body {
     animation-delay: 0.4s;
 }
 
-
 @keyframes typing {
     0% { transform: scale(1); }
     50% { transform: scale(1.5); }
@@ -502,7 +555,6 @@ body {
 #timer-display.active{
     visibility: visible;
     opacity: 1;
-
 }
 
 /* Mobile Responsive Styles */
@@ -520,11 +572,16 @@ body {
         right: 20px;
     }
 
-
-
-
     .info-content {
         width: 90%;
         margin: 20% auto;
+    }
+    
+    .links-container {
+        flex-direction: column;
+    }
+    
+    .kgmu-link {
+        flex: 1 0 100%;
     }
 }
