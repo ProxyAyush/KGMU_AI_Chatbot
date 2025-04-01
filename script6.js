@@ -24,14 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let systemPrompt = ""; // Variable to store the system prompt
 
     // Initialize Firebase
-    const firebaseConfig = {
-        apiKey: "YOUR_FIREBASE_API_KEY",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
-    };
+      const firebaseConfig = {
+        apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
+        authDomain: "kgmu-ai-chatbot.firebaseapp.com",
+        projectId: "kgmu-ai-chatbot",
+        storageBucket: "kgmu-ai-chatbot.firebasestorage.app",
+        messagingSenderId: "1052783262438",
+        appId: "1:1052783262438:web:1ebc1720b1dc6346921927",
+        measurementId: "G-PK9K94MB8X"
+      };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
