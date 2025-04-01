@@ -1,3 +1,7 @@
+// script6.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, FieldValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
@@ -35,9 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const chatbotCollection = db.collection("QA-CHATBOT");
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const chatbotCollection = collection(db, "QA-CHATBOT");
 
     // Function to save Q&A to Firestore
     async function saveToFirestore(question, answer) {
@@ -53,15 +58,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const qaData = {
                 question: question,
                 answer: answer,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: FieldValue.serverTimestamp()
             };
             
             // Reference to today's document
-            const docRef = chatbotCollection.doc(dateString);
+            const docRef = doc(db, chatbotCollection.path, dateString);
             
             // Use update with dot notation to add the new field
             // This creates the document if it doesn't exist or updates it if it does
-            await docRef.set({
+            await setDoc(docRef, {
                 [randomField]: qaData
             }, { merge: true });
             
