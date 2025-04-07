@@ -6751,7 +6751,6 @@ The foundation stone of this grand medical institution was laid by the Royal Hig
  [Mrs. Anandiben Patel Chancellor](http://upgovernor.gov.in/)
  [Prof. Soniya Nityanand MD, PHD Vice Chancellor](https://kgmu.org/vicechancellor.php)
 [Apply for State Health Card](https://sects.up.gov.in/)
-[](https://kgmu.org/holiday-2023.php)
 [](https://ors.gov.in/index.html)
 [](https://kgmu.org/user_download/kgmu-kulgeet.pdf) [Kulgeet Testimonials](https://kgmu.org/kulgeet_feedback.php) [Download](https://kgmu.org/user_download/kgmu-kulgeet.pdf) [Watch on Youtube](https://www.youtube.com/watch?v=5BP-QuOsOCY)
  _King George's Medical University, NAAC A+ accredited Medical Institution of the country, established in 1905, which holds one of the prominent positions combining world-class biomedical research, outstanding patient care, and excellent clinical education._
@@ -6839,9 +6838,9 @@ distinguished eminent faculty and glorious students.
 15. Classes of the MBBS 2022 Batch shall commence on 15th November 2022
 16. [Anti Ragging Helpline Guidelines](https://kgmu.org/download/antiragging.pdf)
 
-####Holiday Data: King George's Medical University (KGMU) - 2025
+#Holiday Data: King George's Medical University (KGMU) - 2025
 
-###Section 1: Common Holidays (Applicable to Teaching & Non-Teaching Staff)
+##Section 1: Common Holidays (Applicable to Teaching & Non-Teaching Staff)
 Holiday: Makar Sankranti, Date: 2025-01-14, Day: Tuesday
 Holiday: Republic Day, Date: 2025-01-26, Day: Sunday
 Holiday: Sant Ravidas Jayanti, **Date:**2025-02-12, Day: wednesday
@@ -6865,7 +6864,7 @@ Holiday: Deepawali, Date: 2025-10-20, Day: Monday
 Holiday: Guru Nanak Jayanti/Kartik Purnima, Date: 2025-11-05,Day: wednesday
 Holiday: Christmas Day, Date: 2025-12-25, Day: Thursday
 
-###Section 2: Non-Teaching Staff Specific Holidays (In addition to Section 1)
+##Section 2: Non-Teaching Staff Specific Holidays (In addition to Section 1)
 Holiday: Guru Govind Singh Jayanti,**Date:**2025-01-06,Day: monday
 Holiday: Mohd. Hazrat Ali's Birthday*/Makar Sankranti, Date: 2025-01-14, Day: Tuesday
 **Holiday:**Holi ka dahan,**Date:**2025-03-13,Day: thursday
@@ -6874,7 +6873,7 @@ Holiday: Govardhan Puja,Date:2025-10-22,**Day:**wednesday
 Holiday: Bhai Dooj/Chitragupta Jayanti, Date: 2025-10-23, Day: Thursday
 Holiday: Guru teg bahadur shahid diwas, **Date:**2025-11-24,Day:monday
 
-###Section 3:Restricted Holidays (OPD/Emergency services wont be closed:Available to Both Teaching and Non teaching Staff to be confirmed by concerned Dean or Chief Medcial Superintendant)
+##Section 3:Restricted Holidays (OPD/Emergency services wont be closed:Available to Both Teaching and Non teaching Staff to be confirmed by concerned Dean or Chief Medcial Superintendant)
 Holiday: New Year's Day, Date: 2025-01-01, Day: Wednesday
 Holiday: Urs of Khwaja Moinuddin Chishti Ajmeri*, Date: 2025-01-08, Day: Wednesday
 Holiday: Jan Nayak Karpoori Thakur's Birthday, Date: 2025-01-24, Day: Friday
