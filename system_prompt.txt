@@ -4469,7 +4469,120 @@ Arrive at the specified date and time
 
 
 
-###OPD in KGMU information: Patients are attended to in various outpatients' departments of the hospital on OPD ticket costing Rs 1/- This is issued from 8.30 A.M. to 11.45 A.M. on all weekdays from the OPD Registration Counter situated at the OPD gate of the hospital. OPD's of Cardiology, Obstetrics & Gynecology, Urology, Psychiatry, Tuberculosis & Chest Diseases, Orthopedics and Rheumatology and Physical Medicine & Rehabilitation are held in their respective buildings. The Outpatients' Clinics of Medicine, Neurology, Pediatrics and Ophthalmology are held in the 3 storied OPD building which was built in the 1970s. The surgical specialities, skin and ENT outpatients are held in the old building in front of the OPD Ticket Counter. Outpatients are held daily between 9:00 A.M. to 12:00 Noon, except on Sundays, 26th January, 15th August and Holi festival. Besides general OPD special clinics such as Diabetes Clinic, Hypertension Clinic, Gastrointestinal Clinic, Allergy Clinic, Scoliosis Clinic, Arthritis Clinic, Pediatric Neurology Clinic, etc are also held. Routine pathological tests are done on prescribed charges for OPD patients in the OPD building basement. Vaccination are given daily in Childrens' OPD and Queen Mary's Hospital. Surgical OPD runs a Minor Operation Theatre where day surgery is performed. The annual OPD attendance is 500,000 the average number of new cases seen being 300,000 and old cases 200,000. List of OPDs with Links: Anaesthesiology and Critical Care: https://kgmu.org/department_details.php?dept_type=2&dept_id=1&page_type=out_patient_services Cardiology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=9&page_type=out_patient_services Cardiovascular & Thoracic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=34&page_type=out_patient_services Clinical Hematology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=10&page_type=out_patient_services Clinical Immunology and Rheumatology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=30&page_type=out_patient_services Community Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=11&page_type=out_patient_services Conservative Dentistry & Endodontics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=42&page_type=out_patient_services Critical Care Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=74&page_type=out_patient_services Dermatology, Venereology & Leprosy: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=12&page_type=out_patient_services Emergency Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=50&page_type=out_patient_services Endocrine Surgery: kgmu.org/department_details.php?dept_type=2&dept_id=53&page_type=out_patient_services Family Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=84&page_type=out_patient_services Geriatric Mental Health: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=14&page_type=out_patient_services Medical Endocrinology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=48&page_type=out_patient_services Medical Gastroenterology: https://kgmu.org/department_details.php?dept_type=3&dept_id=49&page_type=out_patient_services Medical Oncology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=59&page_type=out_patient_services Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=16&page_type=out_patient_services Nephrology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=61&page_type=out_patient_services Neuro Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=19&page_type=out_patient_services Neurology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=18&page_type=out_patient_services Obstetrics & Gynecology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=20&page_type=out_patient_services Ophthalmology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=21&page_type=out_patient_services Oral Pathology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=38&page_type=out_patient_services Oral & Maxillofacial Surgery: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=40&page_type=out_patient_services Oral Medicine & Radiology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=39&page_type=out_patient_services Orthodontics & Dentofacial Orthopaedics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=41&page_type=out_patient_services Orthopedic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=22&page_type=out_patient_services Otorhinolaryngology & Head Neck Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=23&page_type=out_patient_services Paediatric and Preventive Dentistry: https://kgmu.org/department_details.php?dept_type=3&dept_id=45&page_type=out_patient_services Paediatric Orthopaedics: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=54&page_type=out_patient_services Pathology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=5&page_type=out_patient_services Pediatric Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=7&page_type=out_patient_services Pediatric: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=6&page_type=out_patient_services Periodontology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=43&page_type=out_patient_services Physical Medicine & Rehabilitation: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=4&page_type=out_patient_services Plastic & Reconstructive Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=25&page_type=out_patient_services Prosthodontics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=44&page_type=out_patient_services Psychiatry: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=26&page_type=out_patient_services Public Health Dentistry: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=37&page_type=out_patient_services Pulmonary & Critical Care Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=67&page_type=out_patient_services Radiodiagnosis: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=28&page_type=out_patient_services Radiotherapy: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=29&page_type=out_patient_services Respiratory Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=27&page_type=out_patient_services Sports Medicine / Sports Injury: https://www.kgmu.org/department_details.php?dept_type=2&adept_id=55&page_type=out_patient_services Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=31&page_type=out_patient_services Surgical Gastroenterology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=32&page_type=out_patient_services Surgical Oncology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=33&page_type=out_patient_services Thoracic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=70&page_type=out_patient_services Transplantation: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=46&page_type=out_patient_services Trauma Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=72&page_type=out_patient_services Urology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=36&page_type=out_patient_services Vascular Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=73&page_type=out_patient_services OPD information ends ###
+###OPD in KGMU information: Patients are attended to in various outpatients' departments of the hospital on OPD ticket costing Rs 1/- This is issued from 8.30 A.M. to 11.45 A.M. on all weekdays from the OPD Registration Counter situated at the OPD gate of the hospital. OPD's of Cardiology, Obstetrics & Gynecology, Urology, Psychiatry, Tuberculosis & Chest Diseases, Orthopedics and Rheumatology and Physical Medicine & Rehabilitation are held in their respective buildings. The Outpatients' Clinics of Medicine, Neurology, Pediatrics and Ophthalmology are held in the 3 storied OPD building which was built in the 1970s. The surgical specialities, skin and ENT outpatients are held in the old building in front of the OPD Ticket Counter. Outpatients are held daily between 9:00 A.M. to 12:00 Noon, except on Sundays, 26th January, 15th August and Holi festival. Besides general OPD special clinics such as Diabetes Clinic, Hypertension Clinic, Gastrointestinal Clinic, Allergy Clinic, Scoliosis Clinic, Arthritis Clinic, Pediatric Neurology Clinic, etc are also held. Routine pathological tests are done on prescribed charges for OPD patients in the OPD building basement. Vaccination are given daily in Childrens' OPD and Queen Mary's Hospital. Surgical OPD runs a Minor Operation Theatre where day surgery is performed. The annual OPD attendance is 500,000 the average number of new cases seen being 300,000 and old cases 200,000.
+
+Location of Different OPDs in NEW OPD BLOCK BUILDING
+
+FIRST FLOOR
+
+Department of General Surgery
+Room No.: 101,102,103
+Days: Monday to Saturday
+
+Department of Trauma Surgery
+Room No.: 104
+Days: Tues./Thurs./Friday
+
+Department of Oral and Maxillofacial surgery Trauma
+Room No.: 104
+Days: Wednesday
+
+Department of Medical Oncology
+Room No.: 112
+Days: Tues./Thurs./Saturday
+
+Department of Injection room
+Room No.: 121
+Days: Monday to Saturday
+
+SECOND FLOOR
+
+Department of Surgical Oncology
+Room No.: 203
+Days: Mon./Tues./Thur./Friday
+
+Department of Surgical Gastroenterology
+Room No.: 202
+Days: Mon./Wed./Friday
+
+Department of PCCM
+Room No.: 201
+Days: Mon./Wed./Friday
+
+Department of Endocrine Surgery
+Room No.: 222
+Days: Monday to Saturday
+
+Department of Radiotherapy
+Room No.: 221
+Days: Monday to Saturday
+
+Department of Clinical Hematology
+Room No.: 220
+Days: Mon./Wed./Friday
+
+Department of Pain Clinic
+Room No.: 204
+Days: Monday to Friday
+
+THIRD FLOOR
+
+Department of Neurology
+Room No.: 301,302
+Days: Mon./Tues./Thur./Friday
+
+Department of Physiotherapy (Neurology)
+Room No.: 325
+Days: Mon./Tues./Thur./Friday
+
+Department of Dermatology
+Room No.: 303,304
+Days: Tues./Wed./Saturday
+
+Department of Neurosurgery
+Room No.: 322
+Days: Monday to Friday
+
+Department of Plastic surgery
+Room No.: 320,321
+Days: Mon./Wed./Friday
+
+Department of Thoracic Surgery
+Room No.: 312
+Days: Thursday
+
+Department of Medical Gastroenterology
+Room No.: 312
+Days: Mon./Tues./Friday./Sat.
+
+FOURTH FLOOR
+
+Department of Nephrology
+Room No.: 401
+Days: Mon./Wed./Friday
+
+Department of Medical Endocrinology
+Room No.: 401
+Days: Tuesday, Saturday
+
+Department of Urology
+Room No.: 420,421
+Days: Monday to Saturday
+
+Department of Pediatric Surgery
+Room No.: 422
+Days: Mon./Wed./Friday
+
+Department of Pediatric
+Room No.: 402,403
+Days: Monday to Saturday
+
+Department of Pediatric Orthopedic
+Room No.: 425
+Days: Mon./Wed./Saturday
+
+
+List of OPDs with Links: Anaesthesiology and Critical Care: https://kgmu.org/department_details.php?dept_type=2&dept_id=1&page_type=out_patient_services Cardiology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=9&page_type=out_patient_services Cardiovascular & Thoracic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=34&page_type=out_patient_services Clinical Hematology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=10&page_type=out_patient_services Clinical Immunology and Rheumatology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=30&page_type=out_patient_services Community Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=11&page_type=out_patient_services Conservative Dentistry & Endodontics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=42&page_type=out_patient_services Critical Care Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=74&page_type=out_patient_services Dermatology, Venereology & Leprosy: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=12&page_type=out_patient_services Emergency Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=50&page_type=out_patient_services Endocrine Surgery: kgmu.org/department_details.php?dept_type=2&dept_id=53&page_type=out_patient_services Family Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=84&page_type=out_patient_services Geriatric Mental Health: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=14&page_type=out_patient_services Medical Endocrinology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=48&page_type=out_patient_services Medical Gastroenterology: https://kgmu.org/department_details.php?dept_type=3&dept_id=49&page_type=out_patient_services Medical Oncology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=59&page_type=out_patient_services Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=16&page_type=out_patient_services Nephrology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=61&page_type=out_patient_services Neuro Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=19&page_type=out_patient_services Neurology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=18&page_type=out_patient_services Obstetrics & Gynecology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=20&page_type=out_patient_services Ophthalmology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=21&page_type=out_patient_services Oral Pathology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=38&page_type=out_patient_services Oral & Maxillofacial Surgery: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=40&page_type=out_patient_services Oral Medicine & Radiology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=39&page_type=out_patient_services Orthodontics & Dentofacial Orthopaedics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=41&page_type=out_patient_services Orthopedic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=22&page_type=out_patient_services Otorhinolaryngology & Head Neck Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=23&page_type=out_patient_services Paediatric and Preventive Dentistry: https://kgmu.org/department_details.php?dept_type=3&dept_id=45&page_type=out_patient_services Paediatric Orthopaedics: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=54&page_type=out_patient_services Pathology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=5&page_type=out_patient_services Pediatric Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=7&page_type=out_patient_services Pediatric: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=6&page_type=out_patient_services Periodontology: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=43&page_type=out_patient_services Physical Medicine & Rehabilitation: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=4&page_type=out_patient_services Plastic & Reconstructive Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=25&page_type=out_patient_services Prosthodontics: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=44&page_type=out_patient_services Psychiatry: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=26&page_type=out_patient_services Public Health Dentistry: https://www.kgmu.org/department_details.php?dept_type=1&dept_id=37&page_type=out_patient_services Pulmonary & Critical Care Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=67&page_type=out_patient_services Radiodiagnosis: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=28&page_type=out_patient_services Radiotherapy: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=29&page_type=out_patient_services Respiratory Medicine: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=27&page_type=out_patient_services Sports Medicine / Sports Injury: https://www.kgmu.org/department_details.php?dept_type=2&adept_id=55&page_type=out_patient_services Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=31&page_type=out_patient_services Surgical Gastroenterology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=32&page_type=out_patient_services Surgical Oncology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=33&page_type=out_patient_services Thoracic Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=70&page_type=out_patient_services Transplantation: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=46&page_type=out_patient_services Trauma Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=72&page_type=out_patient_services Urology: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=36&page_type=out_patient_services Vascular Surgery: https://www.kgmu.org/department_details.php?dept_type=2&dept_id=73&page_type=out_patient_services OPD information ends ###
 
 #Ratelist of Various Procedures and Tests
 KGMU Hospital Service Rates (2022-23) - Concise Summary
