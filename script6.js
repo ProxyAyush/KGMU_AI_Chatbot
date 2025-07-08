@@ -379,43 +379,66 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function parseMarkdown(text) {
-        if (typeof text !== 'string') return '';
-        let formattedText = text;
-        formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-        formattedText = formattedText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-        formattedText = formattedText.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
-        formattedText = formattedText.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
-        formattedText = formattedText.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-        formattedText = formattedText.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-        formattedText = formattedText.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-        formattedText = formattedText.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
-        formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-        formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
-        formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
-        formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-        formattedText = formattedText.replace(/`([^`]+)`/g, '<code>$1</code>');
-        formattedText = formattedText.replace(/^\s*---\s*$/gm, '<hr>');
-        const lines = formattedText.split('\n');
-        let inList = false;
-        let inCodeBlock = false;
-        formattedText = lines.map(line => {
-            if (line.trim() === '' ||
-                line.match(/^<(h[1-6]|ul|ol|li|pre|hr)/) ||
-                line.match(/<\/(h[1-6]|ul|ol|li|pre)>$/) ||
-                inList || inCodeBlock) {
-                if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
-                if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
-                if (line.includes('<pre>')) inCodeBlock = true;
-                if (line.includes('</pre>')) inCodeBlock = false;
-                return line;
-            }
-            return `<p>${line}</p>`;
-        }).join('\n');
-        return formattedText;
-    }
+    if (typeof text !== 'string') return '';
+    let formattedText = text;
+    
+    // Handle markdown links [text](url) - this should come first
+    formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+        // Check if URL is relative and needs to be made absolute
+        if (url.startsWith('/')) {
+            url = 'https://www.kgmu.org' + url;
+        } else if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            // If it doesn't start with http/https and doesn't start with /, assume it's relative
+            url = 'https://www.kgmu.org/' + url;
+        }
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+    });
+    
+    // Handle standalone URLs (complete URLs only)
+    formattedText = formattedText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+    
+    // Handle relative URLs that appear as standalone text (like /courses_admission.php)
+    formattedText = formattedText.replace(/(?<!href=["'])(\/[^\s<>"']+\.php[^\s<>"']*)/g, (match, url) => {
+        const fullUrl = 'https://www.kgmu.org' + url;
+        return `<a href="${fullUrl}" target="_blank" rel="noopener noreferrer">${fullUrl}</a>`;
+    });
+    
+    // Rest of your markdown parsing...
+    formattedText = formattedText.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+    formattedText = formattedText.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+    formattedText = formattedText.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    formattedText = formattedText.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+    formattedText = formattedText.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    formattedText = formattedText.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
+    formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+    formattedText = formattedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+    formattedText = formattedText.replace(/^\s*---\s*$/gm, '<hr>');
+    
+    const lines = formattedText.split('\n');
+    let inList = false;
+    let inCodeBlock = false;
+    formattedText = lines.map(line => {
+        if (line.trim() === '' ||
+            line.match(/^<(h[1-6]|ul|ol|li|pre|hr)/) ||
+            line.match(/<\/(h[1-6]|ul|ol|li|pre)>$/) ||
+            inList || inCodeBlock) {
+            if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
+            if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
+            if (line.includes('<pre>')) inCodeBlock = true;
+            if (line.includes('</pre>')) inCodeBlock = false;
+            return line;
+        }
+        return `<p>${line}</p>`;
+    }).join('\n');
+    
+    return formattedText;
+}
 
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
