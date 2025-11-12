@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationCloud = createNotificationCloud();
 
     // API Key
-    const API_KEY = "AIzaSyD09OHovaRv4eBwhEy1tnPbb9m--vOIT0U";
+    const API_KEY = "AIzaSyCxv_CrEK6FGhHMm7arCYJ3Gkty05qaLM8";
 
     // Chat State
     let messages = [];
