@@ -1,7 +1,79 @@
-// script6.js (Fixed Version - Improved Link Parsing)
+// script6.js (Fixed Version - Improved Link Parsing & CSS Fixes)
 // NOTE: Replace API_KEY and firebase config values with your own as needed.
 
+/**
+ * Injects custom CSS to fix positioning and style issues.
+ * This function is added to solve the user's requested fixes.
+ */
+function injectChatbotStyles() {
+    const style = document.createElement('style');
+    style.id = 'chatbot-custom-styles';
+    style.innerHTML = `
+        /* --- Chatbot Style Fixes --- */
+
+        /* 1. Move Chat Button to Bottom Left */
+        /* This prevents conflict with the website's 'Scroll to Top' button */
+        .chat-button {
+            right: auto !important; /* Remove the 'right' property */
+            left: 20px !important;  /* Add a 'left' property */
+            bottom: 20px !important;
+        }
+
+        /* 2. Move Chat Container to open from Bottom Left */
+        .chat-container {
+            right: auto !important; /* Remove the 'right' property */
+            left: 20px !important;  /* Add a 'left' property */
+            bottom: 90px !important; /* Position above the button (20px btn bottom + 60px btn height + 10px space) */
+        }
+
+        /* 3. Fix Send Button visibility by setting explicit colors */
+        /* This fixes the issue where the button was invisible due to an undefined CSS variable */
+        #send-btn {
+            background-color: #0056b3 !important; /* KGMU blue from header */
+            color: white !important;             /* White paper plane icon */
+        }
+        
+        #send-btn:hover {
+            background-color: #004080 !important; /* Darker blue on hover */
+        }
+        
+        #send-btn:disabled {
+            background-color: #cccccc !important; /* Standard disabled grey */
+            color: #666666 !important;
+        }
+
+        /* 4. Improve mobile layout handling */
+        @media (max-width: 768px) {
+            /* On mobile, make the non-active window wider */
+            .chat-container {
+                left: 10px !important;
+                right: 10px !important;
+                width: auto !important; /* Let left/right define width */
+            }
+
+            /* When active on mobile, go completely fullscreen */
+            /* This overrides our new 'left' rule and prevents 'white space' layout issues */
+            .chat-container.active {
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 0 !important;
+            }
+        }
+        /* --- End Chatbot Style Fixes --- */
+    `;
+    // Add the new styles to the document's <head>
+    document.head.appendChild(style);
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
+    // *** CALL THE NEWLY ADDED FUNCTION ***
+    // This will inject the CSS fixes as soon as the page is ready.
+    injectChatbotStyles();
+
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
     const chatContainer = document.getElementById('chat-container');
@@ -234,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
             awaitingResponse = false;
         }
         scrollToBottom();
-        updateSendButtonState();
+        updateSendButtonS-tate();
     }
 
     async function callGeminiAPI(userMessage) {
@@ -329,25 +401,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Helper function to normalize URLs
     function normalizeUrl(url) {
         if (!url) return 'https://www.kgmu.org';
-        
+
         let u = url.trim();
-        
+
         // Remove any surrounding quotes and parentheses
         u = u.replace(/^["'()+]+|["'()+]+$/g, '');
-        
+
         // Remove any trailing junk like ") or "]
         u = u.replace(/[")]+$/g, '');
-        
+
         // Fix protocol-relative URLs
         if (/^\/\//.test(u)) {
-            u = 'https:' + u;
+            u = 'https:T' + u;
         }
-        
+
         // Fix relative paths
         if (/^\/[^\/]/.test(u)) {
             u = 'https://www.kgmu.org' + u;
         }
-        
+
         // Add protocol if missing
         if (!/^https?:\/\//i.test(u)) {
             if (/^kgmu\.org/i.test(u)) {
@@ -360,18 +432,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 u = 'https://www.kgmu.org/' + u;
             }
         }
-        
+
         // Security: prevent javascript: and data: URLs
         if (/^\s*(javascript|data):/i.test(u)) {
             u = 'https://www.kgmu.org';
         }
-        
+
         // Fix duplicate domains
         u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-        
+
         // Remove any remaining duplicate domain fragments
         u = u.replace(/(https?:\/\/(?:www\.)?kgmu\.org\/[^\/]+)\/+kgmu\.org/gi, '$1');
-        
+
         return u;
     }
 
@@ -389,16 +461,16 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
             // Clean up the URL - remove any trailing characters
             let cleanUrl = url.trim();
-            
+
             // Remove escaped underscores that Gemini sometimes adds
             cleanUrl = cleanUrl.replace(/\\_/g, '_');
-            
+
             // Normalize the URL
             cleanUrl = normalizeUrl(cleanUrl);
-            
+
             // Escape the link text for safety
             const safeLinkText = escapeHTML(linkText);
-            
+
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${safeLinkText}</a>`;
         });
 
@@ -410,10 +482,10 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
             const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
             if (!hrefMatch) return escapeHTML(label);
-            
+
             const cleanUrl = normalizeUrl(hrefMatch[1]);
             const cleanLabel = label.replace(/<\/?[^>]+(>|$)/g, '').trim() || cleanUrl;
-            
+
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
         });
 
@@ -433,18 +505,18 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
         t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        
+
         // Code blocks
         t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
         t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
-        
+
         // Horizontal rule
         t = t.replace(/^\s*---\s*$/gm, '<hr>');
 
         // Lists
         t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => `<ul>${match}</ul>`);
-        
+
         t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
             // Check if already wrapped
