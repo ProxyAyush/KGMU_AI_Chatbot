@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load system prompt from file
-    fetch('system_prompt.txt')
+    fetch('system_prompt1.txt')
         .then(response => response.text())
         .then(text => {
             systemPrompt = text;
