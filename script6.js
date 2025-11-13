@@ -1,4 +1,4 @@
-// script6.js (Fixed Version)
+// script6.js (Fixed Version - Improved Link Parsing)
 // NOTE: Replace API_KEY and firebase config values with your own as needed.
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -326,56 +326,17 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    // --- NEW: Pre-clean malformed HTML ---
-    function cleanRawHTML(text) {
-        if (typeof text !== 'string') return '';
-        
-        let cleaned = text.trim();
-        
-        // 1. Remove nested <a> tags (keep only the outermost)
-        cleaned = cleaned.replace(/<a\s+[^>]*>\s*<a\s+[^>]*>(.*?)<\/a>\s*<\/a>/gi, (match, innerText) => {
-            const hrefMatch = match.match(/href=["']([^"']+)["']/i);
-            const url = hrefMatch ? hrefMatch[1] : 'https://www.kgmu.org';
-            const cleanUrl = normalizeUrl(url);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${innerText}</a>`;
-        });
-        
-        // 2. Fix broken tags where attributes leak into text
-        // Pattern: ...php" target="_blank"... (without proper <a> wrapping)
-        cleaned = cleaned.replace(/([^\s<>"']+\.php)["']\s+(target|rel)=["'][^"']*["']/gi, (match, url) => {
-            const cleanUrl = normalizeUrl(url);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
-        });
-        
-        // 3. Remove orphaned closing tags
-        cleaned = cleaned.replace(/<\/a>(?![^<]*<\/a>)/gi, (match, offset, string) => {
-            // Check if there's a matching opening tag before this
-            const before = string.substring(0, offset);
-            const openCount = (before.match(/<a\s/gi) || []).length;
-            const closeCount = (before.match(/<\/a>/gi) || []).length;
-            return openCount > closeCount ? match : '';
-        });
-        
-        // 4. Fix URLs that have href= appearing in plain text (not inside tags)
-        cleaned = cleaned.replace(/(?<!<[^>]*)href=["']([^"']+)["'](?![^<]*>)/gi, (match, url) => {
-            const cleanUrl = normalizeUrl(url);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
-        });
-        
-        // 5. Clean up any remaining malformed link fragments
-        cleaned = cleaned.replace(/(<a\s+href=["'][^"']*["'][^>]*>)\s*https?:\/\/[^\s<]+/gi, '$1');
-        
-        return cleaned;
-    }
-
     // Helper function to normalize URLs
     function normalizeUrl(url) {
         if (!url) return 'https://www.kgmu.org';
         
         let u = url.trim();
         
-        // Remove any surrounding quotes
-        u = u.replace(/^["']+|["']+$/g, '');
+        // Remove any surrounding quotes and parentheses
+        u = u.replace(/^["'()+]+|["'()+]+$/g, '');
+        
+        // Remove any trailing junk like ") or "]
+        u = u.replace(/[")]+$/g, '');
         
         // Fix protocol-relative URLs
         if (/^\/\//.test(u)) {
@@ -393,6 +354,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 u = 'https://' + u;
             } else if (/^www\.kgmu\.org/i.test(u)) {
                 u = 'https://' + u;
+            } else if (u.includes('.php') || u.includes('.html')) {
+                u = 'https://www.kgmu.org/' + u.replace(/^\/+/, '');
             } else {
                 u = 'https://www.kgmu.org/' + u;
             }
@@ -406,53 +369,44 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fix duplicate domains
         u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
         
-        // Remove trailing duplicate domain fragments
+        // Remove any remaining duplicate domain fragments
         u = u.replace(/(https?:\/\/(?:www\.)?kgmu\.org\/[^\/]+)\/+kgmu\.org/gi, '$1');
         
         return u;
     }
 
-    // --- Sanitize HTML helper ---
-    function sanitizeHTML(html) {
-        if (!html) return '';
-        
-        // Decode common entities
-        html = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-
-        // Normalize URLs in href attributes
-        html = html.replace(/href=(["'])(.*?)\1/gi, (match, quote, url) => {
-            const cleanUrl = normalizeUrl(url);
-            return `href="${cleanUrl}"`;
-        });
-
-        // Remove any tags not in the allowlist
-        // Allowed: a, p, h1-5, strong, em, code, pre, ul, ol, li, hr, br
-        html = html.replace(/<\/?(?!a\b|p\b|h[1-5]\b|strong\b|em\b|code\b|pre\b|ul\b|ol\b|li\b|hr\b|br\b)[^>]+>/gi, '');
-
-        return html;
-    }
-
-    // --- Updated parseMarkdown ---
+    // --- Updated parseMarkdown with FIXED markdown link parsing ---
     function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
 
-        // Pre-clean any malformed HTML
-        let t = cleanRawHTML(text);
+        let t = text.trim();
 
-        // Quick defensive trim
-        t = t.trim();
-
-        // Decode entities
+        // Decode HTML entities
         t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-        // Remove repeated quotes
-        t = t.replace(/""/g, '"').replace(/"|"/g, '"');
+        // CRITICAL FIX: Convert Markdown links FIRST before any other processing
+        // This regex properly extracts the URL between parentheses
+        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+            // Clean up the URL - remove any trailing characters
+            let cleanUrl = url.trim();
+            
+            // Remove escaped underscores that Gemini sometimes adds
+            cleanUrl = cleanUrl.replace(/\\_/g, '_');
+            
+            // Normalize the URL
+            cleanUrl = normalizeUrl(cleanUrl);
+            
+            // Escape the link text for safety
+            const safeLinkText = escapeHTML(linkText);
+            
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${safeLinkText}</a>`;
+        });
 
-        // Fix obvious domain repetitions in text
-        t = t.replace(/https?:\/\/(www\.)?kgmu\.org\/www\.kgmu\.org/gi, 'https://www.kgmu.org');
-        t = t.replace(/\/\/kgmu\.org/gi, 'https://www.kgmu.org');
+        // Remove any remaining markdown link artifacts (broken syntax)
+        t = t.replace(/\]\([^)]*$/g, '');
+        t = t.replace(/\[[^\]]*$/g, '');
 
-        // Convert existing <a> tags to normalized format
+        // Convert existing HTML <a> tags to normalized format
         t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
             const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
             if (!hrefMatch) return escapeHTML(label);
@@ -463,22 +417,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
         });
 
-        // Convert Markdown links [text](url)
-        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+        // Auto-link standalone URLs (but not ones already in <a> tags)
+        t = t.replace(/(?<!href=["']|">)(https?:\/\/[^\s<>"'\)]+)(?![^<]*<\/a>)/g, (url) => {
             const cleanUrl = normalizeUrl(url);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(linkText)}</a>`;
-        });
-
-        // Auto-link standalone URLs
-        t = t.replace(/(?<!href=["'])(https?:\/\/[^\s<>"']+)(?!["'][^>]*>)/g, (m) => {
-            const cleanUrl = normalizeUrl(m);
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
-        });
-
-        // Convert relative PHP paths that appear as plain text
-        t = t.replace(/(?<!["'=])\/([a-zA-Z0-9_\-\/]+\.php[^\s<>"']*)/gi, (m, p1) => {
-            const u = 'https://www.kgmu.org/' + p1.replace(/^\/+/, '');
-            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`;
         });
 
         // Basic markdown formatting
@@ -491,39 +433,49 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
         t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        // Code blocks
         t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
         t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+        
+        // Horizontal rule
         t = t.replace(/^\s*---\s*$/gm, '<hr>');
 
         // Lists
         t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
-        t = t.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => `<ul>${match}</ul>`);
+        
         t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
-        t = t.replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
+            // Check if already wrapped
+            if (!match.startsWith('<ul>') && !match.startsWith('<ol>')) {
+                return `<ol>${match}</ol>`;
+            }
+            return match;
+        });
 
-        // Wrap remaining lines in paragraphs
+        // Wrap remaining text in paragraphs
         const lines = t.split('\n');
-        let inList = false;
-        let inCode = false;
         t = lines.map(line => {
-            if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
-            if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
-            if (line.includes('<pre>')) inCode = true;
-            if (line.includes('</pre>')) inCode = false;
-
-            if (line.trim() === '' ||
-                line.match(/^<(h[1-6]|ul|ol|li|pre|hr|a|p|code)/) ||
-                line.match(/<\/(h[1-6]|ul|ol|li|pre|a|p|code)>$/) ||
-                inList || inCode) {
+            const trimmed = line.trim();
+            if (trimmed === '' ||
+                trimmed.startsWith('<h') ||
+                trimmed.startsWith('<ul') ||
+                trimmed.startsWith('<ol') ||
+                trimmed.startsWith('<li') ||
+                trimmed.startsWith('<pre') ||
+                trimmed.startsWith('<hr') ||
+                trimmed.startsWith('<p>') ||
+                trimmed.includes('<a href')) {
                 return line;
             }
             return `<p>${line}</p>`;
         }).join('\n');
 
-        // Final sanitization
-        const safe = sanitizeHTML(t);
+        // Clean up empty paragraphs
+        t = t.replace(/<p>\s*<\/p>/g, '');
 
-        return safe;
+        return t;
     }
 
     function showTypingIndicator() {
