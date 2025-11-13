@@ -1,4 +1,4 @@
-// script6.js (updated)
+// script6.js (Fixed Version)
 // NOTE: Replace API_KEY and firebase config values with your own as needed.
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isTimerRunning = false;
     let systemPrompt = "";
 
-    // Firebase config (keep your config)
+    // Firebase config
     const firebaseConfig = {
         apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
         authDomain: "kgmu-ai-chatbot.firebaseapp.com",
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             systemPrompt = "You're an AI assistant for KGMU";
         });
 
-    // Premade responses (unchanged)
+    // Premade responses
     const premadeResponses = {
         greetings: {
             "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Initialize autosize (assumes autosize library present)
+    // Initialize autosize
     autosize(userInput);
 
     // Event Listeners
@@ -315,7 +315,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message bot';
 
-        // parseMarkdown will sanitize and return safe HTML
         const processedMessage = parseMarkdown(message);
 
         messageDiv.innerHTML = `
@@ -327,144 +326,162 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    // --- NEW: sanitizer helpers ---
+    // --- NEW: Pre-clean malformed HTML ---
+    function cleanRawHTML(text) {
+        if (typeof text !== 'string') return '';
+        
+        let cleaned = text.trim();
+        
+        // 1. Remove nested <a> tags (keep only the outermost)
+        cleaned = cleaned.replace(/<a\s+[^>]*>\s*<a\s+[^>]*>(.*?)<\/a>\s*<\/a>/gi, (match, innerText) => {
+            const hrefMatch = match.match(/href=["']([^"']+)["']/i);
+            const url = hrefMatch ? hrefMatch[1] : 'https://www.kgmu.org';
+            const cleanUrl = normalizeUrl(url);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${innerText}</a>`;
+        });
+        
+        // 2. Fix broken tags where attributes leak into text
+        // Pattern: ...php" target="_blank"... (without proper <a> wrapping)
+        cleaned = cleaned.replace(/([^\s<>"']+\.php)["']\s+(target|rel)=["'][^"']*["']/gi, (match, url) => {
+            const cleanUrl = normalizeUrl(url);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
+        });
+        
+        // 3. Remove orphaned closing tags
+        cleaned = cleaned.replace(/<\/a>(?![^<]*<\/a>)/gi, (match, offset, string) => {
+            // Check if there's a matching opening tag before this
+            const before = string.substring(0, offset);
+            const openCount = (before.match(/<a\s/gi) || []).length;
+            const closeCount = (before.match(/<\/a>/gi) || []).length;
+            return openCount > closeCount ? match : '';
+        });
+        
+        // 4. Fix URLs that have href= appearing in plain text (not inside tags)
+        cleaned = cleaned.replace(/(?<!<[^>]*)href=["']([^"']+)["'](?![^<]*>)/gi, (match, url) => {
+            const cleanUrl = normalizeUrl(url);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
+        });
+        
+        // 5. Clean up any remaining malformed link fragments
+        cleaned = cleaned.replace(/(<a\s+href=["'][^"']*["'][^>]*>)\s*https?:\/\/[^\s<]+/gi, '$1');
+        
+        return cleaned;
+    }
 
-    // Remove tags that are not in the allowed whitelist
+    // Helper function to normalize URLs
+    function normalizeUrl(url) {
+        if (!url) return 'https://www.kgmu.org';
+        
+        let u = url.trim();
+        
+        // Remove any surrounding quotes
+        u = u.replace(/^["']+|["']+$/g, '');
+        
+        // Fix protocol-relative URLs
+        if (/^\/\//.test(u)) {
+            u = 'https:' + u;
+        }
+        
+        // Fix relative paths
+        if (/^\/[^\/]/.test(u)) {
+            u = 'https://www.kgmu.org' + u;
+        }
+        
+        // Add protocol if missing
+        if (!/^https?:\/\//i.test(u)) {
+            if (/^kgmu\.org/i.test(u)) {
+                u = 'https://' + u;
+            } else if (/^www\.kgmu\.org/i.test(u)) {
+                u = 'https://' + u;
+            } else {
+                u = 'https://www.kgmu.org/' + u;
+            }
+        }
+        
+        // Security: prevent javascript: and data: URLs
+        if (/^\s*(javascript|data):/i.test(u)) {
+            u = 'https://www.kgmu.org';
+        }
+        
+        // Fix duplicate domains
+        u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
+        
+        // Remove trailing duplicate domain fragments
+        u = u.replace(/(https?:\/\/(?:www\.)?kgmu\.org\/[^\/]+)\/+kgmu\.org/gi, '$1');
+        
+        return u;
+    }
+
+    // --- Sanitize HTML helper ---
     function sanitizeHTML(html) {
         if (!html) return '';
-        // Basic decode of common entities (just in case)
+        
+        // Decode common entities
         html = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-        // 1) Normalize double-domain mistakes
-        html = html.replace(/https?:\/\/(www\.)?kgmu\.org\/www\.kgmu\.org/gi, 'https://www.kgmu.org');
-
-        // 2) Fix protocol-less URLs like //kgmu.org/...  -> https://www.kgmu.org/...
-        html = html.replace(/href=["']\/\/(kgmu\.org[^"']*)["']/gi, (m, p1) => {
-            return `href="https://www.${p1.replace(/^www\./,'')}"`;
-        });
-
-        // 3) Fix href="//..." or "//kgmu.org/..." that may appear in text (not attribute)
-        html = html.replace(/(^|[^a-zA-Z0-9])\/\/kgmu\.org/gi, (m) => {
-            return m.replace('//kgmu.org', 'https://www.kgmu.org');
-        });
-
-        // 4) Sanitize href attributes: convert relative to absolute and reject unsafe protocols
+        // Normalize URLs in href attributes
         html = html.replace(/href=(["'])(.*?)\1/gi, (match, quote, url) => {
-            let fixed = url.trim();
-
-            // remove extra surrounding quotes if present
-            fixed = fixed.replace(/^"+|"+$/g, '');
-
-            // some responses include stray '"' at end, remove them
-            fixed = fixed.replace(/"$/, '');
-
-            // If URL starts with // (protocol relative) -> add https:
-            if (/^\/\//.test(fixed)) {
-                fixed = 'https:' + fixed;
-            }
-
-            // If url starts with single slash (relative path) -> prefix domain
-            if (/^\//.test(fixed)) {
-                fixed = 'https://www.kgmu.org' + fixed;
-            }
-
-            // If it lacks protocol and doesn't start with http(s), prefix domain
-            if (!/^https?:\/\//i.test(fixed)) {
-                // If it's like kgmu.org/... -> add https://
-                if (/^kgmu\.org/i.test(fixed)) {
-                    fixed = 'https://' + fixed;
-                } else {
-                    // fallback to absolute on kgmu
-                    fixed = 'https://www.kgmu.org/' + fixed;
-                }
-            }
-
-            // Prevent javascript: and other unsafe protocols
-            if (/^\s*javascript:/i.test(fixed) || /^\s*data:/i.test(fixed)) {
-                // Replace with harmless link to kgmu home
-                fixed = 'https://www.kgmu.org';
-            }
-
-            // collapse duplicates of domain
-            fixed = fixed.replace(/(https?:\/\/(?:www\.)?kgmu\.org)\/+(www\.)?kgmu\.org/gi, '$1');
-
-            return `href="${fixed}"`;
+            const cleanUrl = normalizeUrl(url);
+            return `href="${cleanUrl}"`;
         });
 
-        // 5) Allowlist of tags: a, p, h1-5, strong, em, code, pre, ul, ol, li, hr
-        // Strip any other tag but keep their inner content
-        html = html.replace(/<\/?(?!a\b|p\b|h[1-5]\b|strong\b|em\b|code\b|pre\b|ul\b|ol\b|li\b|hr\b)[^>]+>/gi, '');
+        // Remove any tags not in the allowlist
+        // Allowed: a, p, h1-5, strong, em, code, pre, ul, ol, li, hr, br
+        html = html.replace(/<\/?(?!a\b|p\b|h[1-5]\b|strong\b|em\b|code\b|pre\b|ul\b|ol\b|li\b|hr\b|br\b)[^>]+>/gi, '');
 
         return html;
     }
 
-    // --- Updated parseMarkdown: normalizes responses, builds links, sanitizes ---
+    // --- Updated parseMarkdown ---
     function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
 
-        // 0) Quick defensive trim
-        let t = text.trim();
+        // Pre-clean any malformed HTML
+        let t = cleanRawHTML(text);
 
-        // 1) Decode entities that sometimes appear
+        // Quick defensive trim
+        t = t.trim();
+
+        // Decode entities
         t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-        // 2) Remove repeated / stray surrounding quotes produced by model
-        //    e.g. ...php"" target=... -> remove double quotes in text blocks
-        t = t.replace(/""/g, '"').replace(/“|”/g, '"');
+        // Remove repeated quotes
+        t = t.replace(/""/g, '"').replace(/"|"/g, '"');
 
-        // 3) Replace accidental repeated domain patterns
+        // Fix obvious domain repetitions in text
         t = t.replace(/https?:\/\/(www\.)?kgmu\.org\/www\.kgmu\.org/gi, 'https://www.kgmu.org');
-
-        // 4) Fix obvious broken fragments like: //kgmu.org/path or //kgmu.org/path" target...
         t = t.replace(/\/\/kgmu\.org/gi, 'https://www.kgmu.org');
 
-        // 5) Convert any raw <a ...>...<\/a> into normalized anchors
-        t = t.replace(/<a[^>]*href=(["']?)([^"'>\s]+)\1[^>]*>(.*?)<\/a>/gi, (m, q, url, label) => {
-            // normalize url
-            let u = url.trim();
-            if (/^\/\//.test(u)) u = 'https:' + u;
-            if (/^\//.test(u)) u = 'https://www.kgmu.org' + u;
-            if (!/^https?:\/\//i.test(u)) {
-                if (/^kgmu\.org/i.test(u)) u = 'https://' + u;
-                else u = 'https://www.kgmu.org/' + u;
-            }
-            // prevent javascript/data:
-            if (/^\s*javascript:/i.test(u) || /^\s*data:/i.test(u)) u = 'https://www.kgmu.org';
-            // collapse duplicate domains
-            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-            // ensure label is plain text (no tags)
-            const lbl = label.replace(/<\/?[^>]+(>|$)/g, '').trim();
-            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${escapeHTML(lbl)}</a>`;
+        // Convert existing <a> tags to normalized format
+        t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
+            const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
+            if (!hrefMatch) return escapeHTML(label);
+            
+            const cleanUrl = normalizeUrl(hrefMatch[1]);
+            const cleanLabel = label.replace(/<\/?[^>]+(>|$)/g, '').trim() || cleanUrl;
+            
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
         });
 
-        // 6) Convert Markdown links [text](url)
+        // Convert Markdown links [text](url)
         t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-            let u = url.trim();
-            if (/^\/\//.test(u)) u = 'https:' + u;
-            if (/^\//.test(u)) u = 'https://www.kgmu.org' + u;
-            if (!/^https?:\/\//i.test(u)) {
-                if (/^kgmu\.org/i.test(u)) u = 'https://' + u;
-                else u = 'https://www.kgmu.org/' + u;
-            }
-            if (/^\s*javascript:/i.test(u) || /^\s*data:/i.test(u)) u = 'https://www.kgmu.org';
-            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${escapeHTML(linkText)}</a>`;
+            const cleanUrl = normalizeUrl(url);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(linkText)}</a>`;
         });
 
-        // 7) Auto-link standalone URLs (http/https)
-        t = t.replace(/(https?:\/\/[^\s<>"']+)/g, (m) => {
-            let u = m.trim();
-            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`;
+        // Auto-link standalone URLs
+        t = t.replace(/(?<!href=["'])(https?:\/\/[^\s<>"']+)(?!["'][^>]*>)/g, (m) => {
+            const cleanUrl = normalizeUrl(m);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
         });
 
-        // 8) Convert relative php paths that might appear as plain text
+        // Convert relative PHP paths that appear as plain text
         t = t.replace(/(?<!["'=])\/([a-zA-Z0-9_\-\/]+\.php[^\s<>"']*)/gi, (m, p1) => {
-            const u = 'https://www.kgmu.org/' + p1.replace(/^\/+/,'');
+            const u = 'https://www.kgmu.org/' + p1.replace(/^\/+/, '');
             return `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`;
         });
 
-        // 9) Basic markdown -> HTML for styling (headings, bold, italic, code, lists)
+        // Basic markdown formatting
         t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
         t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
         t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
@@ -478,13 +495,13 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
         t = t.replace(/^\s*---\s*$/gm, '<hr>');
 
-        // Lists (simple)
+        // Lists
         t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
         t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>');
 
-        // Wrap remaining lines in paragraphs where appropriate
+        // Wrap remaining lines in paragraphs
         const lines = t.split('\n');
         let inList = false;
         let inCode = false;
@@ -503,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return `<p>${line}</p>`;
         }).join('\n');
 
-        // 10) Sanitize produced HTML (collapse duplicates, fix hrefs, remove disallowed tags)
+        // Final sanitization
         const safe = sanitizeHTML(t);
 
         return safe;
@@ -543,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Timer functions (unchanged)
+    // Timer functions
     function startTimer() {
         let timeLeft = 20;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
