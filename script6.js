@@ -1,4 +1,6 @@
-// script6.js
+// script6.js (updated)
+// NOTE: Replace API_KEY and firebase config values with your own as needed.
+
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
@@ -12,34 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const infoModal = document.getElementById('info-modal');
     const closeInfoBtn = document.querySelector('.close-info');
     const timerDisplay = document.getElementById('timer-display');
-        // Notification Cloud Element
+
+    // Notification Cloud Element
     function createNotificationCloud() {
         const notification = document.createElement('div');
         notification.className = 'notification-cloud';
         notification.textContent = '1';
         chatButton.appendChild(notification);
-        
-        // Check if this is the first visit
+
         const hasVisited = localStorage.getItem('hasVisitedBefore');
         if (!hasVisited) {
-            // Show notification after 2 seconds
-            setTimeout(() => {
-                notification.classList.add('visible');
-            }, 2000);
-            
-            // Mark as visited for future
+            setTimeout(() => { notification.classList.add('visible'); }, 2000);
             localStorage.setItem('hasVisitedBefore', 'true');
         }
-        
-        // Hide notification when chatbot opens
+
         chatButton.addEventListener('click', () => {
             notification.classList.remove('visible');
         });
-        
+
         return notification;
     }
-    
-    // Create the notification
+
     const notificationCloud = createNotificationCloud();
 
     // API Key
@@ -50,59 +45,44 @@ document.addEventListener('DOMContentLoaded', function() {
     let timerInterval;
     let timerStarted = false;
     let awaitingResponse = false;
-    let isTimerRunning = false; // Flag to track if the timer is actively running
-    let systemPrompt = ""; // Variable to store the system prompt
+    let isTimerRunning = false;
+    let systemPrompt = "";
 
-    
-    // Your web app's Firebase configuration
+    // Firebase config (keep your config)
     const firebaseConfig = {
         apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
         authDomain: "kgmu-ai-chatbot.firebaseapp.com",
         projectId: "kgmu-ai-chatbot",
-        storageBucket: "kgmu-ai-chatbot.firebaseapp.com",
+        storageBucket: "kgmu-ai-chatbot.appspot.com",
         messagingSenderId: "1052783262438",
         appId: "1:1052783262438:web:1ebc1720b1dc6346921927",
         measurementId: "G-PK9K94MB8X"
     };
-    
-    // Initialize Firebase (using compat version)
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const chatbotCollection = db.collection("QA-CHATBOT");
-    
-    // Function to save Q&A to Firestore
+
     async function saveToFirestore(question, answer) {
         try {
-            // Get today's date in YYYY-MM-DD format
             const today = new Date();
             const dateString = today.toISOString().split('T')[0];
-            
-            // Generate a random field name
             const randomField = generateRandomFieldName();
-            
-            // Create the data object with Q&A
             const qaData = {
                 question: question,
                 answer: answer,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
-            
-            // Reference to today's document
             const docRef = chatbotCollection.doc(dateString);
-            
-            // Use set with merge option to add the new field
             const updateData = {};
             updateData[randomField] = qaData;
-            
             await docRef.set(updateData, { merge: true });
-            
             console.log("Q&A saved to Firestore successfully");
         } catch (error) {
             console.error("Error saving Q&A to Firestore:", error);
         }
     }
-    
-    // Generate random field name
+
     function generateRandomFieldName() {
         const timestamp = Date.now();
         const randomString = Math.random().toString(36).substring(2, 10);
@@ -118,10 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error loading system prompt:', error);
-            systemPrompt = "You're an AI assistant for KGMU"; // Fallback prompt
+            systemPrompt = "You're an AI assistant for KGMU";
         });
 
-    // Premade responses
+    // Premade responses (unchanged)
     const premadeResponses = {
         greetings: {
             "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
@@ -145,23 +125,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Initialize autosize
+    // Initialize autosize (assumes autosize library present)
     autosize(userInput);
 
-    // --- Event Listeners ---
-    infoButton.addEventListener('click', () => {
-        infoModal.style.display = 'block';
-    });
-
-    closeInfoBtn.addEventListener('click', () => {
-        infoModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === infoModal) {
-            infoModal.style.display = 'none';
-        }
-    });
+    // Event Listeners
+    infoButton.addEventListener('click', () => { infoModal.style.display = 'block'; });
+    closeInfoBtn.addEventListener('click', () => { infoModal.style.display = 'none'; });
+    window.addEventListener('click', (event) => { if (event.target === infoModal) infoModal.style.display = 'none'; });
 
     chatButton.addEventListener('click', () => {
         chatContainer.classList.add('active');
@@ -175,27 +145,21 @@ document.addEventListener('DOMContentLoaded', function() {
         stopTimer();
     });
 
-    newChatButton.addEventListener('click', () => {
-        resetChat();
-    });
-
+    newChatButton.addEventListener('click', resetChat);
     sendButton.addEventListener('click', sendMessage);
 
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            if (!awaitingResponse && !isTimerRunning) { // Check BOTH flags
-                sendMessage();
-            }
+            if (!awaitingResponse && !isTimerRunning) sendMessage();
         }
     });
 
     userInput.addEventListener('input', () => {
-        updateSendButtonState(); // Call a function to update the button state
+        updateSendButtonState();
         autosize.update(userInput);
     });
 
-    // --- Helper Functions ---
     function checkPremadeResponse(message) {
         const lowerMessage = message.toLowerCase().trim();
         for (const category in premadeResponses) {
@@ -216,29 +180,29 @@ document.addEventListener('DOMContentLoaded', function() {
         chatBody.innerHTML = '';
         addBotMessage("Hello! I'm KGMU Assistant. How can I help you today? | नमस्ते! मैं KGMU सहायक हूँ। मैं आज आपकी कैसे मदद कर सकता हूँ?");
         userInput.focus();
-        stopTimer();          // Stop any running timer
+        stopTimer();
         timerStarted = false;
         awaitingResponse = false;
-        isTimerRunning = false; // Reset timer running flag
-        updateSendButtonState(); // Update button state after reset
+        isTimerRunning = false;
+        updateSendButtonState();
     }
 
     function updateSendButtonState() {
-        // Disable if: awaiting response OR timer is running OR input is empty
         sendButton.disabled = awaitingResponse || isTimerRunning || userInput.value.trim() === '';
     }
 
     // --- Main Message Handling ---
     async function sendMessage() {
         const message = userInput.value.trim();
-        if (message === '' || awaitingResponse || isTimerRunning) return; // Check BOTH flags
+        if (message === '' || awaitingResponse || isTimerRunning) return;
 
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
         userInput.value = '';
         autosize.update(userInput);
-        awaitingResponse = true;    // Set awaiting response flag
-        updateSendButtonState();     // Update button *after* setting flags
+
+        awaitingResponse = true;
+        updateSendButtonState();
 
         const premadeResponse = checkPremadeResponse(message);
         if (premadeResponse) {
@@ -246,46 +210,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 addBotMessage(premadeResponse);
                 messages.push({ role: "model", parts: [{ text: premadeResponse }] });
                 awaitingResponse = false;
-                
-                // Save Q&A to Firestore
                 saveToFirestore(message, premadeResponse);
-                
-                if (!timerStarted) {
-                    startTimer();
-                    timerStarted = true;
-                } else {
-                    resetTimer();
-                }
+                if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
                 scrollToBottom();
                 updateSendButtonState();
             }, 500);
-        } else {
-            showTypingIndicator();
-            try {
-                const response = await callGeminiAPI(message);
-                removeTypingIndicator();
-                addBotMessage(response);
-                messages.push({ role: "model", parts: [{ text: response }] });
-                
-                // Save Q&A to Firestore
-                saveToFirestore(message, response);
-                
-                awaitingResponse = false;
-                if (!timerStarted) {
-                    startTimer();
-                    timerStarted = true;
-                } else {
-                    resetTimer();
-                }
-            } catch (error) {
-                removeTypingIndicator();
-                addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
-                console.error('Error calling Gemini API:', error);
-                awaitingResponse = false; // Reset even on error
-            }
-            scrollToBottom();
-            updateSendButtonState();
+            return;
         }
+
+        showTypingIndicator();
+        try {
+            const response = await callGeminiAPI(message);
+            removeTypingIndicator();
+            addBotMessage(response);
+            messages.push({ role: "model", parts: [{ text: response }] });
+            saveToFirestore(message, response);
+            awaitingResponse = false;
+            if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
+        } catch (error) {
+            removeTypingIndicator();
+            addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
+            console.error('Error calling Gemini API:', error);
+            awaitingResponse = false;
+        }
+        scrollToBottom();
+        updateSendButtonState();
     }
 
     async function callGeminiAPI(userMessage) {
@@ -300,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             };
 
-            // Add system prompt from loaded file
             requestBody.contents.push({
                 role: "user",
                 parts: [{ text: systemPrompt }]
@@ -312,9 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (messages.length > 0) {
-                messages.forEach(msg => {
-                    requestBody.contents.push(msg);
-                });
+                messages.forEach(msg => { requestBody.contents.push(msg); });
             }
 
             requestBody.contents.push({
@@ -327,9 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
             });
 
@@ -353,6 +297,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- Message rendering & parsing helpers ---
+
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message user';
@@ -368,7 +314,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function addBotMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message bot';
+
+        // parseMarkdown will sanitize and return safe HTML
         const processedMessage = parseMarkdown(message);
+
         messageDiv.innerHTML = `
             <div class="message-content">
                 ${processedMessage}
@@ -378,106 +327,200 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-  function parseMarkdown(text) {
-    if (typeof text !== 'string') return '';
+    // --- NEW: sanitizer helpers ---
 
-    // 1️⃣ Decode any HTML entities like &lt; or &gt;
-    text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    // Remove tags that are not in the allowed whitelist
+    function sanitizeHTML(html) {
+        if (!html) return '';
+        // Basic decode of common entities (just in case)
+        html = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-    // 2️⃣ Clean double domain (Gemini sometimes repeats www.kgmu.org)
-    text = text.replace(/https:\/\/www\.kgmu\.org\/www\.kgmu\.org/g, 'https://www.kgmu.org');
+        // 1) Normalize double-domain mistakes
+        html = html.replace(/https?:\/\/(www\.)?kgmu\.org\/www\.kgmu\.org/gi, 'https://www.kgmu.org');
 
-    // 3️⃣ Fix malformed <a> tags
-    text = text.replace(/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, (match, url, label) => {
-        if (!url) return label;
+        // 2) Fix protocol-less URLs like //kgmu.org/...  -> https://www.kgmu.org/...
+        html = html.replace(/href=["']\/\/(kgmu\.org[^"']*)["']/gi, (m, p1) => {
+            return `href="https://www.${p1.replace(/^www\./,'')}"`;
+        });
 
-        // Sanitize URL
-        if (!/^https?:\/\//i.test(url)) {
-            if (url.startsWith('/')) url = 'https://www.kgmu.org' + url;
-            else url = 'https://www.kgmu.org/' + url;
-        }
+        // 3) Fix href="//..." or "//kgmu.org/..." that may appear in text (not attribute)
+        html = html.replace(/(^|[^a-zA-Z0-9])\/\/kgmu\.org/gi, (m) => {
+            return m.replace('//kgmu.org', 'https://www.kgmu.org');
+        });
 
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-    });
+        // 4) Sanitize href attributes: convert relative to absolute and reject unsafe protocols
+        html = html.replace(/href=(["'])(.*?)\1/gi, (match, quote, url) => {
+            let fixed = url.trim();
 
-    // 4️⃣ Convert Markdown-style links [text](url)
-    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-        if (!/^https?:\/\//i.test(url)) {
-            if (url.startsWith('/')) url = 'https://www.kgmu.org' + url;
-            else url = 'https://www.kgmu.org/' + url;
-        }
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
-    });
+            // remove extra surrounding quotes if present
+            fixed = fixed.replace(/^"+|"+$/g, '');
 
-    // 5️⃣ Auto-link standalone URLs
-    text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+            // some responses include stray '"' at end, remove them
+            fixed = fixed.replace(/"$/, '');
 
-    // 6️⃣ Convert relative URLs like /courses_admission.php to full links
-    text = text.replace(/(?<!href=["'])(\/[^\s<>"']+\.php[^\s<>"']*)/g, (match, url) => {
-        return `<a href="https://www.kgmu.org${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-    });
+            // If URL starts with // (protocol relative) -> add https:
+            if (/^\/\//.test(fixed)) {
+                fixed = 'https:' + fixed;
+            }
 
-    // 7️⃣ Markdown text styling
-    let formattedText = text;
-    formattedText = formattedText.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
-    formattedText = formattedText.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
-    formattedText = formattedText.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-    formattedText = formattedText.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-    formattedText = formattedText.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-    formattedText = formattedText.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    formattedText = formattedText.replace(/`([^`]+)`/g, '<code>$1</code>');
-    formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-    formattedText = formattedText.replace(/^\s*---\s*$/gm, '<hr>');
+            // If url starts with single slash (relative path) -> prefix domain
+            if (/^\//.test(fixed)) {
+                fixed = 'https://www.kgmu.org' + fixed;
+            }
 
-    // 8️⃣ Lists
-    formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
-    formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>');
+            // If it lacks protocol and doesn't start with http(s), prefix domain
+            if (!/^https?:\/\//i.test(fixed)) {
+                // If it's like kgmu.org/... -> add https://
+                if (/^kgmu\.org/i.test(fixed)) {
+                    fixed = 'https://' + fixed;
+                } else {
+                    // fallback to absolute on kgmu
+                    fixed = 'https://www.kgmu.org/' + fixed;
+                }
+            }
 
-    // 9️⃣ Paragraphs
-    const lines = formattedText.split('\n');
-    let inList = false;
-    let inCodeBlock = false;
-    formattedText = lines.map(line => {
-        if (
-            line.trim() === '' ||
-            line.match(/^<(h[1-6]|ul|ol|li|pre|hr|a)/) ||
-            line.match(/<\/(h[1-6]|ul|ol|li|pre|a)>$/) ||
-            inList || inCodeBlock
-        ) {
+            // Prevent javascript: and other unsafe protocols
+            if (/^\s*javascript:/i.test(fixed) || /^\s*data:/i.test(fixed)) {
+                // Replace with harmless link to kgmu home
+                fixed = 'https://www.kgmu.org';
+            }
+
+            // collapse duplicates of domain
+            fixed = fixed.replace(/(https?:\/\/(?:www\.)?kgmu\.org)\/+(www\.)?kgmu\.org/gi, '$1');
+
+            return `href="${fixed}"`;
+        });
+
+        // 5) Allowlist of tags: a, p, h1-5, strong, em, code, pre, ul, ol, li, hr
+        // Strip any other tag but keep their inner content
+        html = html.replace(/<\/?(?!a\b|p\b|h[1-5]\b|strong\b|em\b|code\b|pre\b|ul\b|ol\b|li\b|hr\b)[^>]+>/gi, '');
+
+        return html;
+    }
+
+    // --- Updated parseMarkdown: normalizes responses, builds links, sanitizes ---
+    function parseMarkdown(text) {
+        if (typeof text !== 'string') return '';
+
+        // 0) Quick defensive trim
+        let t = text.trim();
+
+        // 1) Decode entities that sometimes appear
+        t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
+        // 2) Remove repeated / stray surrounding quotes produced by model
+        //    e.g. ...php"" target=... -> remove double quotes in text blocks
+        t = t.replace(/""/g, '"').replace(/“|”/g, '"');
+
+        // 3) Replace accidental repeated domain patterns
+        t = t.replace(/https?:\/\/(www\.)?kgmu\.org\/www\.kgmu\.org/gi, 'https://www.kgmu.org');
+
+        // 4) Fix obvious broken fragments like: //kgmu.org/path or //kgmu.org/path" target...
+        t = t.replace(/\/\/kgmu\.org/gi, 'https://www.kgmu.org');
+
+        // 5) Convert any raw <a ...>...<\/a> into normalized anchors
+        t = t.replace(/<a[^>]*href=(["']?)([^"'>\s]+)\1[^>]*>(.*?)<\/a>/gi, (m, q, url, label) => {
+            // normalize url
+            let u = url.trim();
+            if (/^\/\//.test(u)) u = 'https:' + u;
+            if (/^\//.test(u)) u = 'https://www.kgmu.org' + u;
+            if (!/^https?:\/\//i.test(u)) {
+                if (/^kgmu\.org/i.test(u)) u = 'https://' + u;
+                else u = 'https://www.kgmu.org/' + u;
+            }
+            // prevent javascript/data:
+            if (/^\s*javascript:/i.test(u) || /^\s*data:/i.test(u)) u = 'https://www.kgmu.org';
+            // collapse duplicate domains
+            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
+            // ensure label is plain text (no tags)
+            const lbl = label.replace(/<\/?[^>]+(>|$)/g, '').trim();
+            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${escapeHTML(lbl)}</a>`;
+        });
+
+        // 6) Convert Markdown links [text](url)
+        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+            let u = url.trim();
+            if (/^\/\//.test(u)) u = 'https:' + u;
+            if (/^\//.test(u)) u = 'https://www.kgmu.org' + u;
+            if (!/^https?:\/\//i.test(u)) {
+                if (/^kgmu\.org/i.test(u)) u = 'https://' + u;
+                else u = 'https://www.kgmu.org/' + u;
+            }
+            if (/^\s*javascript:/i.test(u) || /^\s*data:/i.test(u)) u = 'https://www.kgmu.org';
+            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
+            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${escapeHTML(linkText)}</a>`;
+        });
+
+        // 7) Auto-link standalone URLs (http/https)
+        t = t.replace(/(https?:\/\/[^\s<>"']+)/g, (m) => {
+            let u = m.trim();
+            u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
+            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`;
+        });
+
+        // 8) Convert relative php paths that might appear as plain text
+        t = t.replace(/(?<!["'=])\/([a-zA-Z0-9_\-\/]+\.php[^\s<>"']*)/gi, (m, p1) => {
+            const u = 'https://www.kgmu.org/' + p1.replace(/^\/+/,'');
+            return `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`;
+        });
+
+        // 9) Basic markdown -> HTML for styling (headings, bold, italic, code, lists)
+        t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+        t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+        t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+        t = t.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+        t = t.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+        t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+        t = t.replace(/^\s*---\s*$/gm, '<hr>');
+
+        // Lists (simple)
+        t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+        t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>');
+
+        // Wrap remaining lines in paragraphs where appropriate
+        const lines = t.split('\n');
+        let inList = false;
+        let inCode = false;
+        t = lines.map(line => {
             if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
             if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
-            if (line.includes('<pre>')) inCodeBlock = true;
-            if (line.includes('</pre>')) inCodeBlock = false;
-            return line;
-        }
-        return `<p>${line}</p>`;
-    }).join('\n');
+            if (line.includes('<pre>')) inCode = true;
+            if (line.includes('</pre>')) inCode = false;
 
-    return formattedText;
-}
+            if (line.trim() === '' ||
+                line.match(/^<(h[1-6]|ul|ol|li|pre|hr|a|p|code)/) ||
+                line.match(/<\/(h[1-6]|ul|ol|li|pre|a|p|code)>$/) ||
+                inList || inCode) {
+                return line;
+            }
+            return `<p>${line}</p>`;
+        }).join('\n');
+
+        // 10) Sanitize produced HTML (collapse duplicates, fix hrefs, remove disallowed tags)
+        const safe = sanitizeHTML(t);
+
+        return safe;
+    }
 
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
         typingDiv.className = 'typing-indicator';
         typingDiv.id = 'typing-indicator';
-        typingDiv.innerHTML = `
-            <span></span>
-            <span></span>
-            <span></span>
-        `;
+        typingDiv.innerHTML = `<span></span><span></span><span></span>`;
         chatBody.appendChild(typingDiv);
         scrollToBottom();
     }
 
     function removeTypingIndicator() {
         const typingIndicator = document.getElementById('typing-indicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
+        if (typingIndicator) typingIndicator.remove();
     }
 
     function escapeHTML(text) {
@@ -500,20 +543,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Timer Functions ---
+    // Timer functions (unchanged)
     function startTimer() {
         let timeLeft = 20;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
         timerDisplay.classList.add('active');
-        isTimerRunning = true; // Set timer running flag
-        updateSendButtonState(); // Update immediately
-
+        isTimerRunning = true;
+        updateSendButtonState();
         timerInterval = setInterval(() => {
             timeLeft--;
             timerDisplay.textContent = `Next reply in: ${timeLeft}s`;
-            if (timeLeft <= 0) {
-                stopTimer();
-            }
+            if (timeLeft <= 0) stopTimer();
         }, 1000);
     }
 
@@ -525,14 +565,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function stopTimer() {
         clearInterval(timerInterval);
         timerDisplay.classList.remove('active');
-        isTimerRunning = false; // Reset timer running flag
-        updateSendButtonState(); // Update after stopping
+        isTimerRunning = false;
+        updateSendButtonState();
     }
 
-    if (window.innerWidth <= 768) {
-        chatContainer.classList.add('mobile');
-    }
+    if (window.innerWidth <= 768) chatContainer.classList.add('mobile');
 
-    // Initialize chat
+    // Initialize
     resetChat();
 });
