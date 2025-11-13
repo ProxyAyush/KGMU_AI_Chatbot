@@ -378,32 +378,47 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollToBottom();
     }
 
-    function parseMarkdown(text) {
+  function parseMarkdown(text) {
     if (typeof text !== 'string') return '';
-    let formattedText = text;
-    
-    // Handle markdown links [text](url) - this should come first
-    formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-        // Check if URL is relative and needs to be made absolute
-        if (url.startsWith('/')) {
-            url = 'https://www.kgmu.org' + url;
-        } else if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            // If it doesn't start with http/https and doesn't start with /, assume it's relative
-            url = 'https://www.kgmu.org/' + url;
+
+    // 1️⃣ Decode any HTML entities like &lt; or &gt;
+    text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+    // 2️⃣ Clean double domain (Gemini sometimes repeats www.kgmu.org)
+    text = text.replace(/https:\/\/www\.kgmu\.org\/www\.kgmu\.org/g, 'https://www.kgmu.org');
+
+    // 3️⃣ Fix malformed <a> tags
+    text = text.replace(/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, (match, url, label) => {
+        if (!url) return label;
+
+        // Sanitize URL
+        if (!/^https?:\/\//i.test(url)) {
+            if (url.startsWith('/')) url = 'https://www.kgmu.org' + url;
+            else url = 'https://www.kgmu.org/' + url;
+        }
+
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    });
+
+    // 4️⃣ Convert Markdown-style links [text](url)
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+        if (!/^https?:\/\//i.test(url)) {
+            if (url.startsWith('/')) url = 'https://www.kgmu.org' + url;
+            else url = 'https://www.kgmu.org/' + url;
         }
         return `<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
     });
-    
-    // Handle standalone URLs (complete URLs only)
-    formattedText = formattedText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-    
-    // Handle relative URLs that appear as standalone text (like /courses_admission.php)
-    formattedText = formattedText.replace(/(?<!href=["'])(\/[^\s<>"']+\.php[^\s<>"']*)/g, (match, url) => {
-        const fullUrl = 'https://www.kgmu.org' + url;
-        return `<a href="${fullUrl}" target="_blank" rel="noopener noreferrer">${fullUrl}</a>`;
+
+    // 5️⃣ Auto-link standalone URLs
+    text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+
+    // 6️⃣ Convert relative URLs like /courses_admission.php to full links
+    text = text.replace(/(?<!href=["'])(\/[^\s<>"']+\.php[^\s<>"']*)/g, (match, url) => {
+        return `<a href="https://www.kgmu.org${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
     });
-    
-    // Rest of your markdown parsing...
+
+    // 7️⃣ Markdown text styling
+    let formattedText = text;
     formattedText = formattedText.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
     formattedText = formattedText.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
     formattedText = formattedText.replace(/^### (.*$)/gm, '<h3>$1</h3>');
@@ -412,22 +427,27 @@ document.addEventListener('DOMContentLoaded', function() {
     formattedText = formattedText.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
     formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-    formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
-    formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
     formattedText = formattedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+    formattedText = formattedText.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
     formattedText = formattedText.replace(/^\s*---\s*$/gm, '<hr>');
-    
+
+    // 8️⃣ Lists
+    formattedText = formattedText.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+    formattedText = formattedText.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>.*<\/li>)/gs, '<ol>$1</ol>');
+
+    // 9️⃣ Paragraphs
     const lines = formattedText.split('\n');
     let inList = false;
     let inCodeBlock = false;
     formattedText = lines.map(line => {
-        if (line.trim() === '' ||
-            line.match(/^<(h[1-6]|ul|ol|li|pre|hr)/) ||
-            line.match(/<\/(h[1-6]|ul|ol|li|pre)>$/) ||
-            inList || inCodeBlock) {
+        if (
+            line.trim() === '' ||
+            line.match(/^<(h[1-6]|ul|ol|li|pre|hr|a)/) ||
+            line.match(/<\/(h[1-6]|ul|ol|li|pre|a)>$/) ||
+            inList || inCodeBlock
+        ) {
             if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
             if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
             if (line.includes('<pre>')) inCodeBlock = true;
@@ -436,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return `<p>${line}</p>`;
     }).join('\n');
-    
+
     return formattedText;
 }
 
