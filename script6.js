@@ -12,47 +12,42 @@ function injectChatbotStyles() {
         /* --- Chatbot Style Fixes --- */
 
         /* 1. Move Chat Button to Bottom Left */
-        /* This prevents conflict with the website's 'Scroll to Top' button */
         .chat-button {
-            right: auto !important; /* Remove the 'right' property */
-            left: 20px !important;  /* Add a 'left' property */
+            right: auto !important;
+            left: 20px !important;
             bottom: 20px !important;
         }
 
         /* 2. Move Chat Container to open from Bottom Left */
         .chat-container {
-            right: auto !important; /* Remove the 'right' property */
-            left: 20px !important;  /* Add a 'left' property */
-            bottom: 90px !important; /* Position above the button (20px btn bottom + 60px btn height + 10px space) */
+            right: auto !important;
+            left: 20px !important;
+            bottom: 90px !important;
         }
 
-        /* 3. Fix Send Button visibility by setting explicit colors */
-        /* This fixes the issue where the button was invisible due to an undefined CSS variable */
+        /* 3. Fix Send Button visibility */
         #send-btn {
-            background-color: #0056b3 !important; /* KGMU blue from header */
-            color: white !important;             /* White paper plane icon */
+            background-color: #0056b3 !important;
+            color: white !important;
         }
         
         #send-btn:hover {
-            background-color: #004080 !important; /* Darker blue on hover */
+            background-color: #004080 !important;
         }
         
         #send-btn:disabled {
-            background-color: #cccccc !important; /* Standard disabled grey */
+            background-color: #cccccc !important;
             color: #666666 !important;
         }
 
         /* 4. Improve mobile layout handling */
         @media (max-width: 768px) {
-            /* On mobile, make the non-active window wider */
             .chat-container {
                 left: 10px !important;
                 right: 10px !important;
-                width: auto !important; /* Let left/right define width */
+                width: auto !important;
             }
 
-            /* When active on mobile, go completely fullscreen */
-            /* This overrides our new 'left' rule and prevents 'white space' layout issues */
             .chat-container.active {
                 left: 0 !important;
                 right: 0 !important;
@@ -64,14 +59,10 @@ function injectChatbotStyles() {
         }
         /* --- End Chatbot Style Fixes --- */
     `;
-    // Add the new styles to the document's <head>
     document.head.appendChild(style);
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
-    // *** CALL THE NEWLY ADDED FUNCTION ***
-    // This will inject the CSS fixes as soon as the page is ready.
     injectChatbotStyles();
 
     // DOM Elements
@@ -263,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sendButton.disabled = awaitingResponse || isTimerRunning || userInput.value.trim() === '';
     }
 
-    // --- Main Message Handling ---
+    // --- MAIN MESSAGE HANDLING ---
     async function sendMessage() {
         const message = userInput.value.trim();
         if (message === '' || awaitingResponse || isTimerRunning) return;
@@ -294,10 +285,15 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await callGeminiAPI(message);
             removeTypingIndicator();
-            addBotMessage(response);
-            messages.push({ role: "model", parts: [{ text: response }] });
-            saveToFirestore(message, response);
+
+            // SANITIZE MODEL IDENTITY
+            const safeResponse = sanitizeResponse(response);
+
+            addBotMessage(safeResponse);
+            messages.push({ role: "model", parts: [{ text: safeResponse }] });
+            saveToFirestore(message, safeResponse);
             awaitingResponse = false;
+
             if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
         } catch (error) {
             removeTypingIndicator();
@@ -306,13 +302,31 @@ document.addEventListener('DOMContentLoaded', function() {
             awaitingResponse = false;
         }
         scrollToBottom();
-        updateSendButtonS-tate();
+        updateSendButtonState();
     }
 
+    // --- SANITIZATION FIX ---
+    function sanitizeResponse(text) {
+        return text
+            .replace(/I am a large language model[^.]*\./gi, "")
+            .replace(/trained by Google/gi, "created by KGMU developers")
+            .replace(/Google/g, "KGMU");
+    }
+
+    // --- FIXED GEMINI API CALL ---
     async function callGeminiAPI(userMessage) {
         try {
             const requestBody = {
-                contents: [],
+                system_instruction: {
+                    role: "system",
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: messages.concat([
+                    {
+                        role: "user",
+                        parts: [{ text: userMessage }]
+                    }
+                ]),
                 generationConfig: {
                     temperature: 0.7,
                     topP: 0.95,
@@ -320,25 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     maxOutputTokens: 1024
                 }
             };
-
-            requestBody.contents.push({
-                role: "user",
-                parts: [{ text: systemPrompt }]
-            });
-
-            requestBody.contents.push({
-                role: "model",
-                parts: [{ text: "I understand. I'll act as the KGMU virtual assistant and provide helpful information about the university." }]
-            });
-
-            if (messages.length > 0) {
-                messages.forEach(msg => { requestBody.contents.push(msg); });
-            }
-
-            requestBody.contents.push({
-                role: "user",
-                parts: [{ text: userMessage }]
-            });
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
@@ -370,7 +365,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Message rendering & parsing helpers ---
-
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'chat-message user';
@@ -403,24 +397,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!url) return 'https://www.kgmu.org';
 
         let u = url.trim();
-
-        // Remove any surrounding quotes and parentheses
         u = u.replace(/^["'()+]+|["'()+]+$/g, '');
-
-        // Remove any trailing junk like ") or "]
         u = u.replace(/[")]+$/g, '');
 
-        // Fix protocol-relative URLs
         if (/^\/\//.test(u)) {
-            u = 'https:T' + u;
+            u = 'https:' + u;
         }
 
-        // Fix relative paths
         if (/^\/[^\/]/.test(u)) {
             u = 'https://www.kgmu.org' + u;
         }
 
-        // Add protocol if missing
         if (!/^https?:\/\//i.test(u)) {
             if (/^kgmu\.org/i.test(u)) {
                 u = 'https://' + u;
@@ -433,52 +420,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Security: prevent javascript: and data: URLs
         if (/^\s*(javascript|data):/i.test(u)) {
             u = 'https://www.kgmu.org';
         }
 
-        // Fix duplicate domains
         u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-
-        // Remove any remaining duplicate domain fragments
         u = u.replace(/(https?:\/\/(?:www\.)?kgmu\.org\/[^\/]+)\/+kgmu\.org/gi, '$1');
 
         return u;
     }
 
-    // --- Updated parseMarkdown with FIXED markdown link parsing ---
     function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
 
         let t = text.trim();
 
-        // Decode HTML entities
         t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-        // CRITICAL FIX: Convert Markdown links FIRST before any other processing
-        // This regex properly extracts the URL between parentheses
         t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-            // Clean up the URL - remove any trailing characters
             let cleanUrl = url.trim();
-
-            // Remove escaped underscores that Gemini sometimes adds
             cleanUrl = cleanUrl.replace(/\\_/g, '_');
-
-            // Normalize the URL
             cleanUrl = normalizeUrl(cleanUrl);
-
-            // Escape the link text for safety
             const safeLinkText = escapeHTML(linkText);
-
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${safeLinkText}</a>`;
         });
 
-        // Remove any remaining markdown link artifacts (broken syntax)
         t = t.replace(/\]\([^)]*$/g, '');
         t = t.replace(/\[[^\]]*$/g, '');
 
-        // Convert existing HTML <a> tags to normalized format
         t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
             const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
             if (!hrefMatch) return escapeHTML(label);
@@ -489,13 +458,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
         });
 
-        // Auto-link standalone URLs (but not ones already in <a> tags)
         t = t.replace(/(?<!href=["']|">)(https?:\/\/[^\s<>"'\)]+)(?![^<]*<\/a>)/g, (url) => {
             const cleanUrl = normalizeUrl(url);
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
         });
 
-        // Basic markdown formatting
         t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
         t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
         t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
@@ -506,27 +473,22 @@ document.addEventListener('DOMContentLoaded', function() {
         t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-        // Code blocks
         t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
         t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-        // Horizontal rule
         t = t.replace(/^\s*---\s*$/gm, '<hr>');
 
-        // Lists
         t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => `<ul>${match}</ul>`);
 
         t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
         t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
-            // Check if already wrapped
             if (!match.startsWith('<ul>') && !match.startsWith('<ol>')) {
                 return `<ol>${match}</ol>`;
             }
             return match;
         });
 
-        // Wrap remaining text in paragraphs
         const lines = t.split('\n');
         t = lines.map(line => {
             const trimmed = line.trim();
@@ -544,7 +506,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return `<p>${line}</p>`;
         }).join('\n');
 
-        // Clean up empty paragraphs
         t = t.replace(/<p>\s*<\/p>/g, '');
 
         return t;
@@ -612,6 +573,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (window.innerWidth <= 768) chatContainer.classList.add('mobile');
 
-    // Initialize
     resetChat();
 });
