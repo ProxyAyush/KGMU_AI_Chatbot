@@ -317,23 +317,23 @@ document.addEventListener('DOMContentLoaded', function() {
     async function callGeminiAPI(userMessage) {
         try {
             const requestBody = {
-                system_instruction: {
-                    role: "system",
-                    parts: [{ text: systemPrompt }]
-                },
-                contents: messages.concat([
-                    {
-                        role: "user",
-                        parts: [{ text: userMessage }]
-                    }
-                ]),
-                generationConfig: {
-                    temperature: 0.7,
-                    topP: 0.95,
-                    topK: 40,
-                    maxOutputTokens: 1024
-                }
-            };
+    systemInstruction: {
+        role: "system",
+        parts: [{ text: systemPrompt }]
+    },
+    contents: messages.concat([
+        {
+            role: "user",
+            parts: [{ text: userMessage }]
+        }
+    ]),
+    generationConfig: {
+        temperature: 0.7,
+        topP: 0.95,
+        topK: 40,
+        maxOutputTokens: 1024
+    }
+};
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
