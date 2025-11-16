@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load system prompt from file
-    fetch('system_prompt1.txt')
+    fetch('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt')
         .then(response => response.text())
         .then(text => {
             systemPrompt = text;
