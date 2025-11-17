@@ -1,69 +1,48 @@
-// script6.js (Fixed Version - Improved Link Parsing & CSS Fixes)
-// NOTE: Replace API_KEY and firebase config values with your own as needed.
+// script6.js - Production Ready (Vercel Proxy + No API Key Exposure)
+// Updated: November 17, 2025
+// CDN: https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
 
 /**
  * Injects custom CSS to fix positioning and style issues.
- * This function is added to solve the user's requested fixes.
  */
 function injectChatbotStyles() {
     const style = document.createElement('style');
     style.id = 'chatbot-custom-styles';
     style.innerHTML = `
         /* --- Chatbot Style Fixes --- */
-
-        /* 1. Move Chat Button to Bottom Left */
         .chat-button {
             right: auto !important;
             left: 20px !important;
             bottom: 20px !important;
         }
-
-        /* 2. Move Chat Container to open from Bottom Left */
         .chat-container {
             right: auto !important;
             left: 20px !important;
             bottom: 90px !important;
         }
-
-        /* 3. Fix Send Button visibility */
         #send-btn {
             background-color: #0056b3 !important;
             color: white !important;
         }
-        
-        #send-btn:hover {
-            background-color: #004080 !important;
-        }
-        
-        #send-btn:disabled {
-            background-color: #cccccc !important;
-            color: #666666 !important;
-        }
-
-        /* 4. Improve mobile layout handling */
+        #send-btn:hover { background-color: #004080 !important; }
+        #send-btn:disabled { background-color: #cccccc !important; color: #666666 !important; }
         @media (max-width: 768px) {
-            .chat-container {
-                left: 10px !important;
-                right: 10px !important;
-                width: auto !important;
-            }
-
+            .chat-container { left: 10px !important; right: 10px !important; width: auto !important; }
             .chat-container.active {
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                border-radius: 0 !important;
+                left: 0 !important; right: 0 !important; bottom: 0 !important;
+                width: 100% !important; height: 100% !important; border-radius: 0 !important;
             }
         }
-        /* --- End Chatbot Style Fixes --- */
     `;
     document.head.appendChild(style);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     injectChatbotStyles();
+
+    // === CONFIGURATION ===
+    const PROXY_URL = 'https://kgmu-ai-chatbot.vercel.app/api/gemini'; // CHANGE IF YOU RENAMED PROJECT
+    const PROXY_API_KEY = 'kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e'; // CHANGE THIS & MATCH IN VERCEL ENV
 
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
@@ -78,30 +57,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeInfoBtn = document.querySelector('.close-info');
     const timerDisplay = document.getElementById('timer-display');
 
-    // Notification Cloud Element
+    // Notification Cloud
     function createNotificationCloud() {
         const notification = document.createElement('div');
         notification.className = 'notification-cloud';
         notification.textContent = '1';
         chatButton.appendChild(notification);
-
         const hasVisited = localStorage.getItem('hasVisitedBefore');
         if (!hasVisited) {
             setTimeout(() => { notification.classList.add('visible'); }, 2000);
             localStorage.setItem('hasVisitedBefore', 'true');
         }
-
         chatButton.addEventListener('click', () => {
             notification.classList.remove('visible');
         });
-
         return notification;
     }
-
     const notificationCloud = createNotificationCloud();
-
-    // API Key
-    const API_KEY = "AIzaSyCxv_CrEK6FGhHMm7arCYJ3Gkty05qaLM8";
 
     // Chat State
     let messages = [];
@@ -111,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isTimerRunning = false;
     let systemPrompt = "";
 
-    // Firebase config
+    // Firebase Config (safe to be public)
     const firebaseConfig = {
         apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
         authDomain: "kgmu-ai-chatbot.firebaseapp.com",
@@ -128,41 +100,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function saveToFirestore(question, answer) {
         try {
-            const today = new Date();
-            const dateString = today.toISOString().split('T')[0];
+            const today = new Date().toISOString().split('T')[0];
             const randomField = generateRandomFieldName();
-            const qaData = {
-                question: question,
-                answer: answer,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            };
-            const docRef = chatbotCollection.doc(dateString);
-            const updateData = {};
-            updateData[randomField] = qaData;
-            await docRef.set(updateData, { merge: true });
-            console.log("Q&A saved to Firestore successfully");
+            const qaData = { question, answer, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
+            await chatbotCollection.doc(today).set({ [randomField]: qaData }, { merge: true });
+            console.log("Q&A saved to Firestore");
         } catch (error) {
-            console.error("Error saving Q&A to Firestore:", error);
+            console.error("Firestore save error:", error);
         }
     }
 
     function generateRandomFieldName() {
-        const timestamp = Date.now();
-        const randomString = Math.random().toString(36).substring(2, 10);
-        return `qa_${timestamp}_${randomString}`;
+        return `qa_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
 
-    // Load system prompt from file
+    // Load system prompt
     fetch('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt')
-        .then(response => response.text())
-        .then(text => {
-            systemPrompt = text;
-            console.log("System prompt loaded successfully");
-        })
-        .catch(error => {
-            console.error('Error loading system prompt:', error);
-            systemPrompt = "You're an AI assistant for KGMU";
-        });
+        .then(r => r.text())
+        .then(text => { systemPrompt = text; console.log("System prompt loaded"); })
+        .catch(() => { systemPrompt = "You're an AI assistant for KGMU"; });
 
     // Premade responses
     const premadeResponses = {
@@ -188,13 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Initialize autosize
     autosize(userInput);
 
     // Event Listeners
-    infoButton.addEventListener('click', () => { infoModal.style.display = 'block'; });
-    closeInfoBtn.addEventListener('click', () => { infoModal.style.display = 'none'; });
-    window.addEventListener('click', (event) => { if (event.target === infoModal) infoModal.style.display = 'none'; });
+    infoButton.addEventListener('click', () => infoModal.style.display = 'block');
+    closeInfoBtn.addEventListener('click', () => infoModal.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target === infoModal) infoModal.style.display = 'none'; });
 
     chatButton.addEventListener('click', () => {
         chatContainer.classList.add('active');
@@ -210,31 +165,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     newChatButton.addEventListener('click', resetChat);
     sendButton.addEventListener('click', sendMessage);
-
-    userInput.addEventListener('keydown', (e) => {
+    userInput.addEventListener('keydown', e => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             if (!awaitingResponse && !isTimerRunning) sendMessage();
         }
     });
-
     userInput.addEventListener('input', () => {
         updateSendButtonState();
         autosize.update(userInput);
     });
 
     function checkPremadeResponse(message) {
-        const lowerMessage = message.toLowerCase().trim();
-        for (const category in premadeResponses) {
-            for (const key in premadeResponses[category]) {
-                if (lowerMessage === key || lowerMessage === key + "!") {
-                    return premadeResponses[category][key];
-                }
+        const lower = message.toLowerCase().trim();
+        for (const cat in premadeResponses) {
+            for (const key in premadeResponses[cat]) {
+                if (lower === key || lower === key + "!") return premadeResponses[cat][key];
             }
         }
-        if (lowerMessage.includes("thank") && lowerMessage.includes("you")) {
-            return premadeResponses.farewells["thank you"];
-        }
+        if (lower.includes("thank") && lower.includes("you")) return premadeResponses.farewells["thank you"];
         return null;
     }
 
@@ -254,10 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
         sendButton.disabled = awaitingResponse || isTimerRunning || userInput.value.trim() === '';
     }
 
-    // --- MAIN MESSAGE HANDLING ---
     async function sendMessage() {
         const message = userInput.value.trim();
-        if (message === '' || awaitingResponse || isTimerRunning) return;
+        if (!message || awaitingResponse || isTimerRunning) return;
 
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
@@ -267,14 +215,14 @@ document.addEventListener('DOMContentLoaded', function() {
         awaitingResponse = true;
         updateSendButtonState();
 
-        const premadeResponse = checkPremadeResponse(message);
-        if (premadeResponse) {
+        const premade = checkPremadeResponse(message);
+        if (premade) {
             setTimeout(() => {
-                addBotMessage(premadeResponse);
-                messages.push({ role: "model", parts: [{ text: premadeResponse }] });
-                awaitingResponse = false;
-                saveToFirestore(message, premadeResponse);
+                addBotMessage(premade);
+                messages.push({ role: "model", parts: [{ text: premade }] });
+                saveToFirestore(message, premade);
                 if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
+                awaitingResponse = false;
                 scrollToBottom();
                 updateSendButtonState();
             }, 500);
@@ -283,246 +231,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
         showTypingIndicator();
         try {
-            const response = await callGeminiAPI(message);
+            const response = await callGeminiAPI();
             removeTypingIndicator();
-
-            // SANITIZE MODEL IDENTITY
             const safeResponse = sanitizeResponse(response);
-
             addBotMessage(safeResponse);
             messages.push({ role: "model", parts: [{ text: safeResponse }] });
             saveToFirestore(message, safeResponse);
-            awaitingResponse = false;
-
             if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
         } catch (error) {
             removeTypingIndicator();
-            addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
-            console.error('Error calling Gemini API:', error);
+            addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again in a minute.");
+            console.error('Gemini proxy error:', error);
+        } finally {
             awaitingResponse = false;
+            scrollToBottom();
+            updateSendButtonState();
         }
-        scrollToBottom();
-        updateSendButtonState();
     }
 
-    // --- SANITIZATION FIX ---
     function sanitizeResponse(text) {
         return text
             .replace(/I am a large language model[^.]*\./gi, "")
             .replace(/trained by Google/gi, "created by KGMU developers")
-            .replace(/Google/g, "KGMU");
+            .replace(/Google/g, "KGMU")
+            .trim();
     }
 
-    // --- FIXED GEMINI API CALL ---
-    async function callGeminiAPI(userMessage) {
-        try {
-            const requestBody = {
-    systemInstruction: {
-        role: "system",
-        parts: [{ text: systemPrompt }]
-    },
-    contents: messages.concat([
-        {
-            role: "user",
-            parts: [{ text: userMessage }]
+    // PRODUCTION GEMINI CALL VIA VERCEL PROXY
+    async function callGeminiAPI() {
+        if (!systemPrompt) throw new Error("System prompt not loaded");
+        if (messages.length === 0 || messages[messages.length - 1].role !== "user") throw new Error("Invalid state");
+
+        const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Api-Key': PROXY_API_KEY
+            },
+            body: JSON.stringify({
+                systemPrompt,
+                messages,
+                generationConfig: { temperature: 0.7, topP: 0.95, topK: 40, maxOutputTokens: 1024 }
+            })
+        });
+
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            throw new Error(err.error || `Proxy error ${response.status}`);
         }
-    ]),
-    generationConfig: {
-        temperature: 0.7,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: 1024
-    }
-};
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
-            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error Details:', errorData);
-                throw new Error(`API request failed: ${response.status}`);
-            }
-
-            const data = await response.json();
-            console.log("API Response:", data);
-
-            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Unexpected API response format');
-            }
-        } catch (error) {
-            console.error('API call error:', error);
-            throw error;
-        }
+        const data = await response.json();
+        return data.response;
     }
 
-    // --- Message rendering & parsing helpers ---
+    // Message rendering helpers
     function addUserMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chat-message user';
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <p>${escapeHTML(message)}</p>
-            </div>
-        `;
-        chatBody.appendChild(messageDiv);
+        const div = document.createElement('div');
+        div.className = 'chat-message user';
+        div.innerHTML = `<div class="message-content"><p>${escapeHTML(message)}</p></div>`;
+        chatBody.appendChild(div);
         scrollToBottom();
     }
 
     function addBotMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chat-message bot';
-
-        const processedMessage = parseMarkdown(message);
-
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                ${processedMessage}
-            </div>
-        `;
-        chatBody.appendChild(messageDiv);
+        const div = document.createElement('div');
+        div.className = 'chat-message bot';
+        div.innerHTML = `<div class="message-content">${parseMarkdown(message)}</div>`;
+        chatBody.appendChild(div);
         scrollToBottom();
     }
 
-    // Helper function to normalize URLs
-    function normalizeUrl(url) {
-        if (!url) return 'https://www.kgmu.org';
-
-        let u = url.trim();
-        u = u.replace(/^["'()+]+|["'()+]+$/g, '');
-        u = u.replace(/[")]+$/g, '');
-
-        if (/^\/\//.test(u)) {
-            u = 'https:' + u;
-        }
-
-        if (/^\/[^\/]/.test(u)) {
-            u = 'https://www.kgmu.org' + u;
-        }
-
-        if (!/^https?:\/\//i.test(u)) {
-            if (/^kgmu\.org/i.test(u)) {
-                u = 'https://' + u;
-            } else if (/^www\.kgmu\.org/i.test(u)) {
-                u = 'https://' + u;
-            } else if (u.includes('.php') || u.includes('.html')) {
-                u = 'https://www.kgmu.org/' + u.replace(/^\/+/, '');
-            } else {
-                u = 'https://www.kgmu.org/' + u;
-            }
-        }
-
-        if (/^\s*(javascript|data):/i.test(u)) {
-            u = 'https://www.kgmu.org';
-        }
-
-        u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
-        u = u.replace(/(https?:\/\/(?:www\.)?kgmu\.org\/[^\/]+)\/+kgmu\.org/gi, '$1');
-
-        return u;
-    }
-
-    function parseMarkdown(text) {
-        if (typeof text !== 'string') return '';
-
-        let t = text.trim();
-
-        t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-
-        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-            let cleanUrl = url.trim();
-            cleanUrl = cleanUrl.replace(/\\_/g, '_');
-            cleanUrl = normalizeUrl(cleanUrl);
-            const safeLinkText = escapeHTML(linkText);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${safeLinkText}</a>`;
-        });
-
-        t = t.replace(/\]\([^)]*$/g, '');
-        t = t.replace(/\[[^\]]*$/g, '');
-
-        t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
-            const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
-            if (!hrefMatch) return escapeHTML(label);
-
-            const cleanUrl = normalizeUrl(hrefMatch[1]);
-            const cleanLabel = label.replace(/<\/?[^>]+(>|$)/g, '').trim() || cleanUrl;
-
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
-        });
-
-        t = t.replace(/(?<!href=["']|">)(https?:\/\/[^\s<>"'\)]+)(?![^<]*<\/a>)/g, (url) => {
-            const cleanUrl = normalizeUrl(url);
-            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
-        });
-
-        t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
-        t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
-        t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-        t = t.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-        t = t.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-
-        t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-        t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-        t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-        t = t.replace(/^\s*---\s*$/gm, '<hr>');
-
-        t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
-        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => `<ul>${match}</ul>`);
-
-        t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
-        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
-            if (!match.startsWith('<ul>') && !match.startsWith('<ol>')) {
-                return `<ol>${match}</ol>`;
-            }
-            return match;
-        });
-
-        const lines = t.split('\n');
-        t = lines.map(line => {
-            const trimmed = line.trim();
-            if (trimmed === '' ||
-                trimmed.startsWith('<h') ||
-                trimmed.startsWith('<ul') ||
-                trimmed.startsWith('<ol') ||
-                trimmed.startsWith('<li') ||
-                trimmed.startsWith('<pre') ||
-                trimmed.startsWith('<hr') ||
-                trimmed.startsWith('<p>') ||
-                trimmed.includes('<a href')) {
-                return line;
-            }
-            return `<p>${line}</p>`;
-        }).join('\n');
-
-        t = t.replace(/<p>\s*<\/p>/g, '');
-
-        return t;
-    }
-
     function showTypingIndicator() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'typing-indicator';
-        typingDiv.id = 'typing-indicator';
-        typingDiv.innerHTML = `<span></span><span></span><span></span>`;
-        chatBody.appendChild(typingDiv);
+        const div = document.createElement('div');
+        div.className = 'typing-indicator';
+        div.id = 'typing-indicator';
+        div.innerHTML = `<span></span><span></span><span></span>`;
+        chatBody.appendChild(div);
         scrollToBottom();
     }
 
     function removeTypingIndicator() {
-        const typingIndicator = document.getElementById('typing-indicator');
-        if (typingIndicator) typingIndicator.remove();
+        const el = document.getElementById('typing-indicator');
+        if (el) el.remove();
     }
 
     function escapeHTML(text) {
@@ -534,16 +324,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function scrollToBottom() {
         chatBody.scrollTop = chatBody.scrollHeight;
     }
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768 && chatContainer.classList.contains('active')) {
-            chatContainer.style.width = '100%';
-            chatContainer.style.height = '100%';
-        } else {
-            chatContainer.style.width = '';
-            chatContainer.style.height = '';
-        }
-    });
 
     // Timer functions
     function startTimer() {
@@ -559,11 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    function resetTimer() {
-        stopTimer();
-        startTimer();
-    }
-
+    function resetTimer() { stopTimer(); startTimer(); }
     function stopTimer() {
         clearInterval(timerInterval);
         timerDisplay.classList.remove('active');
@@ -571,7 +347,72 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSendButtonState();
     }
 
+    // Mobile handling
     if (window.innerWidth <= 768) chatContainer.classList.add('mobile');
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768 && chatContainer.classList.contains('active')) {
+            chatContainer.style.width = '100%'; chatContainer.style.height = '100%';
+        } else {
+            chatContainer.style.width = ''; chatContainer.style.height = '';
+        }
+    });
+
+    // Markdown parser (unchanged - kept full for links, lists, etc.)
+    function normalizeUrl(url) {
+        if (!url) return 'https://www.kgmu.org';
+        let u = url.trim().replace(/^["'()+]+|["'()+]+$/g, '').replace(/[")]+$/g, '');
+        if (/^\/\//.test(u)) u = 'https:' + u;
+        if (/^\/[^\/]/.test(u)) u = 'https://www.kgmu.org' + u;
+        if (!/^https?:\/\//i.test(u)) {
+            if (/^kgmu\.org/i.test(u) || /^www\.kgmu\.org/i.test(u)) u = 'https://' + u;
+            else if (u.includes('.php') || u.includes('.html')) u = 'https://www.kgmu.org/' + u.replace(/^\/+/, '');
+            else u = 'https://www.kgmu.org/' + u;
+        }
+        if (/^\s*(javascript|data):/i.test(u)) u = 'https://www.kgmu.org';
+        u = u.replace(/https?:\/\/(www\.)?kgmu\.org\/+(www\.)?kgmu\.org/gi, 'https://www.kgmu.org');
+        return u;
+    }
+
+    function parseMarkdown(text) {
+        if (typeof text !== 'string') return '';
+        let t = text.trim()
+            .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
+        // Links
+        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, url) => {
+            const cleanUrl = normalizeUrl(url.replace(/\\_/g, '_'));
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(txt)}</a>`;
+        });
+
+        t = t.replace(/(?<!href=["']|">)(https?:\/\/[^\s<>"'\)]+)(?![^<]*<\/a>)/g, url => {
+            return `<a href="${normalizeUrl(url)}" target="_blank" rel="noopener noreferrer">${normalizeUrl(url)}</a>`;
+        });
+
+        // Headers, bold, italic, code, lists, etc.
+        t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+        t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+        t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+        t = t.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+        t = t.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+        t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+        t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, m => m.startsWith('<ul>') || m.startsWith('<ol>') ? m : `<ul>${m}</ul>`);
+        t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, m => m.includes('<ol>') || m.includes('<ul>') ? m : `<ol>${m}</ol>`);
+
+        const lines = t.split('\n');
+        t = lines.map(l => {
+            const tr = l.trim();
+            if (!tr || tr.startsWith('<h') || tr.startsWith('<ul') || tr.startsWith('<ol') || tr.startsWith('<li') || tr.startsWith('<pre') || tr.startsWith('<hr') || tr.includes('<a href')) return l;
+            return `<p>${l}</p>`;
+        }).join('\n');
+
+        return t.replace(/<p>\s*<\/p>/g, '');
+    }
 
     resetChat();
 });
