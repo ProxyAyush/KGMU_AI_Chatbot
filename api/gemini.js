@@ -1,12 +1,14 @@
-// api/gemini.js - Production-Ready Vercel Proxy for Gemini API
-// Rate limit: Simple in-memory (per instance) - upgrade to Redis for distributed.
-const rateLimitMap = new Map(); // IP -> { count, lastReset }
+// app/api/gemini/[key]/route.js
+// 1:1 Request Ratio Version (No Preflight!)
+// Updated: November 17, 2025
 
-function rateLimit(req, res) {
-  const ip = req.headers['x-forwarded-for'] || 'unknown';
+const rateLimitMap = new Map(); // IP → { count, lastReset }
+
+function rateLimit(req) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
   const now = Date.now();
-  const windowMs = 1000; // 1s window
-  const maxRequests = 1; // 1 req/sec/IP - adjust as needed
+  const windowMs = 1000;    // 1 second window
+  const maxRequests = 1;    // 1 req/sec per IP (adjust as needed)
 
   if (!rateLimitMap.has(ip)) {
     rateLimitMap.set(ip, { count: 1, lastReset: now });
@@ -14,6 +16,7 @@ function rateLimit(req, res) {
   }
 
   const data = rateLimitMap.get(ip);
+
   if (now - data.lastReset > windowMs) {
     data.count = 1;
     data.lastReset = now;
@@ -21,44 +24,53 @@ function rateLimit(req, res) {
   }
 
   if (data.count >= maxRequests) {
-    res.status(429).json({ error: 'Rate limit exceeded - try again soon' });
-    return false;
+    return { allowed: false, retryAfter: 1 };
   }
 
   data.count++;
-  return true;
+  return { allowed: true };
 }
 
-export default async function handler(req, res) {
-  // CORS preflight
-  res.setHeader('Access-Control-Allow-Origin', 'https://kgmu.org');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Api-Key');
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+export async function POST(req, { params }) {
+  const { key } = params;
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  // === SECURITY: Change this secret key! Match it in your script.js ===
+  const VALID_KEY = 'kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e';
 
-  // Auth: Check header key (set in env & script)
-  const apiKey = req.headers['x-api-key'];
-  if (apiKey !== process.env.PROXY_API_KEY) {
-    return res.status(401).json({ error: 'Unauthorized' });
+  if (key !== VALID_KEY) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   // Rate limit
-  if (!rateLimit(req, res)) return;
-
-  const { systemPrompt, messages, generationConfig } = req.body;
-  if (!messages || !Array.isArray(messages) || messages.length === 0) {
-    return res.status(400).json({ error: 'Invalid or missing messages' });
+  const rl = rateLimit(req);
+  if (!rl.allowed) {
+    return new Response(JSON.stringify({ error: 'Rate limit exceeded - try again soon' }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'Retry-After': rl.retryAfter
+      }
+    });
   }
 
-  // Validate last message is user
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400 });
+  }
+
+  const { systemPrompt, messages, generationConfig } = body;
+
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return new Response(JSON.stringify({ error: 'Invalid or missing messages' }), { status: 400 });
+  }
+
   if (messages[messages.length - 1].role !== 'user') {
-    return res.status(400).json({ error: 'Message history must end with user input' });
+    return new Response(JSON.stringify({ error: 'Last message must be from user' }), { status: 400 });
   }
 
   try {
@@ -77,34 +89,43 @@ export default async function handler(req, res) {
     };
 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`;
-    const response = await fetch(apiUrl, {
+
+    const geminiRes = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody)
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Gemini API error:', errorData); // Logs to Vercel
-      throw new Error(`Gemini API failed: ${response.status} - ${errorData.error?.message || 'Unknown'}`);
+    if (!geminiRes.ok) {
+      const err = await geminiRes.json().catch(() => ({}));
+      console.error('Gemini API error:', err);
+      throw new Error(err.error?.message || 'Gemini failed');
     }
 
-    const data = await response.json();
-    let text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) {
-      throw new Error('Empty response from Gemini');
-    }
+    const data = await geminiRes.json();
+    let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    // Sanitize response
     const safeText = text
       .replace(/I am a large language model[^.]*\./gi, '')
       .replace(/trained by Google/gi, 'created by KGMU developers')
       .replace(/Google/g, 'KGMU')
       .trim();
 
-    res.status(200).json({ response: safeText });
+    return new Response(JSON.stringify({ response: safeText }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
   } catch (error) {
-    console.error('Proxy error:', error.message, { stack: error.stack }); // Detailed logging
-    res.status(500).json({ error: 'Server error - please try again or contact admin' });
+    console.error('Proxy error:', error.message);
+    return new Response(JSON.stringify({ error: 'Server error - please try again' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
+}
+
+// Optional: Block GET requests cleanly
+export function GET() {
+  return new Response('KGMU AI Proxy Active', { status: 200 });
 }
