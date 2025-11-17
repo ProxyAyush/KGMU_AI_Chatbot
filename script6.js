@@ -1,21 +1,38 @@
 <script>
-// script6.js - OFFICIAL KGMU.ORG PRODUCTION VERSION (1:1 Request Ratio)
-// Used directly on https://kgmu.org
+// script6.js - OFFICIAL KGMU.ORG VERSION (CORB-FIXED: Vercel-Hosted Prompt + 1:1 Requests)
+// No GitHub raw fetch → Zero CORS/CORB issues on mobile/desktop
 // CDN: https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
-// Updated: November 17, 2025
+// Updated: November 17, 2025 (v1.2 - Cache-Bust)
 
 function injectChatbotStyles() {
     const style = document.createElement('style');
     style.id = 'chatbot-custom-styles';
     style.innerHTML = `
-        .chat-button { right: auto !important; left: 20px !important; bottom: 20px !important; z-index: 9999; }
-        .chat-container { right: auto !important; left: 20px !important; bottom: 90px !important; z-index: 9999; }
-        #send-btn { background-color: #0056b3 !important; color: white !important; }
+        /* --- Chatbot Style Fixes --- */
+        .chat-button {
+            right: auto !important;
+            left: 20px !important;
+            bottom: 20px !important;
+            z-index: 9999;
+        }
+        .chat-container {
+            right: auto !important;
+            left: 20px !important;
+            bottom: 90px !important;
+            z-index: 9999;
+        }
+        #send-btn {
+            background-color: #0056b3 !important;
+            color: white !important;
+        }
         #send-btn:hover { background-color: #004080 !important; }
         #send-btn:disabled { background-color: #cccccc !important; color: #666666 !important; }
         @media (max-width: 768px) {
             .chat-container { left: 10px !important; right: 10px !important; width: auto !important; }
-            .chat-container.active { left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0 !important; }
+            .chat-container.active {
+                left: 0 !important; right: 0 !important; bottom: 0 !important;
+                width: 100% !important; height: 100% !important; border-radius: 0 !important;
+            }
         }
     `;
     document.head.appendChild(style);
@@ -24,9 +41,13 @@ function injectChatbotStyles() {
 document.addEventListener('DOMContentLoaded', function() {
     injectChatbotStyles();
 
-    // 1:1 REQUEST RATIO — KEY NOW IN PATH (NO CUSTOM HEADER = NO PREFLIGHT)
+    // 1:1 REQUEST RATIO — KEY IN PATH (NO PREFLIGHT)
     const PROXY_URL = 'https://kgmu-ai-chatbot.vercel.app/api/gemini/kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e';
 
+    // VERCEL-HOSTED PROMPT (Same domain = No CORS/CORB)
+    const PROMPT_URL = 'https://kgmu-ai-chatbot.vercel.app/system_prompt1.txt';
+
+    // DOM Elements
     const chatButton = document.getElementById('chat-button');
     const chatContainer = document.getElementById('chat-container');
     const closeButton = document.getElementById('close-chat-btn');
@@ -47,21 +68,39 @@ document.addEventListener('DOMContentLoaded', function() {
         chatButton.appendChild(notification);
         const hasVisited = localStorage.getItem('hasVisitedBefore');
         if (!hasVisited) {
-            setTimeout(() => notification.classList.add('visible'), 2000);
+            setTimeout(() => { notification.classList.add('visible'); }, 2000);
             localStorage.setItem('hasVisitedBefore', 'true');
         }
-        chatButton.addEventListener('click', () => notification.classList.remove('visible'));
+        chatButton.addEventListener('click', () => {
+            notification.classList.remove('visible');
+        });
+        return notification;
     }
-    createNotificationCloud();
+    const notificationCloud = createNotificationCloud();
 
+    // Chat State
     let messages = [];
     let timerInterval;
     let timerStarted = false;
     let awaitingResponse = false;
     let isTimerRunning = false;
-    let systemPrompt = "";
+    let systemPrompt = "You are a helpful AI assistant for KGMU."; // Fallback
 
-    // Firebase (public - safe)
+    // Load system prompt from Vercel (CORS-free)
+    fetch(PROMPT_URL, { cache: 'no-cache' })
+        .then(r => {
+            if (!r.ok) throw new Error('Prompt fetch failed');
+            return r.text();
+        })
+        .then(text => {
+            systemPrompt = text.trim();
+            console.log("System prompt loaded from Vercel (CORS-safe)");
+        })
+        .catch(err => {
+            console.warn("Using fallback prompt:", err);
+        });
+
+    // Firebase Config (safe to be public)
     const firebaseConfig = {
         apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
         authDomain: "kgmu-ai-chatbot.firebaseapp.com",
@@ -71,49 +110,64 @@ document.addEventListener('DOMContentLoaded', function() {
         appId: "1:1052783262438:web:1ebc1720b1dc6346921927",
         measurementId: "G-PK9K94MB8X"
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const chatbotCollection = db.collection("QA-CHATBOT");
 
-    async function saveToFirestore(question, answer) {
-        try {
-            const today = new Date().toISOString().split('T')[0];
-            const randomField = `qa_${Date.now()}_${Math.random().toString(36).substr(2,9)}`;
-            await chatbotCollection.doc(today).set({ [randomField]: { question, answer, timestamp: firebase.firestore.FieldValue.serverTimestamp() } }, { merge: true });
-        } catch(e) { console.error("Firestore error:", e); }
+    if (typeof firebase !== 'undefined') {
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const chatbotCollection = db.collection("QA-CHATBOT");
+
+        async function saveToFirestore(question, answer) {
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const randomField = `qa_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                const qaData = { question, answer, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
+                await chatbotCollection.doc(today).set({ [randomField]: qaData }, { merge: true });
+                console.log("Q&A saved to Firestore");
+            } catch (error) {
+                console.error("Firestore save error:", error);
+            }
+        }
+        window.saveToFirestore = saveToFirestore; // Global for premade
     }
 
-    const PROMPT_URL = 'https://corsproxy.io/?' + encodeURIComponent('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt');
-fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.trim()) systemPrompt = t.trim(); });
-        .then(r => r.text())
-        .then(t => { systemPrompt = t; console.log("System prompt loaded"); })
-        .catch(() => systemPrompt = "You are an AI assistant for KGMU.");
-
+    // Premade responses
     const premadeResponses = {
         greetings: {
             "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
-            "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?",
-            "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?",
-            "good morning": "Good morning! How may I assist you with KGMU information today? | सुप्रभात! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
-            "good afternoon": "Good afternoon! What information about KGMU can I help you with? | शुभ दोपहर! मैं KGMU के बारे में किस जानकारी में आपकी सहायता कर सकता हूँ?",
-            "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help? | शुभ संध्या! मैं KGMU के बारे में आपके प्रश्नों का उत्तर देने के लिए यहाँ हूँ। मैं आपकी कैसे मदद कर सकता हूँ?",
+            "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?\"",
+            "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | \"हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?\"",
+            "good morning": "Good morning! How may I assist you with KGMU information today? | \"सुप्रभात! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?\"",
+            "good afternoon": "Good afternoon! What information about KGMU can I help you with? | \"शुभ दोपहर! मैं KGMU के बारे में किस जानकारी में आपकी सहायता कर सकता हूँ?\"",
+            "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help? | \"शुभ संध्या! मैं KGMU के बारे में आपके प्रश्नों का उत्तर देने के लिए यहाँ हूँ। मैं आपकी कैसे मदद कर सकता हूँ?\"",
         },
         farewells: {
-            "bye": "Goodbye! Feel free to return if you have more questions about KGMU. | अलविदा! यदि आपके पास KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।",
-            "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here. | बातचीत के लिए धन्यवाद! यदि आपको KGMU के बारे में और जानकारी चाहिए, तो मैं यहाँ रहूँगा।",
-            "ok": "See you later! Have a great day! | फिर मिलेंगे! आपका दिन शुभ हो!",
-            "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।",
-            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।"
+            "bye": "Goodbye! Feel free to return if you have more questions about KGMU. | \"अलविदा! यदि आपके पास KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।\"",
+            "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here. | \"बातचीत के लिए धन्यवाद! यदि आपको KGMU के बारे में और जानकारी चाहिए, तो मैं यहाँ रहूँगा।\"",
+            "ok": "See you later! Have a great day! | \"फिर मिलेंगे! आपका दिन शुभ हो!\"",
+            "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | \"आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।\"",
+            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\""
         },
         basics: {
-            "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow. | मैं KGMU सहायक हूँ, जिसे किंग जॉर्ज मेडिकल यूनिवर्सिटी, लखनऊ के बारे में जानकारी खोजने में आपकी मदद करने के लिए डिज़ाइन किया गया है।",
-            "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more. | मैं KGMU के विभागों, कार्यक्रमों, सुविधाओं, प्रवेश प्रक्रियाओं, संपर्क विवरण और बहुत कुछ के बारे में जानकारी प्रदान कर सकता हूँ।",
-            "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics. | मैं KGMU के बारे में जानकारी खोजने में आपकी मदद कर सकता हूँ। आप विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं या विश्वविद्यालय से संबंधित किसी भी अन्य विषय के बारे में पूछ सकते हैं।"
+            "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow. | \"मैं KGMU सहायक हूँ, जिसे किंग जॉर्ज मेडिकल यूनिवर्सिटी, लखनऊ के बारे में जानकारी खोजने में आपकी मदद करने के लिए डिज़ाइन किया गया है।\"",
+            "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more. | \"मैं KGMU के विभागों, कार्यक्रमों, सुविधाओं, प्रवेश प्रक्रियाओं, संपर्क विवरण और बहुत कुछ के बारे में जानकारी प्रदान कर सकता हूँ।\"",
+            "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics. | \"मैं KGMU के बारे में जानकारी खोजने में आपकी मदद कर सकता हूँ। आप विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं या विश्वविद्यालय से संबंधित किसी भी अन्य विषय के बारे में पूछ सकते हैं।\""
         }
     };
 
-    autosize(userInput);
+    // Autosize fallback
+    function initAutosize() {
+        if (typeof autosize !== 'undefined') {
+            autosize(userInput);
+        } else {
+            userInput.addEventListener('input', () => {
+                userInput.style.height = 'auto';
+                userInput.style.height = (userInput.scrollHeight) + 'px';
+            });
+        }
+    }
+    initAutosize();
 
+    // Event Listeners
     infoButton.addEventListener('click', () => infoModal.style.display = 'block');
     closeInfoBtn.addEventListener('click', () => infoModal.style.display = 'none');
     window.addEventListener('click', e => { if (e.target === infoModal) infoModal.style.display = 'none'; });
@@ -140,7 +194,7 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
     });
     userInput.addEventListener('input', () => {
         updateSendButtonState();
-        autosize.update(userInput);
+        if (typeof autosize !== 'undefined') autosize.update(userInput);
     });
 
     function checkPremadeResponse(message) {
@@ -177,7 +231,8 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
         userInput.value = '';
-        autosize.update(userInput);
+        if (typeof autosize !== 'undefined') autosize.update(userInput);
+
         awaitingResponse = true;
         updateSendButtonState();
 
@@ -186,8 +241,8 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
             setTimeout(() => {
                 addBotMessage(premade);
                 messages.push({ role: "model", parts: [{ text: premade }] });
-                saveToFirestore(message, premade);
-                if (!timerStarted) { startTimer(); timerStarted = true; } else resetTimer();
+                if (typeof saveToFirestore === 'function') saveToFirestore(message, premade);
+                if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
                 awaitingResponse = false;
                 scrollToBottom();
                 updateSendButtonState();
@@ -202,8 +257,8 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
             const safeResponse = sanitizeResponse(response);
             addBotMessage(safeResponse);
             messages.push({ role: "model", parts: [{ text: safeResponse }] });
-            saveToFirestore(message, safeResponse);
-            if (!timerStarted) { startTimer(); timerStarted = true; } else resetTimer();
+            if (typeof saveToFirestore === 'function') saveToFirestore(message, safeResponse);
+            if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
         } catch (error) {
             removeTypingIndicator();
             addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again in a minute.");
@@ -223,14 +278,16 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
             .trim();
     }
 
-    // 1:1 RATIO — NO CUSTOM HEADER ANYMORE
+    // PRODUCTION GEMINI CALL VIA VERCEL PROXY (1:1 Ratio)
     async function callGeminiAPI() {
         if (!systemPrompt) throw new Error("System prompt not loaded");
-        if (messages[messages.length - 1].role !== "user") throw new Error("Invalid state");
+        if (messages.length === 0 || messages[messages.length - 1].role !== "user") throw new Error("Invalid state");
 
         const response = await fetch(PROXY_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }, // No X-Api-Key = No preflight
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 systemPrompt,
                 messages,
@@ -247,6 +304,7 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
         return data.response;
     }
 
+    // Message rendering helpers
     function addUserMessage(message) {
         const div = document.createElement('div');
         div.className = 'chat-message user';
@@ -287,6 +345,7 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
+    // Timer functions
     function startTimer() {
         let timeLeft = 20;
         timerDisplay.textContent = `Time left: ${timeLeft}s`;
@@ -308,6 +367,17 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
         updateSendButtonState();
     }
 
+    // Mobile handling
+    if (window.innerWidth <= 768) chatContainer.classList.add('mobile');
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768 && chatContainer.classList.contains('active')) {
+            chatContainer.style.width = '100%'; chatContainer.style.height = '100%';
+        } else {
+            chatContainer.style.width = ''; chatContainer.style.height = '';
+        }
+    });
+
+    // Markdown parser (unchanged)
     function normalizeUrl(url) {
         if (!url) return 'https://www.kgmu.org';
         let u = url.trim().replace(/^["'()+]+|["'()+]+$/g, '').replace(/[")]+$/g, '');
@@ -325,8 +395,10 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
 
     function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
-        let t = text.trim().replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+        let t = text.trim()
+            .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
+        // Links
         t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, url) => {
             const cleanUrl = normalizeUrl(url.replace(/\\_/g, '_'));
             return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(txt)}</a>`;
@@ -336,6 +408,7 @@ fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.tr
             return `<a href="${normalizeUrl(url)}" target="_blank" rel="noopener noreferrer">${normalizeUrl(url)}</a>`;
         });
 
+        // Headers, bold, italic, code, lists, etc.
         t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
         t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
         t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
