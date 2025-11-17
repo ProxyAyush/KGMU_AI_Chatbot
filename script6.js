@@ -83,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch(e) { console.error("Firestore error:", e); }
     }
 
-    fetch('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt')
+    const PROMPT_URL = 'https://corsproxy.io/?' + encodeURIComponent('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt');
+fetch(PROMPT_URL, { cache: "no-store" }).then(r => r.text()).then(t => { if(t.trim()) systemPrompt = t.trim(); });
         .then(r => r.text())
         .then(t => { systemPrompt = t; console.log("System prompt loaded"); })
         .catch(() => systemPrompt = "You are an AI assistant for KGMU.");
