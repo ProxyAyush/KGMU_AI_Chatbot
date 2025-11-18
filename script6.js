@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const PROXY_URL = 'https://kgmu-ai-chatbot.vercel.app/api/gemini/kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e';
 
     // VERCEL-HOSTED PROMPT (Same domain = No CORS/CORB)
-    const PROMPT_URL = 'https://kgmu-ai-chatbot.vercel.app/system_prompt1.txt';
+    const PROMPT_URL = 'https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt';
 
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
