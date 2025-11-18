@@ -1,9 +1,11 @@
 <script>
-// script6.js - OFFICIAL KGMU.ORG VERSION (CORB-FIXED: Vercel-Hosted Prompt + 1:1 Requests)
-// No GitHub raw fetch → Zero CORS/CORB issues on mobile/desktop
+// script6.js - Production Ready (Vercel Proxy + No API Key Exposure)
+// Updated: November 17, 2025
 // CDN: https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
-// Updated: November 17, 2025 (v1.2 - Cache-Bust)
 
+/**
+ * Injects custom CSS to fix positioning and style issues.
+ */
 function injectChatbotStyles() {
     const style = document.createElement('style');
     style.id = 'chatbot-custom-styles';
@@ -13,13 +15,11 @@ function injectChatbotStyles() {
             right: auto !important;
             left: 20px !important;
             bottom: 20px !important;
-            z-index: 9999;
         }
         .chat-container {
             right: auto !important;
             left: 20px !important;
             bottom: 90px !important;
-            z-index: 9999;
         }
         #send-btn {
             background-color: #0056b3 !important;
@@ -41,11 +41,9 @@ function injectChatbotStyles() {
 document.addEventListener('DOMContentLoaded', function() {
     injectChatbotStyles();
 
-    // 1:1 REQUEST RATIO — KEY IN PATH (NO PREFLIGHT)
-    const PROXY_URL = 'https://kgmu-ai-chatbot.vercel.app/api/gemini/kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e';
-
-    // VERCEL-HOSTED PROMPT (Same domain = No CORS/CORB)
-    const PROMPT_URL = 'https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt';
+    // === CONFIGURATION ===
+    const PROXY_URL = 'https://kgmu-ai-chatbot.vercel.app/api/gemini'; // CHANGE IF YOU RENAMED PROJECT
+    const PROXY_API_KEY = 'kgmu-prod-2025-secure-key-9f8e3d2a1c5b7e'; // CHANGE THIS & MATCH IN VERCEL ENV
 
     // DOM Elements
     const chatButton = document.getElementById('chat-button');
@@ -84,21 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let timerStarted = false;
     let awaitingResponse = false;
     let isTimerRunning = false;
-    let systemPrompt = "You are a helpful AI assistant for KGMU."; // Fallback
-
-    // Load system prompt from Vercel (CORS-free)
-    fetch(PROMPT_URL, { cache: 'no-cache' })
-        .then(r => {
-            if (!r.ok) throw new Error('Prompt fetch failed');
-            return r.text();
-        })
-        .then(text => {
-            systemPrompt = text.trim();
-            console.log("System prompt loaded from Vercel (CORS-safe)");
-        })
-        .catch(err => {
-            console.warn("Using fallback prompt:", err);
-        });
+    let systemPrompt = "";
 
     // Firebase Config (safe to be public)
     const firebaseConfig = {
@@ -111,24 +95,31 @@ document.addEventListener('DOMContentLoaded', function() {
         measurementId: "G-PK9K94MB8X"
     };
 
-    if (typeof firebase !== 'undefined') {
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const chatbotCollection = db.collection("QA-CHATBOT");
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const chatbotCollection = db.collection("QA-CHATBOT");
 
-        async function saveToFirestore(question, answer) {
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                const randomField = `qa_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-                const qaData = { question, answer, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
-                await chatbotCollection.doc(today).set({ [randomField]: qaData }, { merge: true });
-                console.log("Q&A saved to Firestore");
-            } catch (error) {
-                console.error("Firestore save error:", error);
-            }
+    async function saveToFirestore(question, answer) {
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const randomField = generateRandomFieldName();
+            const qaData = { question, answer, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
+            await chatbotCollection.doc(today).set({ [randomField]: qaData }, { merge: true });
+            console.log("Q&A saved to Firestore");
+        } catch (error) {
+            console.error("Firestore save error:", error);
         }
-        window.saveToFirestore = saveToFirestore; // Global for premade
     }
+
+    function generateRandomFieldName() {
+        return `qa_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    }
+
+    // Load system prompt
+    fetch('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt')
+        .then(r => r.text())
+        .then(text => { systemPrompt = text; console.log("System prompt loaded"); })
+        .catch(() => { systemPrompt = "You're an AI assistant for KGMU"; });
 
     // Premade responses
     const premadeResponses = {
@@ -154,18 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Autosize fallback
-    function initAutosize() {
-        if (typeof autosize !== 'undefined') {
-            autosize(userInput);
-        } else {
-            userInput.addEventListener('input', () => {
-                userInput.style.height = 'auto';
-                userInput.style.height = (userInput.scrollHeight) + 'px';
-            });
-        }
-    }
-    initAutosize();
+    autosize(userInput);
 
     // Event Listeners
     infoButton.addEventListener('click', () => infoModal.style.display = 'block');
@@ -194,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     userInput.addEventListener('input', () => {
         updateSendButtonState();
-        if (typeof autosize !== 'undefined') autosize.update(userInput);
+        autosize.update(userInput);
     });
 
     function checkPremadeResponse(message) {
@@ -231,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
         userInput.value = '';
-        if (typeof autosize !== 'undefined') autosize.update(userInput);
+        autosize.update(userInput);
 
         awaitingResponse = true;
         updateSendButtonState();
@@ -241,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 addBotMessage(premade);
                 messages.push({ role: "model", parts: [{ text: premade }] });
-                if (typeof saveToFirestore === 'function') saveToFirestore(message, premade);
+                saveToFirestore(message, premade);
                 if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
                 awaitingResponse = false;
                 scrollToBottom();
@@ -257,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const safeResponse = sanitizeResponse(response);
             addBotMessage(safeResponse);
             messages.push({ role: "model", parts: [{ text: safeResponse }] });
-            if (typeof saveToFirestore === 'function') saveToFirestore(message, safeResponse);
+            saveToFirestore(message, safeResponse);
             if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
         } catch (error) {
             removeTypingIndicator();
@@ -278,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .trim();
     }
 
-    // PRODUCTION GEMINI CALL VIA VERCEL PROXY (1:1 Ratio)
+    // PRODUCTION GEMINI CALL VIA VERCEL PROXY
     async function callGeminiAPI() {
         if (!systemPrompt) throw new Error("System prompt not loaded");
         if (messages.length === 0 || messages[messages.length - 1].role !== "user") throw new Error("Invalid state");
@@ -286,7 +266,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const response = await fetch(PROXY_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-Api-Key': PROXY_API_KEY
             },
             body: JSON.stringify({
                 systemPrompt,
@@ -377,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Markdown parser (unchanged)
+    // Markdown parser (unchanged - kept full for links, lists, etc.)
     function normalizeUrl(url) {
         if (!url) return 'https://www.kgmu.org';
         let u = url.trim().replace(/^["'()+]+|["'()+]+$/g, '').replace(/[")]+$/g, '');
@@ -436,4 +417,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     resetChat();
 });
-</script>
