@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`;
             console.log("Sending request:", JSON.stringify(requestBody, null, 2));
 
             const response = await fetch(apiUrl, {
