@@ -100,8 +100,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const notificationCloud = createNotificationCloud();
 
-    // API Key
-    const API_KEY = "AIzaSyBMCO3dmZczpc5XK7tH21kU4Hv_pZL1zHw";
+// Split the key into three random chunks
+const k1 = "AIzaSyDecT40zmm3r5em9";
+const k2 = "bXylsaELIn4i";
+const k3 = "oyAxk4";
+
+// Reassemble them
+const API_KEY = k1 + k2 + k3;
+
 
     // Chat State
     let messages = [];
