@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationCloud = createNotificationCloud();
 
 // Split the key into three random chunks
-const k1 = "AIzaSyDecT40zmm3r5em9";
-const k2 = "bXylsaELIn4i";
-const k3 = "oyAxk4";
+const k1 = "AIzaSyCTjCkReRSnqs3wZZB";
+const k2 = "N8jb6w3J";
+const k3 = "7bPo7mfs";
 
 // Reassemble them
 const API_KEY = k1 + k2 + k3;
