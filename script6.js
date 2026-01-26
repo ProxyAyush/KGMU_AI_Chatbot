@@ -101,12 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationCloud = createNotificationCloud();
 
 
-const k1 = "AIzaSyDFta23";
-const k2 = "KVT4v6j66ikB";
-const k3 = "Tl1PlO5xT05oYR4";
-
-
-const API_KEY = k1 + k2 + k3;
+// API key is now securely stored on Cloudflare Workers proxy
+const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
 
 
     // Chat State
@@ -341,10 +337,9 @@ const API_KEY = k1 + k2 + k3;
     }
 };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`;
-            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+            console.log("Sending request to proxy:", JSON.stringify(requestBody, null, 2));
 
-            const response = await fetch(apiUrl, {
+            const response = await fetch(PROXY_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
