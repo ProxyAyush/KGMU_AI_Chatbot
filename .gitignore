@@ -1,0 +1,30 @@
+# Environment variables (NEVER commit these!)
+.env
+.env.local
+.env.production
+
+# Vercel
+.vercel
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Firebase private keys (if any)
+*-firebase-adminsdk-*.json
+serviceAccountKey.json

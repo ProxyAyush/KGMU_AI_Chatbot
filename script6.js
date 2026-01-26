@@ -100,13 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const notificationCloud = createNotificationCloud();
 
-// Split the key into three random chunks
-const k1 = "AIzaSyCTjCkReRSnqs3wZZB";
-const k2 = "N8jb6w3J";
-const k3 = "7bPo7mfs";
-
-// Reassemble them
-const API_KEY = k1 + k2 + k3;
+// Proxy endpoint configuration (deployed on Vercel)
+// IMPORTANT: Set PROXY_API_KEY as an environment variable or replace with your secret key
+const PROXY_ENDPOINT = 'https://your-vercel-app.vercel.app/api/gemini'; // Replace with your actual Vercel URL
+const PROXY_API_KEY = 'your-proxy-secret-key-here'; // Replace with a secure random string
 
 
     // Chat State
@@ -319,50 +316,49 @@ const API_KEY = k1 + k2 + k3;
             .replace(/Google/g, "KGMU");
     }
 
-    // --- FIXED GEMINI API CALL ---
+    // --- SECURE PROXY API CALL ---
     async function callGeminiAPI(userMessage) {
         try {
             const requestBody = {
-    systemInstruction: {
-        role: "system",
-        parts: [{ text: systemPrompt }]
-    },
-    contents: messages.concat([
-        {
-            role: "user",
-            parts: [{ text: userMessage }]
-        }
-    ]),
-    generationConfig: {
-        temperature: 0.7,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: 1024
-    }
-};
+                systemPrompt: systemPrompt,
+                messages: messages.concat([
+                    {
+                        role: "user",
+                        parts: [{ text: userMessage }]
+                    }
+                ]),
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 1024
+                }
+            };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`;
-            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+            console.log("Sending request to proxy:", JSON.stringify(requestBody, null, 2));
 
-            const response = await fetch(apiUrl, {
+            const response = await fetch(PROXY_ENDPOINT, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Api-Key': PROXY_API_KEY
+                },
                 body: JSON.stringify(requestBody)
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error Details:', errorData);
-                throw new Error(`API request failed: ${response.status}`);
+                const errorData = await response.json().catch(() => ({}));
+                console.error('Proxy Error Details:', errorData);
+                throw new Error(`Proxy request failed: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log("API Response:", data);
+            console.log("Proxy Response:", data);
 
-            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-                return data.candidates[0].content.parts[0].text;
+            if (data.response) {
+                return data.response;
             } else {
-                throw new Error('Unexpected API response format');
+                throw new Error('Unexpected proxy response format');
             }
         } catch (error) {
             console.error('API call error:', error);

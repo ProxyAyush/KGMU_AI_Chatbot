@@ -30,8 +30,12 @@ function rateLimit(req, res) {
 }
 
 export default async function handler(req, res) {
-  // CORS preflight
-  res.setHeader('Access-Control-Allow-Origin', 'https://kgmu.org');
+  // CORS preflight - Allow both kgmu.org and www.kgmu.org
+  const allowedOrigins = ['https://kgmu.org', 'https://www.kgmu.org'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Api-Key');
   if (req.method === 'OPTIONS') {
