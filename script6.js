@@ -297,6 +297,14 @@ const API_KEY = k1 + k2 + k3;
 
             addBotMessage(safeResponse);
             messages.push({ role: "model", parts: [{ text: safeResponse }] });
+
+            // Limit message history to prevent excessive token usage
+            const MAX_STORED_MESSAGES = 30;
+            if (messages.length > MAX_STORED_MESSAGES) {
+                messages = messages.slice(-MAX_STORED_MESSAGES);
+                console.log(`Trimmed message history to ${MAX_STORED_MESSAGES} messages`);
+            }
+
             saveToFirestore(message, safeResponse);
             awaitingResponse = false;
 
@@ -319,30 +327,36 @@ const API_KEY = k1 + k2 + k3;
             .replace(/Google/g, "KGMU");
     }
 
-    // --- FIXED GEMINI API CALL ---
+    // --- OPTIMIZED GEMINI API CALL (Context-Aware) ---
     async function callGeminiAPI(userMessage) {
         try {
-            const requestBody = {
-    systemInstruction: {
-        role: "system",
-        parts: [{ text: systemPrompt }]
-    },
-    contents: messages.concat([
-        {
-            role: "user",
-            parts: [{ text: userMessage }]
-        }
-    ]),
-    generationConfig: {
-        temperature: 0.7,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: 1024
-    }
-};
+            // Limit conversation history to last 10 exchanges (20 messages)
+            const MAX_HISTORY_MESSAGES = 20;
+            const recentMessages = messages.length > MAX_HISTORY_MESSAGES
+                ? messages.slice(-MAX_HISTORY_MESSAGES)
+                : messages;
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`;
-            console.log("Sending request:", JSON.stringify(requestBody, null, 2));
+            const requestBody = {
+                systemInstruction: {
+                    role: "system",
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: recentMessages.concat([
+                    {
+                        role: "user",
+                        parts: [{ text: userMessage }]
+                    }
+                ]),
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 1024
+                }
+            };
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`;
+            console.log(`Sending request with ${recentMessages.length} messages in history`);
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -357,7 +371,7 @@ const API_KEY = k1 + k2 + k3;
             }
 
             const data = await response.json();
-            console.log("API Response:", data);
+            console.log("API Response received");
 
             if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
                 return data.candidates[0].content.parts[0].text;

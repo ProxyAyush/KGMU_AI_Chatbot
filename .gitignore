@@ -1,0 +1,21 @@
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Firebase private keys (if any)
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Temporary files
+.tmp/
+temp/
