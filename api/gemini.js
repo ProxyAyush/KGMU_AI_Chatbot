@@ -1,4 +1,12 @@
-// api/gemini.js - Production-Ready Vercel Proxy for Gemini API
+// api/gemini.js - Backend Proxy for Gemini API (NOT CURRENTLY USED)
+// This file is for future reference if you decide to deploy a backend proxy
+// Current setup: Direct API calls from browser (script6.js)
+//
+// To use this proxy:
+// 1. Deploy to Vercel/Cloudflare Workers
+// 2. Set environment variables: GEMINI_API_KEY, PROXY_API_KEY
+// 3. Update script6.js to call this endpoint instead of Google directly
+//
 // Rate limit: Simple in-memory (per instance) - upgrade to Redis for distributed.
 const rateLimitMap = new Map(); // IP -> { count, lastReset }
 

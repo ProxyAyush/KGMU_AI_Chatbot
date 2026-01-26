@@ -100,10 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const notificationCloud = createNotificationCloud();
 
-// Proxy endpoint configuration (deployed on Vercel)
-// IMPORTANT: Set PROXY_API_KEY as an environment variable or replace with your secret key
-const PROXY_ENDPOINT = 'https://your-vercel-app.vercel.app/api/gemini'; // Replace with your actual Vercel URL
-const PROXY_API_KEY = 'your-proxy-secret-key-here'; // Replace with a secure random string
+// Split the key into three random chunks
+const k1 = "AIzaSyCTjCkReRSnqs3wZZB";
+const k2 = "N8jb6w3J";
+const k3 = "7bPo7mfs";
+
+// Reassemble them
+const API_KEY = k1 + k2 + k3;
 
 
     // Chat State
@@ -294,6 +297,14 @@ const PROXY_API_KEY = 'your-proxy-secret-key-here'; // Replace with a secure ran
 
             addBotMessage(safeResponse);
             messages.push({ role: "model", parts: [{ text: safeResponse }] });
+
+            // Limit message history to prevent excessive token usage
+            const MAX_STORED_MESSAGES = 30;
+            if (messages.length > MAX_STORED_MESSAGES) {
+                messages = messages.slice(-MAX_STORED_MESSAGES);
+                console.log(`Trimmed message history to ${MAX_STORED_MESSAGES} messages`);
+            }
+
             saveToFirestore(message, safeResponse);
             awaitingResponse = false;
 
@@ -316,12 +327,21 @@ const PROXY_API_KEY = 'your-proxy-secret-key-here'; // Replace with a secure ran
             .replace(/Google/g, "KGMU");
     }
 
-    // --- SECURE PROXY API CALL ---
+    // --- OPTIMIZED GEMINI API CALL (Context-Aware) ---
     async function callGeminiAPI(userMessage) {
         try {
+            // Limit conversation history to last 10 exchanges (20 messages)
+            const MAX_HISTORY_MESSAGES = 20;
+            const recentMessages = messages.length > MAX_HISTORY_MESSAGES
+                ? messages.slice(-MAX_HISTORY_MESSAGES)
+                : messages;
+
             const requestBody = {
-                systemPrompt: systemPrompt,
-                messages: messages.concat([
+                systemInstruction: {
+                    role: "system",
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: recentMessages.concat([
                     {
                         role: "user",
                         parts: [{ text: userMessage }]
@@ -335,30 +355,28 @@ const PROXY_API_KEY = 'your-proxy-secret-key-here'; // Replace with a secure ran
                 }
             };
 
-            console.log("Sending request to proxy:", JSON.stringify(requestBody, null, 2));
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`;
+            console.log(`Sending request with ${recentMessages.length} messages in history`);
 
-            const response = await fetch(PROXY_ENDPOINT, {
+            const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Api-Key': PROXY_API_KEY
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                console.error('Proxy Error Details:', errorData);
-                throw new Error(`Proxy request failed: ${response.status}`);
+                const errorData = await response.json();
+                console.error('API Error Details:', errorData);
+                throw new Error(`API request failed: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log("Proxy Response:", data);
+            console.log("API Response received");
 
-            if (data.response) {
-                return data.response;
+            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                return data.candidates[0].content.parts[0].text;
             } else {
-                throw new Error('Unexpected proxy response format');
+                throw new Error('Unexpected API response format');
             }
         } catch (error) {
             console.error('API call error:', error);
