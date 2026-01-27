@@ -16,16 +16,22 @@
 
 ## About The Developer
 
-<img align="right" src="https://img.shields.io/badge/MBBS-KGMU%20Lucknow-1a5f7a?style=for-the-badge" alt="MBBS Badge"/>
+<p align="center">
+  <img src="./your-profile-image.JPG" alt="Dr. Ayush Yadav" width="150" style="border-radius:50%"/>
+</p>
 
-**Dr. Ayush Yadav**
-MBBS Graduate, King George's Medical University, Lucknow
+<h3 align="center">Made by Dr. Ayush Yadav</h3>
+<p align="center"><strong>MBBS, King George's Medical University (Batch of 2019)</strong></p>
 
-> *"As an alumnus of KGMU, I built this chatbot to help students, patients, and visitors navigate one of India's largest and most prestigious medical institutions with ease."*
+<p align="center">
+  <em>As a physician and developer, I've combined my medical knowledge with programming skills to create this KGMU Assistant. This project aims to enhance the university website's accessibility and provide seamless information access for patients, students, and faculty members.</em>
+</p>
 
-<p align="left">
-  <a href="https://github.com/ProxyAyush"><img src="https://img.shields.io/badge/GitHub-ProxyAyush-181717?style=flat-square&logo=github" alt="GitHub"/></a>
-  <a href="https://linkedin.com/in/proxyayush"><img src="https://img.shields.io/badge/LinkedIn-Dr.%20Ayush%20Yadav-0A66C2?style=flat-square&logo=linkedin" alt="LinkedIn"/></a>
+<h4 align="center">Connect with me</h4>
+<p align="center">
+  <a href="https://linkedin.com/in/ayush-yadav-kgmu"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+  <a href="https://instagram.com/ayush.ism"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
+  <a href="https://x.com/ProxyAyush"><img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X"/></a>
 </p>
 
 ---
@@ -36,7 +42,7 @@ MBBS Graduate, King George's Medical University, Lucknow
 <tr>
 <td width="50%">
 
-### Campus Navigation
+### 🏥 Campus Navigation
 - **Departments & Buildings** - Find any department across the sprawling KGMU campus
 - **Facilities & Services** - Locate OPDs, emergency services, pharmacies, canteens
 - **Contact Information** - Direct phone numbers and office locations
@@ -44,7 +50,7 @@ MBBS Graduate, King George's Medical University, Lucknow
 </td>
 <td width="50%">
 
-### Medical Infrastructure
+### 🏨 Medical Infrastructure
 - **Hospital Services** - Information about all hospitals under KGMU
 - **Speciality Clinics** - Cardiology, Neurology, Orthopedics, and 50+ departments
 - **Patient Services** - Admission process, visiting hours, documentation
@@ -54,7 +60,7 @@ MBBS Graduate, King George's Medical University, Lucknow
 <tr>
 <td width="50%">
 
-### Academic Information
+### 📚 Academic Information
 - **Courses & Programs** - MBBS, MD, MS, DM, MCh, Nursing, Paramedical
 - **Admissions** - Eligibility, process, important dates
 - **Research** - Publications, ongoing projects, collaborations
@@ -62,7 +68,7 @@ MBBS Graduate, King George's Medical University, Lucknow
 </td>
 <td width="50%">
 
-### Website Navigation
+### 🌐 Website Navigation
 - **Quick Links** - Direct links to relevant KGMU web pages
 - **Downloads** - Forms, notices, results, circulars
 - **Updates** - Latest news and announcements
@@ -85,20 +91,16 @@ MBBS Graduate, King George's Medical University, Lucknow
 ---
 
 ## Architecture
-
-```
 ┌─────────────────┐     ┌──────────────────────┐     ┌─────────────────┐
 │   KGMU.org      │────▶│  Cloudflare Workers  │────▶│  Google Gemini  │
 │   (Frontend)    │◀────│  (Secure API Proxy)  │◀────│  (AI Engine)    │
 └─────────────────┘     └──────────────────────┘     └─────────────────┘
-                                  │
-                                  ▼
-                        ┌──────────────────┐
-                        │     Firebase     │
-                        │   (Analytics)    │
-                        └──────────────────┘
-```
-
+│
+▼
+┌──────────────────┐
+│     Firebase     │
+│   (Analytics)    │
+└──────────────────┘
 **Security Features:**
 - API keys secured via Cloudflare Workers (never exposed client-side)
 - Origin-restricted requests (only `*.kgmu.org` allowed)
@@ -110,12 +112,12 @@ MBBS Graduate, King George's Medical University, Lucknow
 
 | Feature | Description |
 |---------|-------------|
-| **Bilingual Support** | Responds in both English and Hindi |
-| **Context-Aware** | Maintains conversation history for follow-up questions |
-| **Smart Responses** | Pre-defined responses for common greetings (instant) |
-| **Rate Limiting** | 20-second cooldown to prevent API abuse |
-| **Mobile Responsive** | Fully functional on all device sizes |
-| **Markdown Rendering** | Supports formatted text, links, and lists |
+| 🌍 **Bilingual Support** | Responds in both English and Hindi |
+| 🧠 **Context-Aware** | Maintains conversation history for follow-up questions |
+| ⚡ **Smart Responses** | Pre-defined responses for common greetings (instant) |
+| ⏱️ **Rate Limiting** | 20-second cooldown to prevent API abuse |
+| 📱 **Mobile Responsive** | Fully functional on all device sizes |
+| 📝 **Markdown Rendering** | Supports formatted text, links, and lists |
 
 ---
 
@@ -131,12 +133,24 @@ MBBS Graduate, King George's Medical University, Lucknow
 ## CDN Information
 
 The chatbot is served via jsDelivr CDN on the official KGMU website:
-
-```
 https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
-```
+---
 
-For cache troubleshooting, see [CDN_CACHE_TROUBLESHOOTING.md](./CDN_CACHE_TROUBLESHOOTING.md)
+## CDN Cache Troubleshooting
+
+**Setup:**
+- Repo: ProxyAyush/KGMU_AI_Chatbot
+- File: script6.js  
+- CDN URL: https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
+- Purge URL: https://purge.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js
+
+**Steps:**
+1. Verify issue (compare GitHub vs CDN content)
+2. Check cache headers (age, x-cache, etag)
+3. Purge multiple times (hits different edge servers)
+4. Verify purge worked
+
+For detailed instructions, see [CDN_CACHE_TROUBLESHOOTING.md](./CDN_CACHE_TROUBLESHOOTING.md)
 
 ---
 
@@ -145,5 +159,5 @@ For cache troubleshooting, see [CDN_CACHE_TROUBLESHOOTING.md](./CDN_CACHE_TROUBL
 </p>
 
 <p align="center">
-  Made with <img src="https://img.shields.io/badge/❤️-for%20KGMU-1a5f7a?style=flat-square" alt="Love"/> by <a href="https://github.com/ProxyAyush">Dr. Ayush Yadav</a>
+  Made with ❤️ for KGMU by <a href="https://github.com/ProxyAyush">Dr. Ayush Yadav</a>
 </p>
