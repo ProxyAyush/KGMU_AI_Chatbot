@@ -66,11 +66,11 @@ function injectChatbotStyles() {
         .consent-banner {
             background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
             border-top: 2px solid #ffc107;
-            padding: 8px 14px;
-            font-size: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
             color: #555;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.6;
             flex-shrink: 0;
             transition: all 0.3s ease;
         }
@@ -86,28 +86,29 @@ function injectChatbotStyles() {
         }
         @keyframes consentShake {
             0%, 100% { transform: translateX(0); }
-            10% { transform: translateX(-6px); }
-            20% { transform: translateX(6px); }
-            30% { transform: translateX(-5px); }
-            40% { transform: translateX(5px); }
-            50% { transform: translateX(-3px); }
-            60% { transform: translateX(3px); }
-            70% { transform: translateX(-2px); }
-            80% { transform: translateX(2px); }
+            10% { transform: translateX(-10px); }
+            20% { transform: translateX(10px); }
+            30% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            50% { transform: translateX(-6px); }
+            60% { transform: translateX(6px); }
+            70% { transform: translateX(-3px); }
+            80% { transform: translateX(3px); }
             90% { transform: translateX(-1px); }
         }
         .consent-checkbox-label {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
+            font-weight: 500;
             color: #333;
             user-select: none;
         }
         .consent-checkbox-label input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 22px;
+            height: 22px;
             accent-color: #0056b3;
             cursor: pointer;
             flex-shrink: 0;
@@ -123,12 +124,20 @@ function injectChatbotStyles() {
         }
         .consent-banner .consent-hindi {
             display: block;
-            font-size: 10px;
+            font-size: 12px;
             color: #777;
-            margin-top: 3px;
+            margin-top: 4px;
         }
         .consent-banner.consented .consent-hindi {
             display: none;
+        }
+        .consent-banner.hidden {
+            max-height: 0;
+            padding: 0 14px;
+            border-top-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease, border-top-width 0.3s ease;
         }
 
         /* --- Privacy/Terms Modal --- */
@@ -512,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
         consentBanner.classList.add('flash-required');
         consentBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         // Device vibration for mobile
-        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        if (navigator.vibrate) navigator.vibrate([150, 50, 150, 50, 100]);
         setTimeout(() => consentBanner.classList.remove('flash-required'), 1500);
     }
 
@@ -748,6 +757,13 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         messages.push({ role: "user", parts: [{ text: message }] });
         userInput.value = '';
         autosize.update(userInput);
+
+        // Hide consent banner after first message
+        if (consentBanner && !consentBanner.classList.contains('hidden')) {
+            consentBanner.style.maxHeight = consentBanner.scrollHeight + 'px';
+            void consentBanner.offsetWidth;
+            consentBanner.classList.add('hidden');
+        }
 
         awaitingResponse = true;
         updateSendButtonState();
