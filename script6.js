@@ -572,24 +572,22 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     let isTimerRunning = false;
     let systemPrompt = "";
 
-    // Firebase config
-    const firebaseConfig = {
-        apiKey: "AIzaSyBTJpZXsh5tLvOrgeTi_JWPLvTlcZjP-kI",
-        authDomain: "kgmu-ai-chatbot.firebaseapp.com",
-        projectId: "kgmu-ai-chatbot",
-        storageBucket: "kgmu-ai-chatbot.appspot.com",
-        messagingSenderId: "1052783262438",
-        appId: "1:1052783262438:web:1ebc1720b1dc6346921927",
-        measurementId: "G-PK9K94MB8X"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const chatbotCollection = db.collection("QA-CHATBOT");
+    // Firebase config fetched from Cloudflare Worker
+    let db, chatbotCollection;
+    async function initFirebase() {
+        const res = await fetch(PROXY_URL + "/firebase-config");
+        if (!res.ok) throw new Error("Failed to fetch Firebase config");
+        const firebaseConfig = await res.json();
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        chatbotCollection = db.collection("QA-CHATBOT");
+    }
+    const firebaseReady = initFirebase();
 
     async function saveToFirestore(question, answer) {
         // DPDP Act compliance: only store data after user has consented
         if (!hasUserConsented()) return;
+        await firebaseReady;
         try {
             const today = new Date();
             const dateString = today.toISOString().split('T')[0];
