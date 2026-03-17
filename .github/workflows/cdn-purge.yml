@@ -1,0 +1,39 @@
+name: Purge jsDelivr CDN Cache
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'script6.js'
+
+jobs:
+  purge-cdn:
+    runs-on: ubuntu-latest
+    name: Purge jsDelivr CDN Cache
+
+    steps:
+      - name: Purge jsDelivr CDN cache for script6.js
+        run: |
+          echo "Purging jsDelivr CDN cache..."
+          PURGE_URL="https://purge.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js"
+
+          # Purge multiple times to hit different edge servers
+          for i in 1 2 3; do
+            echo "Purge attempt $i..."
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$PURGE_URL")
+            echo "Response status: $HTTP_STATUS"
+            if [ "$HTTP_STATUS" -eq 200 ]; then
+              echo "Purge $i succeeded."
+            else
+              echo "Purge $i returned status $HTTP_STATUS."
+            fi
+            sleep 2
+          done
+
+      - name: Verify CDN cache is updated
+        run: |
+          CDN_URL="https://cdn.jsdelivr.net/gh/ProxyAyush/KGMU_AI_Chatbot@main/script6.js"
+          echo "Checking CDN cache headers..."
+          curl -sI "$CDN_URL" | grep -iE "x-cache|age|etag|cache-control|last-modified" || true
+          echo "CDN purge workflow complete."
