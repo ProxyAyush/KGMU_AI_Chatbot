@@ -65,8 +65,8 @@ function injectChatbotStyles() {
         /* --- Consent Banner (blocking checkbox) --- */
         .consent-banner {
             background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
-            border-bottom: 2px solid #ffc107;
-            padding: 10px 14px;
+            border-top: 2px solid #ffc107;
+            padding: 8px 14px;
             font-size: 12px;
             color: #555;
             text-align: center;
@@ -76,19 +76,25 @@ function injectChatbotStyles() {
         }
         .consent-banner.consented {
             background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
-            border-bottom-color: #4caf50;
-            padding: 6px 14px;
+            border-top-color: #4caf50;
+            padding: 5px 14px;
         }
         .consent-banner.flash-required {
             background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%) !important;
-            border-bottom-color: #f44336 !important;
-            animation: consentShake 0.4s ease;
+            border-top-color: #f44336 !important;
+            animation: consentShake 0.5s ease;
         }
         @keyframes consentShake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            50% { transform: translateX(6px); }
-            75% { transform: translateX(-4px); }
+            10% { transform: translateX(-6px); }
+            20% { transform: translateX(6px); }
+            30% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            50% { transform: translateX(-3px); }
+            60% { transform: translateX(3px); }
+            70% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+            90% { transform: translateX(-1px); }
         }
         .consent-checkbox-label {
             display: inline-flex;
@@ -449,9 +455,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return footer;
     }
 
-    // Create and insert the consent banner, privacy footer, and modal
+    // Create and insert the consent banner (just above chat-footer/input area), privacy footer, and modal
     const consentBanner = createConsentBanner();
-    chatContainer.insertBefore(consentBanner, chatBody);
+    const chatFooter = document.querySelector('.chat-footer');
+    chatContainer.insertBefore(consentBanner, chatFooter);
     const privacyFooter = createPrivacyFooterLink();
     chatContainer.appendChild(privacyFooter);
     const privacyModalOverlay = createPrivacyModal();
@@ -481,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.removeItem('kgmuConsent');
             consentBanner.classList.remove('consented');
             userInput.disabled = true;
-            userInput.placeholder = 'Please accept the Terms & Privacy Policy above to chat';
+            userInput.placeholder = 'Please accept the Terms & Privacy Policy to chat';
             sendButton.disabled = true;
         }
     }
@@ -494,16 +501,28 @@ document.addEventListener('DOMContentLoaded', function() {
         consentBanner.classList.add('consented');
     } else {
         userInput.disabled = true;
-        userInput.placeholder = 'Please accept the Terms & Privacy Policy above to chat';
+        userInput.placeholder = 'Please accept the Terms & Privacy Policy to chat';
         sendButton.disabled = true;
     }
 
-    // Flash the consent checkbox red if user tries to send without consent
+    // Flash the consent checkbox red + vibrate if user tries to send without consent
     function flashConsentRequired() {
+        consentBanner.classList.remove('flash-required');
+        void consentBanner.offsetWidth; // force reflow to restart animation
         consentBanner.classList.add('flash-required');
         consentBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Device vibration for mobile
+        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
         setTimeout(() => consentBanner.classList.remove('flash-required'), 1500);
     }
+
+    // Also shake when user taps on the disabled input area
+    userInput.addEventListener('focus', () => {
+        if (!hasUserConsented()) {
+            flashConsentRequired();
+            userInput.blur();
+        }
+    });
 
     // --- Dynamic Typing Messages ---
     const typingMessages = [
@@ -578,7 +597,9 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             const qaData = {
                 question: question,
                 answer: answer,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                consent: true,
+                consentTimestamp: localStorage.getItem('kgmuConsentTime') || new Date().toISOString()
             };
             const docRef = chatbotCollection.doc(dateString);
             const updateData = {};
