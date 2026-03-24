@@ -400,7 +400,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function recordConsent() {
         localStorage.setItem('kgmuConsent', 'true');
-        localStorage.setItem('kgmuConsentTime', new Date().toISOString());
+        // Only set consentTime on first consent — never overwrite — so all QA pairs
+        // from this device share the same original consent timestamp.
+        if (!localStorage.getItem('kgmuConsentTime')) {
+            localStorage.setItem('kgmuConsentTime', new Date().toISOString());
+        }
     }
 
     // --- Create Privacy/Terms Modal ---
@@ -508,6 +512,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hasUserConsented()) {
         consentCheckbox.checked = true;
         consentBanner.classList.add('consented');
+        // Back-fill consentTime for users who consented before this field was introduced
+        if (!localStorage.getItem('kgmuConsentTime')) {
+            localStorage.setItem('kgmuConsentTime', new Date().toISOString());
+        }
     } else {
         userInput.disabled = true;
         userInput.placeholder = 'Please accept the Terms & Privacy Policy to chat';
