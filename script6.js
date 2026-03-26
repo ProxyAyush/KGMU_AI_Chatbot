@@ -9,6 +9,17 @@ function injectChatbotStyles() {
     const style = document.createElement('style');
     style.id = 'chatbot-custom-styles';
     style.innerHTML = `
+        /* --- Page Layout Fixes (kgmu.org horizontal overflow) --- */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+        }
+        .ranking-box, .info-box {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
         /* --- Chatbot Style Fixes --- */
 
         /* 1. Move Chat Button to Bottom Left */
@@ -319,11 +330,17 @@ function injectChatbotStyles() {
             background-color: #fafbfd !important;
             display: flex !important;
             flex-direction: column !important;
+            overscroll-behavior: contain !important;
         }
         .chat-message {
             display: flex !important;
             flex-direction: column !important;
             max-width: 85% !important;
+        }
+        .message-content {
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            line-height: 1.6 !important;
         }
         .bot .message-content {
             background-color: #f0f7ff !important;
