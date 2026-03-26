@@ -516,6 +516,8 @@ def main():
 
         output_lines.append('')
         output_lines.extend(revised_lines)
+        # Add RTI reference line (the full RTI legal text is in the dropped scraped pages section)
+        output_lines.append('For RTI information and the Public Information Officer contact, see: https://kgmu.org/rti.php')
     else:
         print(f"WARNING: Revised main data not found (revised_start={revised_start}, holiday_start={holiday_start})")
 
