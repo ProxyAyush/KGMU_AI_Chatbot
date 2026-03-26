@@ -60,7 +60,7 @@ https://linkedin.com/in/ayush-yadav-kgmu
 - Follow same State/Hospital selection flow as ORS portal
 
 **C. SMS Booking**
-- Number: 1887019134
+- Number: 8887019134
 - Format: Send SMS: "Appointment [Patient Name]" → receive booking confirmation
 
 **D. Walk-in (On-Site Counters)**
