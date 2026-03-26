@@ -9,6 +9,17 @@ function injectChatbotStyles() {
     const style = document.createElement('style');
     style.id = 'chatbot-custom-styles';
     style.innerHTML = `
+        /* --- Page Layout Fixes (kgmu.org horizontal overflow) --- */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+        }
+        .ranking-box, .info-box {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
         /* --- Chatbot Style Fixes --- */
 
         /* 1. Move Chat Button to Bottom Left */
@@ -24,9 +35,6 @@ function injectChatbotStyles() {
             left: 20px !important;
             bottom: 90px !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18) !important;
-            font-size: 15px !important;
-            zoom: 1 !important;
-            transform-origin: bottom left !important;
         }
 
         /* 3. Fix Send Button visibility */
