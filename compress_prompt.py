@@ -480,16 +480,39 @@ def main():
         dup_start = None
         dup_end = None
         for j, line in enumerate(revised_lines):
-            if "If you're asked about your origin" in line or \
-               "If you're asked about your origin" in line:
+            if "If you're asked about your origin" in line:
                 dup_start = j
-            if dup_start and 'linkedin.com/in/ayush-yadav-kgmu' in line:
+            if dup_start is not None and 'linkedin.com/in/ayush-yadav-kgmu' in line:
                 dup_end = j
                 break
 
         if dup_start is not None and dup_end is not None:
             print(f"Removing duplicate identity block at revised_lines[{dup_start}:{dup_end+1}]")
             revised_lines = revised_lines[:dup_start] + revised_lines[dup_end+1:]
+
+        # Trim the large navigation tree - keep only up to and including the social media links
+        # (up to Instagram link), then skip to "### Digital Lectures" onwards
+        # Social media links end after Instagram. Then the big nav tree starts.
+        # Find where "### Digital Lectures" or "### Important Links" begins
+        trim_end = None
+        important_links_start = None
+        for j, line in enumerate(revised_lines):
+            stripped = line.strip()
+            # Find where the navigation tree starts (just after KGMU social media links)
+            # The nav tree starts with "* [About KGMU]"
+            if stripped == '* [About KGMU](https://kgmu.org/about-us.php)' and trim_end is None:
+                trim_end = j
+            # Find the "### Important Links" section
+            if stripped == '### Important Links':
+                important_links_start = j
+                break
+
+        if trim_end is not None and important_links_start is not None:
+            print(f"Trimming nav tree from revised_lines[{trim_end}:{important_links_start}]")
+            # Keep: header + founding info + social media links + important links onwards
+            revised_lines = revised_lines[:trim_end] + revised_lines[important_links_start:]
+        elif trim_end is not None:
+            print(f"WARNING: Could not find '### Important Links', keeping from trim_end={trim_end}")
 
         output_lines.append('')
         output_lines.extend(revised_lines)
