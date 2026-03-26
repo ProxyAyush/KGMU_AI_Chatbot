@@ -24,6 +24,9 @@ function injectChatbotStyles() {
             left: 20px !important;
             bottom: 90px !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18) !important;
+            font-size: 15px !important;
+            zoom: 1 !important;
+            transform-origin: bottom left !important;
         }
 
         /* 3. Fix Send Button visibility */
@@ -319,11 +322,17 @@ function injectChatbotStyles() {
             background-color: #fafbfd !important;
             display: flex !important;
             flex-direction: column !important;
+            overscroll-behavior: contain !important;
         }
         .chat-message {
             display: flex !important;
             flex-direction: column !important;
             max-width: 85% !important;
+        }
+        .message-content {
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            line-height: 1.6 !important;
         }
         .bot .message-content {
             background-color: #f0f7ff !important;
