@@ -317,13 +317,27 @@ function injectChatbotStyles() {
         }
         .chat-body {
             background-color: #fafbfd !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .chat-message {
+            display: flex !important;
+            flex-direction: column !important;
+            max-width: 85% !important;
         }
         .bot .message-content {
             background-color: #f0f7ff !important;
             border-left: 3px solid #0056b3;
         }
+        .user {
+            align-self: flex-end !important;
+        }
         .user .message-content {
             background: linear-gradient(135deg, #0056b3 0%, #0069d9 100%) !important;
+            color: white !important;
+        }
+        .user .message-content * {
+            color: white !important;
         }
         .chat-footer {
             box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05) !important;
