@@ -124,7 +124,7 @@ CMO/ADO, Trauma Centre[8004849905]
 VC Office[0522-2257540], [0522-2258880], Extn-3
 Registrar Office[0522-2253171]
 Help Line[0522-2258880]
-C.U.G Number C.M.S. Office[8004007269]
+C.U.G Number C.MS Office[8004007269]
 
 #Departments and Important information+Links
 - [Anaesthesiology and Critical Care](https://www.kgmu.org/department_details.php?dept_id=1&dept_type=2)
@@ -212,7 +212,7 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Shefali Gautam|MD, MNAMS|Addl Prof|Thoracic Anesthesia,Difficult Airway||drshefaligautam@gmail.com|
 |Dr. Sateesh Verma|MD, IDRA|Addl Prof|PaediatricAnaesthesia, CPR training||sateeshverma24 @gmail.com|
 |Dr. Hemlata|DNB, PDCC(Neuroanaesthesia), FRCP (London), IDRA,…|Addl Prof|Neuroanaesthesia, Regional Anaesthesia,…||hema2211@yahoo.co.in|
-|Dr. Ahsan K. Siddiqui||Addl Prof|M.B.B.S, M.D||aksiddiqui@kgmcindia.edu|
+|Dr. Ahsan K. Siddiqui||Addl Prof|MBBS, MD||aksiddiqui@kgmcindia.edu|
 |Dr. Vipin Kumar Singh|MD, PDCC ( Critical care medicine)|Addl Prof|Critical care medicine (ICU)||vipintheazad@gmail.com|
 |Dr. Rajesh Raman|MD|Addl Prof|Critical care, Organ transplant, Diffic…||ramanrajesh83 @gmail.com|
 |Dr. Tanmay Tiwari|MD, PDCC, MNAMS|Addl Prof|Airway, Transplant||tanmayanesthesia @gmail.com|
@@ -240,13 +240,13 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Noor Us Saba|MBBS, MD|Asst Prof|Cytogenetics||noorussaba83@gmail.com|
 |Dr. Pratibha Shakya|MBBS, MD|Asst Prof|Gross Anatomy, Microanatomy, Medical Ed…||shakya_pratibha@rediffmail.com|
 |Dr. Heena Singh|MBBS, MD|Asst Prof|Cytogenetics, Embryology, Neuroanatomy,…||dr.singhheena@gmail.com|
-|Dr. Shivani Pandey||Prof|Ph.D (Med. Biochem)||shivanipandey@kgmcindia.edu|
-|Dr. Ranjana Singh||Prof|Ph.D (Med. Biochem)||ranjanasingh@kgmcindia.edu|
-|Dr. Kalpana Singh||HOD|M.D.(Biochemistry)||kalpanasingh@kgmcindia.edu|
-|Dr. Md. Kaleem Ahmad||Addl Prof|Ph.D (Med. Biochem)||mohdkaleemahmad@kgmcindia.edu|
-|Dr. Gyanendra Kumar Sonkar||Addl Prof|Ph.D (Med. Biochem)||gyanendrakrsonkar@kgmcindia.edu|
-|Dr. Dilutpal Sharma||Addl Prof|M.D.(Biochemistry)||dilutpal@kgmcindia.edu|
-|Dr. Shweta Kumari||Assoc Prof|M.D.(Biochemistry)||shweta.rungta29@gmail.com|
+|Dr. Shivani Pandey||Prof|PhD (Med. Biochem)||shivanipandey@kgmcindia.edu|
+|Dr. Ranjana Singh||Prof|PhD (Med. Biochem)||ranjanasingh@kgmcindia.edu|
+|Dr. Kalpana Singh||HOD|MD(Biochemistry)||kalpanasingh@kgmcindia.edu|
+|Dr. Md. Kaleem Ahmad||Addl Prof|PhD (Med. Biochem)||mohdkaleemahmad@kgmcindia.edu|
+|Dr. Gyanendra Kumar Sonkar||Addl Prof|PhD (Med. Biochem)||gyanendrakrsonkar@kgmcindia.edu|
+|Dr. Dilutpal Sharma||Addl Prof|MD(Biochemistry)||dilutpal@kgmcindia.edu|
+|Dr. Shweta Kumari||Assoc Prof|MD(Biochemistry)||shweta.rungta29@gmail.com|
 |Dr. Karan Kaushik|MD, DM|Asst Prof|CARDIACANAESTHISIA, CARDIAC CRITICAL CA…||kaushikkaran18@gmail.com|
 |Dr. S. K. Dwivedi|MD, DM(Cardio), FSCAI|HOD|Interventional Cardiology, Electrophysi…|522-2385725|skdwivedi@kgmcindia.edu|
 |Dr. Sharad Chandra|MD,DM(Cardio), FSCAI, FACC, FESC|Prof|Intervention cardiologist, Adult struct…||sharadchandra@ kgmcindia.edu|
@@ -265,7 +265,7 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Shailendra Kumar Saxena||Prof|Stem Cell/Cell Culture, Molecular Cell …||shailen@kgmcindia.edu|
 |Dr. Satyendra Kumar Singh||||||
 |Dr. rer. nat (University Duisburg-Essen, Germany) Post Doctorate, NCI-NIH, USA||Addl Prof|Adult and Cancer Stem Cell maintenance,…||satyendraks@kgmcindia.edu|
-|Dr. Nitu Nigam||Addl Prof|Ph.D. Medical GeneticsPostdoctoral Fell…||nitunigam@kgmcindia.edu|
+|Dr. Nitu Nigam||Addl Prof|PhD Medical GeneticsPostdoctoral Fell…||nitunigam@kgmcindia.edu|
 |Dr. Anshu Priya||Asst Prof|Forensic Fingerprinting, Forensic Serol…||anshupriya@kgmcindia.edu|
 |Dr. Shailendra Prasad Verma|DM Clinical Hematology|Addl Prof|Acute leukemias Coagulation & bleeding …||drspkgmu@rediffmail.com, spverma1998@gmail.com|
 |Dr. Swasti Sinha|DNB Hematology|Asst Prof|Myeloproliferative/Myelodysplastic Neop…||swasti.sinha@kgmcindia.edu|
@@ -273,24 +273,24 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Urmila Dhakad|MD Medicine with 03 years Training in Rheumatology|Assoc Prof|Rheumatoid Arthritis, Spondyloarthritis…||rheumatology@kgmcindia.edu|
 |Dr. Sundaram Tg|DM (Clinical Immunology and Rheumatology), MD (In…||Assistant Professor(Contractual)||sundaram.manutd@gmail.com|
 |Dr. Monika Agarwal|MD|HOD|Community Medicine||monikaagarwal@kgmcindia.edu|
-|Dr. O. P. Singh||Prof|MA (Socio), MSW, LLB, PGDEBL, Ph.D. (SW…||opsingh@kgmcindia.edu|
+|Dr. O. P. Singh||Prof|MA (Socio), MSW, LLB, PGDEBL, PhD (SW…||opsingh@kgmcindia.edu|
 |Dr. Reema Kumari|MD, CHCWM|Prof|Community Medicine,Hospital Waste Manag…||reemakumari@kgmcindia.edu|
 |Dr. S. K. Singh|MD, FIPHA|Prof|Epidemiology, National Health Programme||sksinghspm@kgmcindia.edu|
 |Dr. Naim Ahmed|MD|Prof|Community Medicine||naimahmad@kgmcindia.edu|
 |Dr. Anish Khanna|MD|Prof|Industrial Hygiene||anishkhanna@kgmcindia.edu|
-|Dr. Vijay Kumar Singh|B.Tech., M. Tech, PhD.|Prof|MSc, Ph.D. (Statistics)||vksingh@kgmcindia.edu|
+|Dr. Vijay Kumar Singh|BTech, M. Tech, PhD.|Prof|MSc, PhD (Statistics)||vksingh@kgmcindia.edu|
 |Dr. Rajeev Misra|MSW, PhD|Asst Prof|Medical Social Work||drrajeevmisracmph@gmail.com|
 |Dr. Saurabh Kashyap|MD|Asst Prof|Community Medicine||drsaurabhkashyapspm@kgmcindia.edu|
 |Dr. Prashant Kumar Bajpai|MD|Asst Prof|Community Medicine||drprashantkrbajpaispm@kgmcindia.edu|
-|Dr. Abhishek Singh||Asst Prof|MSc, Ph.D. (Statistics)||drabhisheksinghspm@kgmcindia.edu|
+|Dr. Abhishek Singh||Asst Prof|MSc, PhD (Statistics)||drabhisheksinghspm@kgmcindia.edu|
 |Dr. Promila Verma|BDS, MDS|HOD|||promilaverma@kgmcindia.edu|
 |Dr. Rakesh Yadav|BDS, MDS|Prof|||rakeshkumaryadav@kgmcindia.edu|
 |Dr. Ramesh Bharti|BDS, MDS|Prof|||rameshbharti@kgmcindia.edu , r_bharti14@yahoo.com|
 |Dr. Rhythm||Prof|||rhythm@kgmcindia.edu, docrhythm77@gmail.com|
-|Dr. Vijay Kumar Shakya|BDS, MDS||Professor(Junior Grade)||vijaykumarshakya@kgmcindia.edu , drvijayshakya@gma|
-|Dr. Pragya Pandey|BDS, MDS||Professor(Junior Grade)||pragya78@gmail.com|
+|Dr. Vijay Kumar Shakya|BDS, MDS||Prof (Jr)||vijaykumarshakya@kgmcindia.edu , drvijayshakya@gma|
+|Dr. Pragya Pandey|BDS, MDS||Prof (Jr)||pragya78@gmail.com|
 |Dr. Nishi Singh|BDS, MDS|Asst Prof|Critical Care Medicine||nishisingh@kgmcindia.edu|
-|Dr. Avinash Agarwal|MD, I.D.C.C, I.F.C.C.M , FCCP(USA)|HOD|General Medicine and Critical Care, Neu…||avinashagrawal@kgmcindia.edu|
+|Dr. Avinash Agarwal|MD, I.D.C.C, I.F.C.C.M, FCCP(USA)|HOD|General Medicine and Critical Care, Neu…||avinashagrawal@kgmcindia.edu|
 |Dr. Armin Ahmed||Assoc Prof|Obstetrics critical care, Infection con…||drarminahmed@gmail.com|
 |Dr. Sulekha Saxena|MD, PDCC ,PDCC|Assoc Prof|Gastroenterology & hepatobiliary critic…||dr.sulekha2008@rediffmail|
 |Dr. Syed Nabeel Muzaffar|MD,PDCC,DM,EDIC|Assoc Prof|Trauma Critical Care, Neuro critical ca…||muzaffarnabeel@gmail.com|
@@ -300,10 +300,10 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Nitin Rai|MD, DM (Critical care Medicine)|Asst Prof|Critical Care Cardiology, Extracorporea…||nitinrai311@gmail.com|
 |Dr. Swastika Suvirya|MD|HOD|Leprosy Cosmetic Dermatology||swastika.p@gamil.com|
 |Dr. Parul Verma|MD|Assoc Prof|Psoriasis, skin infections||parulverma_30@yahoo.co.in|
-|Dr. Ahsan Khaliq Siddiqui||Assoc Prof|M.B.B.S, M.D|0522 2258873|aksiddiqui@kgmcindia.edu|
-|Dr. Mukesh Kumar|MS, PDCC, MCH, FACS, FICS,MCh(Principles of Oncop…|Asst Prof|M.B.B.S.,M.D. Young Investigator Award||drmkumarm@gmail.com|
+|Dr. Ahsan Khaliq Siddiqui||Assoc Prof|MBBS, MD|0522 2258873|aksiddiqui@kgmcindia.edu|
+|Dr. Mukesh Kumar|MS, PDCC, MCH, FACS, FICS,MCh(Principles of Oncop…|Asst Prof|MBBS,MD Young Investigator Award||drmkumarm@gmail.com|
 |Dr. Pooja Ramakant|MS, DNB, MCh, MNAMS, FACS, FISS ,FRCS||Professor(Jr.)||poojaramakant@kgmcindia.edu|
-|Dr. Kul Ranjan Singh|MS, MCh, FACS, FICS||Professor(Junior Grade)||kulranjan@hotmail.com|
+|Dr. Kul Ranjan Singh|MS, MCh, FACS, FICS||Prof (Jr)||kulranjan@hotmail.com|
 |Dr. Shreyamsa M|Alumni , MCh Resident|||||
 |Dr. Sasi Mouli|Alumni , MCh Resident|||||
 |Dr. Loreno Enny|MCh Resident|||||
@@ -332,12 +332,12 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Raja Rupani|MBBS, MD|Addl Prof|Forensic Traumatology Forensic Toxicolo…||rajarupani@kgmcindia.edu|
 |Dr. Shiuli|MBBS, MD|Assoc Prof|Clinical and Analytical toxicology, Sui…||drshiuli@gmail.com, sheuli@kgmcindia.edu|
 |Dr. Sangeeta Kumari|MBBS, MD|Assoc Prof|Forensic Traumatology Forensic Toxicolo…||dr.sangeeta.sahni@gmail.com|
-|Dr. Shrikant Srivastava||HOD|M.D. (Psychiatry) FRCPsych(UK), M.Sc. (…||shrikantsrivastava@kgmcindia.edu|
+|Dr. Shrikant Srivastava||HOD|MD (Psychiatry) FRCPsych(UK), MSc. (…||shrikantsrivastava@kgmcindia.edu|
 |Dr. Rakesh Kumar Tripathi|PhD, MPhil (M&SP), MA (Psychology) / MRCI, MIACP,…||Professor cum Clinical Psychologist||rakeshkumartripathi@kgmcindia.edu|
-|Dr. Shailendra Mohan Tripathi|M.D. (Psychiatry),PhD (UK), FIPS, FIAGMH||Professor(Junior Grade)||smtripathi@kgmcindia.edu|
-|Dr. Bhupendra Singh||Addl Prof|M.D. (Psychiatry) MSCVES, DVES, CHCWM, …||bhupendrasingh@kgmcindia.edu|
-|Dr. Radhey Shyam Gangwar|MD, PDCC(CCM), FCCS, FIPM||Professor(Junior Grade)|||
-|Dr. Nisha Mani Pandey|||M.A. Ph.D. (Psychology), Post Doc (ICSS…||nishamani@kgmcindia.edu|
+|Dr. Shailendra Mohan Tripathi|MD (Psychiatry),PhD (UK), FIPS, FIAGMH||Prof (Jr)||smtripathi@kgmcindia.edu|
+|Dr. Bhupendra Singh||Addl Prof|MD (Psychiatry) MSCVES, DVES, CHCWM, …||bhupendrasingh@kgmcindia.edu|
+|Dr. Radhey Shyam Gangwar|MD, PDCC(CCM), FCCS, FIPM||Prof (Jr)|||
+|Dr. Nisha Mani Pandey|||MA PhD (Psychology), Post Doc (ICSS…||nishamani@kgmcindia.edu|
 |Dr. Akanksha Sonal|MD (Psychiatry), DM (Geriatric Mental Health)|Asst Prof|Geriatric ICU||drakankshasonal@kgmcindia.edu|
 |Dr. Ambrish Mishra|MD (Psychiatry), DM (Geriatric Mental Health)||Assistant Professor(Contractual)||Drambi07@gmail.com|
 |Dr. Nimitha K.j.|MD (Psychiatry), DM (Geriatric Mental Health)||Assistant Professor(Contractual)||nimitha3493.dmmch18@kgmcindia.edu|
@@ -348,7 +348,7 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Pradeep Srivastava||Assoc Prof|Human Organ Transplant||pradeepneena@gmail.com|
 |Dr. Abhijit Chandra|MS, MCh, DNB, MNAMS|HOD|Advance GI, Laparoscopy and Colorectal …|0522-2258660|abhijitchandra@hotmail.com|
 |Dr. Vivek Gupta|MS, GI Surgery Fellow, Transplant Fellow|Assoc Prof|Liver Transplant, Hepato-Biliary and Pa…|0522-2258660|vgkem@yahoo.com, vivekgupta@kgmcindia.edu|
-|Dr. Amita Pandey Mishra|MS (OBGYN) D.M. (Medical Genetics) FICOG|HOD|Infertility, High Risk Pregnancy, Clini…|522-2421421|qmhobgynkgmu@gmail.com|
+|Dr. Amita Pandey Mishra|MS (OBGYN) DM (Medical Genetics) FICOG|HOD|Infertility, High Risk Pregnancy, Clini…|522-2421421|qmhobgynkgmu@gmail.com|
 |Dr. Nihit Kharkwal||Asst Prof|Endocrinology|||
 |Dr. Sumit Rungta|MD, DM (Gastroenterology)||Additional Professor & Head||drsumitrungta79@ gmail.com|
 |Dr. Manyak||Asst Prof||||
@@ -374,12 +374,12 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Amit Kumar|MD|Asst Prof|Internal Medicine||amit_gupta2612@rediffmail.com|
 |Dr. Ambuj Yadav|MD, PDCC(CCM)|Asst Prof|Internal Medicine||dr.ambujyadav@gmail.com|
 |Dr. Mahak Lamba|MD|Asst Prof|Internal Medicine||mahak7@gmail.com|
-|Dr. Amita Jain|MBBS, MD, Ph.D|HOD|Tuberculosis, Clinical Microbiology, Vi…||amita602002@yahoo.com|
+|Dr. Amita Jain|MBBS, MD, PhD|HOD|Tuberculosis, Clinical Microbiology, Vi…||amita602002@yahoo.com|
 |Dr. Vimala Venkatesh|MBBS MD|Prof|Viral serology, ICTC/SRL Molecular Biol…||venkatesh_vimala@rediffmail.com|
 |Dr. Gopa Banerjee|MBBS, MD|Prof|Mycology, National Shigella Center||gopabanerjee31@rediffmail.com|
 |Dr. Raj Kumar Kalyan|MBBS, MD|Prof|Microbiology||rajkumarkalyan@kgmcindia.edu|
 |Dr. Prashant Gupta|MBBS, MD|Prof|Microbiology||prashantgupta@kgmcindia.edu|
-|Dr. Sheetal Verma|MBBS,MD||Professor(Junior Grade)||sheetalverma@kgmcindia.edu|
+|Dr. Sheetal Verma|MBBS,MD||Prof (Jr)||sheetalverma@kgmcindia.edu|
 |Dr. Parul Jain|MBBS, MD, PhD, MNAMS|Assoc Prof|Microbiology||parulkgmu@yahoo.com|
 |Dr. Suruchi Shukla|MBBS, MD, PDCC-Infectious Diseases, Pursuing MD-P…|Asst Prof|Microbiology||shukla_suruchi@yahoo.com|
 |Dr. Shruti Radera|MBBS, MD|Asst Prof|Nephrology||radera.s28@gmail.com|
@@ -403,12 +403,12 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Imran Rizvi|MD,DM|Assoc Prof|NMJ Disorders, Neuroinfections||imranrizvi09@gmail.com|
 |Dr. Harish Nigam|MD, DM|Asst Prof|Tropical Neurology, Neuroradiology||E-mail: harish.nigam007@gmail.com|
 |Dr. Sarvesh Kumar|MD|Asst Prof|NMJ disorders, peripheral neuropathy|522 2257671|Skc087a@gmail.com|
-|Dr. Dr. Amita Pandey|MS (OBGYN) D.M. (Medical Genetics) FICOG|Asst Prof|Vice Dean||qmhobgynkgmu@gmail.com|
+|Dr. Dr. Amita Pandey|MS (OBGYN) DM (Medical Genetics) FICOG|Asst Prof|Vice Dean||qmhobgynkgmu@gmail.com|
 |Dr. Anjoo Agarwal|MD, FIGO Fellow,FICOG||Professor, Head & Vice Dean Academic|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Nisha Singh|MBBS, MD, FICOG|Prof|Gynecologic oncology, Laparoscopic & Hy…|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Rekha Sachan|MBBS, MS ,FICOG|Prof|Nodal officer BMW, Incharge Obstetrics …|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Sujata|MBBS, MS,FICOG|Prof|Adolescent health High risk pregnancy, …|522 2257742|qmhobgynkgmu@gmail.com|
-|Dr. Amita Pandey Mishra|MS (OBGYN) D.M. (Medical Genetics) FICOG|Prof|Infertility, High Risk Pregnancy, Clini…|522 2257742|qmhobgynkgmu@gmail.com|
+|Dr. Amita Pandey Mishra|MS (OBGYN) DM (Medical Genetics) FICOG|Prof|Infertility, High Risk Pregnancy, Clini…|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Seema Mehrotra|MBBS, MD|Prof|Fetal medicine USG in gynaecology & Obs…|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Sabuhi Qureshi|M. S, DNB, MNAMS|Prof|**(On Lien)**|522 2257742|qmhobgynkgmu@gmail.com|
 |Dr. Pushplata Sankhwar|MBBSMS(OBGYN) FICOG FICS MNAMS|Prof|Laproscopy, hysteroscopy infertility, H…|522 2257742|qmhobgynkgmu@gmail.com|
@@ -492,10 +492,10 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Sanjay Mishra|MD|Addl Prof|Hematopathology, Benign hematology, Apl…||sanjaymishra@kgmcindia.edu|
 |Dr. Jiledar Rawat||HOD|Neonatal Surgery, General Pediatric Sur…|522 2348603|rawatjd@yahoo.com, jdrawat@kgmc.com.|
 |Dr. . S.n. Kureel||Prof|(Re-employed)||snkkgmu@rediffmail.com|
-|Dr. Archika Gupta|||Professor(Junior Grade)||archika@kgmcindia.edu|
-|Dr. Anand Pandey|||Professor(Junior Grade)||anandpandey@kgmcindia.edu|
-|Dr. Sudhir Singh|||Professor(Junior Grade)||sudhir@kgmcindia.edu|
-|Dr. Nitin Pant|||Professor(Junior Grade)||nitinpant@kgmcindia.edu|
+|Dr. Archika Gupta|||Prof (Jr)||archika@kgmcindia.edu|
+|Dr. Anand Pandey|||Prof (Jr)||anandpandey@kgmcindia.edu|
+|Dr. Sudhir Singh|||Prof (Jr)||sudhir@kgmcindia.edu|
+|Dr. Nitin Pant|||Prof (Jr)||nitinpant@kgmcindia.edu|
 |Dr. Gurmeet Singh||Asst Prof|Neonatal Surgery, General Pediatric Sur…||gurmeet.dr@kgmcindia.edu|
 |Dr. Piyush Kumar||Asst Prof|Neonatal Surgery, General Pediatric Sur…||piyushk@kgmcindia.edu|
 |Dr. Rahul Kumar Rai||Asst Prof|Neonatal Surgery, General Pediatric Sur…||drrahul2004@gmail.com|
@@ -516,7 +516,7 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Shalini Kaushal|BDS, MDS|Prof|www.kgmu.org/upload_file/faculty_image/…||shalinikaushal@kgmcindia.edu|
 |Dr. Pavitra Rastogi|BDS, MDS|Prof|www.kgmu.org/upload_file/faculty_image/…||pavitrarastogi@kgmcindia.edu|
 |Dr. Rameshwari Singhal|BDS, MDS|Prof|www.kgmu.org/upload_file/faculty_image/…||rameshwarisinghal@kgmcindia.edu|
-|Dr. Anjani Kumar Pathak|BDS MDS|HOD|Professor(Junior Grade)|:+91 9936016999, 9415012523|anjanikumarpathak@kgmcindia.edu|
+|Dr. Anjani Kumar Pathak|BDS MDS|HOD|Prof (Jr)|:+91 9936016999, 9415012523|anjanikumarpathak@kgmcindia.edu|
 |Dr. Devendra Kumar Katiyar|MD|Assoc Prof|Clinical Pharmacology|0522-2257448|devendradr@rediffmail.com|
 |Dr. Rishi Pal|PhD. (Pharmacology), Postdoc (USA), MAMS|Prof|Molecular Pharmacology and Drug Discove…|0522-2257448|rishi_paul@yahoo.com, rishipalkgmc@gmail.com, rishipal@kgmcindia.edu|
 |Dr. Sarvesh Singh|MD||Professor Junior Grade (Additional Prof…|7499171613|drsarveshsingh@gmail.com|
@@ -525,10 +525,10 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Suyog Sindhu||Asst Prof|\- Medical Education - Teaching and Res…|0522-2257448|suyog@kgmcindia.edu|
 |Dr. Anil. K. Gupta|MD (PMR) (AIIMS), DNB(PMR), CEPC,MNAMS|HOD|Pain, Arthritis, S.C.I., Palliative car…||dranilaiims@yahoo.co.in,akgupta@kgmcindia.edu|
 |Dr. Dileep Kumar|MS (Ortho)|Prof|Locomotor Disability, Polio corrective …||dileepmsortho@yahoo.in, dileepkumar@kgmcindia.edu|
-|Dr. Sudhir R. Mishra|DNB (PMR),MNAMS||Professor(Junior Grade)||sudhirpmr10@gmail.com|
+|Dr. Sudhir R. Mishra|DNB (PMR),MNAMS||Prof (Jr)||sudhirpmr10@gmail.com|
 |Dr. Ganesh Yadav|MD (PMR)|Assoc Prof|Spinal cord injury, Corrective surgery,…||ganeshyadav4u@yahoo.co.in,ganeshyadav4u@kgmcindia.|
-|Dr. Arvind Kumar|||MPT, Ph.D.||arvindmspt@yahoo.in, arvindkumar@kgmcindia.edu|
-|Dr. Sandeep Kumar Gupt|M.B.B.S., DNB(P.M.R.)|Asst Prof|Pediatric Rehabilitation, Neuro Rehabil…||drsandeepk24@gmail.com,drsandeep2k4@kgmcindia.ed|
+|Dr. Arvind Kumar|||MPT, PhD||arvindmspt@yahoo.in, arvindkumar@kgmcindia.edu|
+|Dr. Sandeep Kumar Gupt|MBBS, DNB(P.M.R.)|Asst Prof|Pediatric Rehabilitation, Neuro Rehabil…||drsandeepk24@gmail.com,drsandeep2k4@kgmcindia.ed|
 |Dr. Shraddha Singh|MD|HOD|Neurophy Physiology|0522-2258880|drshraddhasingh@yahoo.com|
 |Dr. Vani Gupta|MD, DNB MNAMS|Prof|Endocrine Physiology|9839914186|vaniphysiology@gmail.com|
 |Dr. Sandeep Bhattacharya|MD, DNB|Prof|Molecular Physiology|0522-2258880|drsbhattacharya@gmail.com|
@@ -556,12 +556,12 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Balendra Pratap Singh|MDS|Prof|Prosthodontics, Crowns & Bridges|0522 2258700, 701, 702 EXT 241|balendra02@yahoo.com|
 |Dr. Kamleshwar Singh|MDS|Prof|Prosthodontics, Crowns & Bridges|0522 2258700, 701, 702 EXT 241|dr_kamleshwarsingh@yahoo.co.in|
 |Dr. Sunit Kr. Jurel|MDS|Prof|Prosthodontics, Crowns & Bridges|0522 2258700, 701, 702 EXT 241|dentistmj1110@yahoo.com|
-|Dr. Shuchi Tripathi|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|dr08shuchi@yahoo.com|
-|Dr. Deeksha Arya|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|deeksha.arya@gmail.com|
-|Dr. Lakshya Kumar|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|lakshya79@yahoo.com|
-|Dr. Bhaskar Agarwal|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|bhaskaragarwal@kgmcindia.edu|
-|Dr. Kaushal Kishore Agarwal|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|drkaushalp@yahoo.co.in|
-|Dr. Mayank Singh|MDS||Professor(Junior Grade)|0522 2258700, 701, 702 EXT 241|dr_mayank1983@yahoo.co.in|
+|Dr. Shuchi Tripathi|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|dr08shuchi@yahoo.com|
+|Dr. Deeksha Arya|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|deeksha.arya@gmail.com|
+|Dr. Lakshya Kumar|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|lakshya79@yahoo.com|
+|Dr. Bhaskar Agarwal|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|bhaskaragarwal@kgmcindia.edu|
+|Dr. Kaushal Kishore Agarwal|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|drkaushalp@yahoo.co.in|
+|Dr. Mayank Singh|MDS||Prof (Jr)|0522 2258700, 701, 702 EXT 241|dr_mayank1983@yahoo.co.in|
 |Dr. Vivek Agarwal|MD|HOD|Child and Adolescent Psychiatry|522 2265416|psychiatry@kgmcindia.edu|
 |Dr. Anil Nischal|MD[VIEW PROFILE](http://kgmu.org/download/profile…|Prof|General Psychiatry, Addiction Psychiatr…|522 2265416|an.kgmu@gmail.com|
 |Dr. Manu Agarwal|MD|Assoc Prof|(On higher education leave since Octobe…||manuagarwal@kgmcindia.edu|
@@ -574,18 +574,18 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Lt Gen (retd)dr (prof) Bnbm Prasad|||Professor (Contratual)|||
 |Dr. Anit Parihar|MD, PDCC|HOD|Neuroradiology, MRI||anitparihar@kgmcindia.edu|
 |Dr. Manoj Kumar|MD, FICS (Interventional Radiology)|Prof|Interventional Radiology||manojkumar@kgmcindia.edu|
-|Dr. Durgesh Kumar Dwivedi|Ph.D. (AIIMS, Delhi) ; Fellowship (UTSW, Dallas, …|Addl Prof|MR Spectroscopy, Oncological imaging, Q…|9335699847|durgeshdwivedi@kgmcindia.edu|
-|Dr. Sukriti Kumar||Assoc Prof|M.D.||sukritikumar@kgmcindia.edu|
-|Dr. Anil Rawat||Asst Prof|M.D.||rawats20@gmail.com|
-|Dr. Amit Kumar Verma||Asst Prof|M.D.||drverma.gilbert25@gmail.com|
+|Dr. Durgesh Kumar Dwivedi|PhD (AIIMS, Delhi) ; Fellowship (UTSW, Dallas, …|Addl Prof|MR Spectroscopy, Oncological imaging, Q…|9335699847|durgeshdwivedi@kgmcindia.edu|
+|Dr. Sukriti Kumar||Assoc Prof|MD||sukritikumar@kgmcindia.edu|
+|Dr. Anil Rawat||Asst Prof|MD||rawats20@gmail.com|
+|Dr. Amit Kumar Verma||Asst Prof|MD||drverma.gilbert25@gmail.com|
 |Dr. Priyanka Yadav|MD|Asst Prof|MRI, CT and USG; Women's and Pediatrics…||priyankasjh1990@gmail.com|
 |Dr. Saurabh Kumar|MD|Asst Prof|InterventionalRadiology, Obstetrics and…||gaurav.saurav1988@gmail.com|
 |Dr. Siddharth Mishra|MD, DNB, PDCC|Asst Prof|Interventional Radiology||drsiddharth337@kgmcindia.edu|
 |Dr. Maj (dr.) Nitin Arun Dikshit|MD|Asst Prof|Vascular, Non Vascular Intervention and…||drnadz@gmail.com|
-|Dr. N. K. Painuly|M.Sc., D.R.P., PhD, M.Sc (Med Rad Phy)|Prof|Monte Carlo Simulation, Radioimmuno tar…|0522-2253316|nk_painuly@yahoo.com|
+|Dr. N. K. Painuly|MSc., D.R.P., PhD, MSc (Med Rad Phy)|Prof|Monte Carlo Simulation, Radioimmuno tar…|0522-2253316|nk_painuly@yahoo.com|
 |Dr. Sudhir Singh|MD|Prof|Systemic and Targeted Therapy for solid…||drsudhirsaharanpur@gmail.com|
-|Dr. Navin Singh|M.Sc., D.R.P, PhD|Addl Prof|Medical Physics||navinkgmu@gmail.com|
-|Dr. Teerthraj Verma|M.Sc., D.R.P., PhD|Addl Prof|Medical Physics, Motion & Inhomogeneity…||teerth05kashi@gmail.com|
+|Dr. Navin Singh|MSc., D.R.P, PhD|Addl Prof|Medical Physics||navinkgmu@gmail.com|
+|Dr. Teerthraj Verma|MSc., D.R.P., PhD|Addl Prof|Medical Physics, Motion & Inhomogeneity…||teerth05kashi@gmail.com|
 |Dr. Mranalini Verma||Assoc Prof|Head and Neck Cancer, Breast Cancer, Pa…||drmrinalini79@gmail.com|
 |Dr. Surya Kant||HOD|Tuberculosis ILD COPD Asthma and Allerg…|522 2255167 (O),|dr.kantskt@rediffmail.com|
 |Dr. S. K. Verma||Prof|TB Asthma COPD Pleural Disease|522 2255167 (O),|skverma@kgmcindia.edu|
@@ -601,23 +601,23 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Abhishek Saini|MBBS,MS,FNB|Asst Prof|Shoulder Arthroscopy, Revision Arthrosc…|8175081034|abhisheksaini1034@kgmcindia.edu|
 |Dr. K K Singh|MS|Prof|General Surgery, Gastro-Intestinal Surg…|9415914557, 9935579050|drkksinghkgmu@gmail.com|
 |Dr. Jitendra Kushwaha|MS, FACS, FMAS, FICS, FIAGES|Prof|Minimal Access Surgery, Venous Surgery||jitendrakrkushwaha@kgmcindia.edu|
-|Dr. Parijat Suryavanshi|MS MCh (Surg Onco)||Professor(Junior Grade)||parijatsuryawanshi@kgmcindia.edu|
-|Dr. Faraz Ahmad|MS FACS FICS FIAGES Dip MAS||Professor(Junior Grade)||farazahmed@kgmcindia.edu|
-|Dr. Gitika Nanda Singh|MS MCh (Endo Sx)||Professor(Junior Grade)||gitika@kgmcindia.edu|
+|Dr. Parijat Suryavanshi|MS MCh (Surg Onco)||Prof (Jr)||parijatsuryawanshi@kgmcindia.edu|
+|Dr. Faraz Ahmad|MS FACS FICS FIAGES Dip MAS||Prof (Jr)||farazahmed@kgmcindia.edu|
+|Dr. Gitika Nanda Singh|MS MCh (Endo Sx)||Prof (Jr)||gitika@kgmcindia.edu|
 |Dr. Pankaj Kumar|MS FICS (Gastro Sx) FACS FALS (Upper GI Sx) FMAS …|Assoc Prof|Gastro-Intestinal Surgery||pankajkumar@kgmcindia.edu|
-|Dr. Sanjeev Kumar|MS FIAGES EFIAGES FALS (Hernia)||Professor(Junior Grade)||sanjeevkumar@kgmcindia.edu|
-|Dr. Akshay Anand|MS FIAGES ACS (Asso. Fellow)||Professor(Junior Grade)||akshayanand@kgmcindia.edu|
-|Dr. Ajay Kumar Pal|MS FACS FMAS FIAGES FALS(Hernia) DipMAS (Hernia) …||Professor(Junior Grade)||ajay@kgmcindia.edu|
+|Dr. Sanjeev Kumar|MS FIAGES EFIAGES FALS (Hernia)||Prof (Jr)||sanjeevkumar@kgmcindia.edu|
+|Dr. Akshay Anand|MS FIAGES ACS (Asso. Fellow)||Prof (Jr)||akshayanand@kgmcindia.edu|
+|Dr. Ajay Kumar Pal|MS FACS FMAS FIAGES FALS(Hernia) DipMAS (Hernia) …||Prof (Jr)||ajay@kgmcindia.edu|
 |Dr. Saumya Singh|MS FICS FIAGES FACS|Assoc Prof|Breast & Thyroid Surgery||saumyasingh@kgmcindia.edu|
 |Dr. Manish Kumar Agarwal|MS FAIS FIAGES ACS(Member)|Assoc Prof|Minimal Access Surgery||manishkumaragarwal@kgmcindia.edu|
 |Dr. Pankaj Singh|MS FIAGES FMAS FALS(Hernia)|Assoc Prof|Minimal Access Surgery||pankajsingh@kgmcindia.edu|
 |Dr. Kushagra Gaurav Bhatnagar|MS, MCh (Endocrine Surgery)|Assoc Prof|Endocrine ( Thyroid, Parathyroid, Adren…||kushagra_gaurav@yahoo.co.in|
 |Dr. Amit Karnik|MS|Asst Prof|General Surgery and Minimal Access Surg…|0522-2258660|amitkgmc007@gmail.com|
 |Dr. Vivek Gupta|MS,FAC|Addl Prof|Hepatobiliary Transplant and GI surgery||vgkem@yahoo.com|
-|Dr. Sandeep Verma|MS, MCh|Asst Prof|Advance GI , Laparoscopy and Colorectal…||drvermasandyms@gmail.com|
-|Dr. Mahesh R|MS, MCh|Asst Prof|Advance GI , Laparoscopy, HPB and Color…||maheshraj_9326@yahoo.co.in|
-|Dr. . Ravi Ashok Kumar Patel|MS, MCh|Asst Prof|Advance GI , Laparoscopy, HPB and Color…||ravipatel396@gmail.com|
-|Dr. Pritheesh Rajan|MS, MCh|Asst Prof|Advance GI , Laparoscopy, HPB and Color…||pritheeshrajan@gmail.com|
+|Dr. Sandeep Verma|MS, MCh|Asst Prof|Advance GI, Laparoscopy and Colorectal…||drvermasandyms@gmail.com|
+|Dr. Mahesh R|MS, MCh|Asst Prof|Advance GI, Laparoscopy, HPB and Color…||maheshraj_9326@yahoo.co.in|
+|Dr. . Ravi Ashok Kumar Patel|MS, MCh|Asst Prof|Advance GI, Laparoscopy, HPB and Color…||ravipatel396@gmail.com|
+|Dr. Pritheesh Rajan|MS, MCh|Asst Prof|Advance GI, Laparoscopy, HPB and Color…||pritheeshrajan@gmail.com|
 |Dr. Vijay Kumar|MS, MCh, FICS, FACS|HOD|Head & Neck cancer, GI cancers, Breast …|522 2258880,Dept. Mob: 8004336235|drvkumar2007@gmail.com|
 |Dr. Sanjeev Misra|MS, MCh, FRCS (Eng.), FRCS (Glasgow), FICS, FACS …|Prof|Head & Neck Cancer, Cancer Esophagus, G…|,Dept. Mob: 8004336235|misralko@gmail.com|
 |Dr. Sameer Gupta|MS, MCh,FAIS|Addl Prof|Head & Neck, Hepatobiliary, GI Cancer, …|Dept. Mob: 8004336235|sameerdr79@gmail.com|
@@ -626,24 +626,24 @@ C.U.G Number C.M.S. Office[8004007269]
 |Dr. Puneet Prakash|MS, MCh, FAIS|Asst Prof|HPB and GI oncology; Breast and Gynaec …|Dept. Mob: 8004336235|drpuneetsinha@gmail.com|
 |Dr. Anurag Rai||Assoc Prof|General Thoracic, Vascular and cardiac …||anuragrai@kgmu.edu|
 |Dr. Tulika Chandra|MD|HOD|www.kgmu.org/upload_file/faculty_image/…||drtulikachandra@gmail.com|
-|Dr. Archana Solanki|MD, PDCC||Professor(Junior Grade)||archana.solanki@gmail.com|
-|Dr. Ashutosh Singh|MS FACS FICS FIAGES|Asst Prof|M.D., P.D.C.C.|522 2258672(O)|drashullrm@gmail.com|
+|Dr. Archana Solanki|MD, PDCC||Prof (Jr)||archana.solanki@gmail.com|
+|Dr. Ashutosh Singh|MS FACS FICS FIAGES|Asst Prof|MD, P.D.C.C.|522 2258672(O)|drashullrm@gmail.com|
 |Dr. Samir Misra|MS FACS FIAGES FMAS FICS MAMS FLCS LLB.|Prof|Trauma Surgery, Minimal Access Surgery,…||samirmishra@kgmcindia.edu|
-|Dr. Yadvendra Dheer||Assoc Prof|M.B.B.S , M.S, M.Ch||yadusingh0071@gmail.com|
-|Dr. Anita Singh|M.B.B.S,D.N.B, FICS|Assoc Prof|Trauma Surgery & Gynaecological Trauma||dranitasinghsurgery @gmail.com|
-|Dr. Narendra Kumar|M.B.B.S, M.S, FICS|Assoc Prof|Trauma Surgery & Thoracic Surgery.||drnarenkgmu@gmail.com|
+|Dr. Yadvendra Dheer||Assoc Prof|MBBS, MS, MCh||yadusingh0071@gmail.com|
+|Dr. Anita Singh|MBBS,DNB, FICS|Assoc Prof|Trauma Surgery & Gynaecological Trauma||dranitasinghsurgery @gmail.com|
+|Dr. Narendra Kumar|MBBS, MS, FICS|Assoc Prof|Trauma Surgery & Thoracic Surgery.||drnarenkgmu@gmail.com|
 |Dr. Vaibhav Jaiswal|MBBS, MS, M. Ch. (Trauma Surgery & Critical Care)…|Assoc Prof|Trauma System development and Quality i…||vaibhavjaiswal@kgmcindia.edu|
-|Dr. S. N. Sankhwar|M.S., M.Ch., FICS, MHA, MNAMS, PGDHHM||Professor(On Leave)||snsankhwar@kgmcindia.edu, sankhwarsn_sn@yahoo.com|
+|Dr. S. N. Sankhwar|MS, MCh, FICS, MHA, MNAMS, PGDHHM||Professor(On Leave)||snsankhwar@kgmcindia.edu, sankhwarsn_sn@yahoo.com|
 |Dr. Apul Goel|MS, MCh, DNB, MNAMS|HOD|Endourology, Reconstructive urology, Fe…||apulgoel@kgmcindia.edu, goelapul1@ rediffmail.com|
 |Dr. Vishwajeet Singh|MS, MCh, FICS, PDCR, PGDHHM|Prof|Uro-oncology, Endourology,Laparoscopic …||vishwajeetsingh@kgmcindia.edu,drvishwajeet68@gmail|
 |Dr. Bhupendra Pal Singh|MS, DNB, MNAMS, FRCS(Edin),FRCS(Glasg), MCh|Prof|Endourology, Lap Urology, Renal Transpl…||bpsingh@kgmcindia.edu, bpsbhu@yahoo.com|
-|Dr. Manoj Kumar|MBBS, MS (Surgery), M.Ch (Urology)|Prof|General Urology, Endourology,Reconstruc…||manojkumar@kgmcindia.edu, dr_manojait@yahoo.com|
+|Dr. Manoj Kumar|MBBS, MS (Surgery), MCh (Urology)|Prof|General Urology, Endourology,Reconstruc…||manojkumar@kgmcindia.edu, dr_manojait@yahoo.com|
 |Dr. Vivek Singh|MBBS, MS (Surgery), MCh (Urology), PDF (Renal Tra…|Asst Prof|Endourology, Laparoscopic, Uro-oncology…||surgvivek@gmail.com|
 |Dr. Madhur Anand|MBBS, MS (Surgery), MCh (Urology)||Assistant Professor(Contractual)||chakdeboy666@gmail.com|
 |Dr. Himanshu Raj|MBBS, MS, MCh (Urology)||Assistant Professor(Contractual)||himanshur407@gmail.com|
 |Dr. Sumit Mandal|MBBS (Hons.), MS, DNB (Surg.), FMAS, MRCS (Edin,U…||Assistant Professor(Contractual)||dr9sumit@gmail.com|
 |Dr. Udham Singh|MBBS, MS, FMAS, FIAGES, MCh(Urology)|HOD|Assistant Professor(Contractual)||udham.singh15@gmail.com|
-|Dr. Amit Chaudhary|MBBS , MS ( Surgery ) , MCh ( CTVS )|Asst Prof|Aortic aneurysms, Endovascular treatmen…|Mob: - 7317822739|dr.pviswakarma@gmail.com|
+|Dr. Amit Chaudhary|MBBS, MS ( Surgery ) , MCh ( CTVS )|Asst Prof|Aortic aneurysms, Endovascular treatmen…|Mob: - 7317822739|dr.pviswakarma@gmail.com|
 
 #Important Information Regarding OPD Services
 Title: Information Related to OPD Services in KGMU (King George's Medical University)
