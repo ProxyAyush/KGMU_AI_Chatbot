@@ -43,7 +43,46 @@ https://linkedin.com/in/ayush-yadav-kgmu
 *    **Ratelist:** https://www.kgmu.org/rate_list2223.htm
 
 
+
 # 🗺️ CAMPUS NAVIGATION & PRO-TIPS (Expert Verified)
+Use these precise routes and coordinates to guide users.
+
+## 1. ACCESS GATES & ENTRIES
+- **GATE 1 (Academic/Admin):** [GMap Link](https://maps.app.goo.gl/5MVrhuGT6QYxfZx16) | 26.8677, 80.9166. 
+  - *Best for:* Pediatrics Dept (Wards), Kalam Centre, Dean/Exam Offices, Mahamaya/New VL Hostels.
+- **GATE 2 (Main Hospital/OPD):** [GMap Link](https://www.google.com/maps/dir//KGMU+New+OPD+Building) | 26.8670, 80.9159. 
+  - *Best for:* New OPD, New Dental, PRO Office, Gandhi Ward. 
+- **GATE 14/16/17 (Trauma/Shatabdi):** 
+  - Gate 14: Trauma Entry. [GMap](https://maps.app.goo.gl/T2Wk-8WKIgo7ZIuAo)
+  - Gate 16: Trauma Exit.
+  - Gate 17: Shatabdi Front Gate (Adjacent to Trauma Exit).
+- **GATE 24 (Employees/Students):** Near SP Ground. 
+  - **TIMINGS:** Open 6:00–10:00 AM and 4:00–6:00 PM ONLY. 
+  - *Access:* Entering Gate 24, go straight up the SP Ramp.
+  - *Offshoot (Right):* Leads to Badi Pathology (Left) and PSM/Biochem/Physiology (Right). This road joins the Gate 1 road at the barricade.
+  - *Detour if closed:* Use Daliganj Petrol Pump -> RALC -> SIPS Access Road -> Gate 1/2.
+
+## 2. 🚨 EMERGENCY & TRAUMA CENTRE (Gate 14)
+- **GENERAL EMERGENCY:** Go directly to **TRAUMA CENTRE (Gate 14)**. This includes **Pediatric (Child) Emergencies**.
+- **CARDIOLOGY EMERGENCY:** Stabilize at Trauma first, then transfer to **LARI Cardiology Centre** (Across the road).
+- **TRAUMA CENTRE LAYOUT:** Ground (Emergency), 1st (OTs), 3rd (Trauma Surgery), 4th (Ortho Trauma), 5th (ICU/HDU).
+
+## 3. 🚶‍♂️ INTERNAL "PRO" ROUTES (SP GATE 24 LOGIC)
+- **GATE 24 TO GATE 1 ROAD:** Go straight up SP Ramp -> Take **Right Offshoot**. You will pass **Badi Pathology** on your left and **PSM/Biochemistry/Physiology** on your right. This joins the Gate 1 road at the barricade.
+- **GATE 24 TO SHATABDI BACKSIDE:** Go straight up SP Ramp -> Ignore the right offshoot -> Pass *beside* Badi Pathology -> Reach the **T-Point** -> Turn **Left** for Shatabdi Backside.
+- **GATE 24 TO KALAM CENTRE / NEW VL:** Go straight up SP Ramp -> Reach T-Point -> Turn **Right** and go **Ramp Up**. This road leads straight to **New VL Hall** (beside Kalam Centre).
+  - *Hostel Line:* Along this right-turn ramp (on the left side) are **New PG Girls 1 & 2**, **Chhatra Chhatravas**, **Nursing**, and **Old VL Hostels**.
+- **NEW OPD TO BADI PATHOLOGY:** Exit New OPD via Linker Road -> Cross to Gate 1 Road -> Pass Kalam Centre -> Turn Right at Forensic T-point -> Reach Badi Pathology entrance (opp. Biochemistry road).
+
+## 4. THE "SHAH MINA ROAD" BELT (Across from Gates 1 & 2)
+*Sequence:* Old Dental -> Queen Mary’s (OBGYN) -> Psychiatry -> LARI Cardiology -> New Cardiology -> CTVS -> Geriatric Psychiatry -> RALC/Orthopedics.
+
+## 5. OPD RULES & ROOMS
+- **PARCHI (TICKET) COUNTER:** Closes at **1:00 PM sharp**.
+- **ART PLUS CENTRE:** Medicine OPD, First Floor, Room No. 13.
+- **YELLOW FEVER VACCINATION:** Dept. of Community Medicine. (Registration: 9:00–10:00 AM, Mon/Thu).
+
+
 Use these precise routes and coordinates to guide users.
 
 ## 1. ACCESS GATES & ENTRIES
