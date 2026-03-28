@@ -611,6 +611,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // API key is now securely stored on Cloudflare Workers proxy
 const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
 
+    // Timer & Cooldown Configuration
+    const INITIAL_TIMER_SECONDS = 10;
+    const POST_MESSAGE_VISIBLE_SECONDS = 25;
+    const POST_MESSAGE_BUFFER_SECONDS = 5;
+    const TOTAL_COOLDOWN_MS = (POST_MESSAGE_VISIBLE_SECONDS + POST_MESSAGE_BUFFER_SECONDS) * 1000;
+
+    // Retry & Resilience Configuration
+    const MAX_RETRIES = 3;
+    const INITIAL_RETRY_DELAY_MS = 2000;
+    const RETRYABLE_STATUS_CODES = [429, 503, 529];
+    const API_TIMEOUT_MS = 30000;
+    const MAX_HISTORY_MESSAGES = 10;
 
     // Chat State
     let messages = [];
@@ -618,6 +630,7 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     let timerStarted = false;
     let awaitingResponse = false;
     let isTimerRunning = false;
+    let silentBufferTimeout = null;
     let systemPrompt = "";
 
     // Firebase config fetched from Cloudflare Worker
@@ -681,20 +694,40 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             "hi": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
             "hello": "Hi there! Welcome to KGMU Assistant. What would you like to know about King George's Medical University? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। आप किंग जॉर्ज मेडिकल यूनिवर्सिटी के बारे में क्या जानना चाहेंगे?\"",
             "hey": "Hey! I'm here to help with any KGMU-related questions. What can I do for you? | \"हे! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। मैं आपके लिए क्या कर सकता हूँ?\"",
+            "hii": "Hello! How can I assist you with KGMU information today? | नमस्ते! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?",
+            "helo": "Hi there! Welcome to KGMU Assistant. How can I help? | \"नमस्कार! KGMU सहायक में आपका स्वागत है। मैं कैसे मदद कर सकता हूँ?\"",
+            "howdy": "Hey there! I'm the KGMU Assistant. What can I help you with? | \"नमस्ते! मैं KGMU सहायक हूँ। मैं आपकी कैसे मदद कर सकता हूँ?\"",
+            "namaste": "नमस्ते! KGMU सहायक में आपका स्वागत है। मैं आपकी कैसे मदद कर सकता हूँ? | Namaste! Welcome to KGMU Assistant. How can I help you?",
+            "namaskar": "नमस्कार! मैं KGMU से संबंधित किसी भी प्रश्न में मदद करने के लिए यहाँ हूँ। | Namaskar! I'm here to help with any KGMU-related questions.",
             "good morning": "Good morning! How may I assist you with KGMU information today? | \"सुप्रभात! मैं आज KGMU की जानकारी में आपकी कैसे सहायता कर सकता हूँ?\"",
             "good afternoon": "Good afternoon! What information about KGMU can I help you with? | \"शुभ दोपहर! मैं KGMU के बारे में किस जानकारी में आपकी सहायता कर सकता हूँ?\"",
             "good evening": "Good evening! I'm here to answer your questions about KGMU. How can I help? | \"शुभ संध्या! मैं KGMU के बारे में आपके प्रश्नों का उत्तर देने के लिए यहाँ हूँ। मैं आपकी कैसे मदद कर सकता हूँ?\"",
+            "good night": "Good night! If you have questions about KGMU, feel free to come back anytime. | \"शुभ रात्रि! यदि KGMU के बारे में प्रश्न हों, तो कभी भी वापस आएं।\"",
+            "gm": "Good morning! How can I help you with KGMU today? | \"सुप्रभात! आज KGMU के बारे में मैं कैसे मदद कर सकता हूँ?\"",
+            "gn": "Good night! Feel free to return anytime with KGMU questions. | \"शुभ रात्रि! KGMU के प्रश्नों के साथ कभी भी वापस आएं।\""
         },
         farewells: {
             "bye": "Goodbye! Feel free to return if you have more questions about KGMU. | \"अलविदा! यदि आपके पास KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।\"",
             "goodbye": "Thanks for chatting! If you need any more information about KGMU, I'll be here. | \"बातचीत के लिए धन्यवाद! यदि आपको KGMU के बारे में और जानकारी चाहिए, तो मैं यहाँ रहूँगा।\"",
+            "ok bye": "Goodbye! Feel free to return if you have more questions about KGMU. | \"अलविदा! यदि आपके KGMU के बारे में और प्रश्न हैं तो बेझिझक वापस आएं।\"",
+            "see you": "See you later! Have a great day! | \"फिर मिलेंगे! आपका दिन शुभ हो!\"",
+            "take care": "Take care! Come back anytime you need help with KGMU info. | \"अपना ख्याल रखें! KGMU की जानकारी के लिए कभी भी वापस आएं।\"",
             "ok": "See you later! Have a great day! | \"फिर मिलेंगे! आपका दिन शुभ हो!\"",
             "thank you": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | \"आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।\"",
-            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\""
+            "thanks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\"",
+            "thnx": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\"",
+            "thnks": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\"",
+            "ty": "You're welcome! I'm here anytime you need information about KGMU. | \"आपका स्वागत है! जब भी आपको KGMU के बारे में जानकारी चाहिए, मैं यहाँ हूँ।\"",
+            "thanku": "You're welcome! If you have any more questions about KGMU, don't hesitate to ask. | \"आपका स्वागत है! यदि आपके पास KGMU के बारे में और प्रश्न हैं, तो पूछने में संकोच न करें।\"",
+            "dhanyavaad": "आपका स्वागत है! KGMU के बारे में और प्रश्न हों तो बेझिझक पूछें। | You're welcome! Feel free to ask more about KGMU.",
+            "shukriya": "आपका स्वागत है! KGMU की जानकारी के लिए कभी भी वापस आएं। | You're welcome! Come back anytime for KGMU info."
         },
         basics: {
             "who are you": "I'm the KGMU Assistant, designed to help you find information about King George's Medical University, Lucknow. | \"मैं KGMU सहायक हूँ, जिसे किंग जॉर्ज मेडिकल यूनिवर्सिटी, लखनऊ के बारे में जानकारी खोजने में आपकी मदद करने के लिए डिज़ाइन किया गया है।\"",
+            "who made you": "I was developed as an AI assistant for King George's Medical University (KGMU), Lucknow to help students and visitors find university information. | \"मुझे किंग जॉर्ज मेडिकल यूनिवर्सिटी (KGMU), लखनऊ के लिए छात्रों और आगंतुकों को विश्वविद्यालय की जानकारी खोजने में मदद करने के लिए विकसित किया गया है।\"",
+            "who created you": "I was developed as an AI assistant for King George's Medical University (KGMU), Lucknow to help students and visitors find university information. | \"मुझे किंग जॉर्ज मेडिकल यूनिवर्सिटी (KGMU), लखनऊ के लिए छात्रों और आगंतुकों को विश्वविद्यालय की जानकारी खोजने में मदद करने के लिए विकसित किया गया है।\"",
             "what can you do": "I can provide information about KGMU's departments, programs, facilities, admission processes, contact details, and more. | \"मैं KGMU के विभागों, कार्यक्रमों, सुविधाओं, प्रवेश प्रक्रियाओं, संपर्क विवरण और बहुत कुछ के बारे में जानकारी प्रदान कर सकता हूँ।\"",
+            "kya kar sakte ho": "मैं KGMU के विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं के बारे में जानकारी प्रदान कर सकता हूँ। | I can provide information about KGMU's departments, courses, admissions, faculty, research, and facilities.",
             "help": "I can help you find information about KGMU. You can ask about departments, courses, admissions, faculty, research, facilities, or any other university-related topics. | \"मैं KGMU के बारे में जानकारी खोजने में आपकी मदद कर सकता हूँ। आप विभागों, पाठ्यक्रमों, प्रवेश, संकाय, अनुसंधान, सुविधाओं या विश्वविद्यालय से संबंधित किसी भी अन्य विषय के बारे में पूछ सकते हैं।\""
         }
     };
@@ -713,11 +746,12 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         // Check if timer should still be running (non-bypassable via localStorage)
         const lastMsgTime = parseInt(localStorage.getItem('kgmuLastMsgTime') || '0');
         const elapsed = Date.now() - lastMsgTime;
-        if (lastMsgTime > 0 && elapsed < 20000) {
-            // Resume timer with remaining time
-            startTimerWithDuration(Math.ceil((20000 - elapsed) / 1000));
+        if (lastMsgTime > 0 && elapsed < TOTAL_COOLDOWN_MS) {
+            // Resume timer with remaining time (cap visible at POST_MESSAGE_VISIBLE_SECONDS)
+            const remainingSec = Math.ceil((TOTAL_COOLDOWN_MS - elapsed) / 1000);
+            startTimerWithDuration(Math.min(remainingSec, POST_MESSAGE_VISIBLE_SECONDS));
         } else if (!timerStarted) {
-            // First open ever — start 20s timer
+            // First open ever — start short initial timer
             startTimer();
             timerStarted = true;
         }
@@ -770,8 +804,9 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             // If timer not running, check localStorage for recent message
             const lastMsgTime = parseInt(localStorage.getItem('kgmuLastMsgTime') || '0');
             const elapsed = Date.now() - lastMsgTime;
-            if (lastMsgTime > 0 && elapsed < 20000) {
-                startTimerWithDuration(Math.ceil((20000 - elapsed) / 1000));
+            if (lastMsgTime > 0 && elapsed < TOTAL_COOLDOWN_MS) {
+                const remainingSec = Math.ceil((TOTAL_COOLDOWN_MS - elapsed) / 1000);
+                startTimerWithDuration(Math.min(remainingSec, POST_MESSAGE_VISIBLE_SECONDS));
             }
         }
         awaitingResponse = false;
@@ -822,8 +857,17 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         }
 
         showTypingIndicator();
+        // Safety timeout: auto-remove typing indicator if everything else fails
+        const typingSafetyTimeout = setTimeout(() => {
+            removeTypingIndicator();
+            addBotMessage("Sorry, the request is taking too long. Please try again.");
+            awaitingResponse = false;
+            updateSendButtonState();
+            scrollToBottom();
+        }, 45000);
         try {
             const response = await callGeminiAPI(message);
+            clearTimeout(typingSafetyTimeout);
             removeTypingIndicator();
 
             // SANITIZE MODEL IDENTITY
@@ -836,8 +880,17 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
 
             if (!timerStarted) { startTimer(); timerStarted = true; } else { resetTimer(); }
         } catch (error) {
+            clearTimeout(typingSafetyTimeout);
             removeTypingIndicator();
-            addBotMessage("I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.");
+            let errorMsg;
+            if (error.message && error.message.includes('429')) {
+                errorMsg = "The server is busy right now. Please wait a moment and try again.";
+            } else if (error.message && (error.message.includes('503') || error.message.includes('529'))) {
+                errorMsg = "The service is temporarily unavailable. Please try again in a minute.";
+            } else {
+                errorMsg = "I'm sorry, I'm having trouble connecting right now. Please try again after 1-2 minutes.";
+            }
+            addBotMessage(errorMsg);
             console.error('Error calling Gemini API:', error);
             awaitingResponse = false;
         }
@@ -853,54 +906,88 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             .replace(/Google/g, "KGMU");
     }
 
-    // --- FIXED GEMINI API CALL ---
-    async function callGeminiAPI(userMessage) {
-        try {
-            const requestBody = {
-    systemInstruction: {
-        role: "system",
-        parts: [{ text: systemPrompt }]
-    },
-    contents: messages.concat([
-        {
-            role: "user",
-            parts: [{ text: userMessage }]
-        }
-    ]),
-    generationConfig: {
-        temperature: 0.7,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: 1024
+    // --- RETRY HELPERS ---
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
-};
 
-            console.log("Sending request to proxy:", JSON.stringify(requestBody, null, 2));
+    function addJitter(baseDelay) {
+        const jitter = baseDelay * 0.25 * (Math.random() * 2 - 1);
+        return Math.max(0, baseDelay + jitter);
+    }
 
-            const response = await fetch(PROXY_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
-            });
+    // --- GEMINI API CALL WITH RETRY + TIMEOUT ---
+    async function callGeminiAPI(userMessage) {
+        const requestBody = {
+            systemInstruction: {
+                role: "system",
+                parts: [{ text: systemPrompt }]
+            },
+            contents: messages.slice(-MAX_HISTORY_MESSAGES).concat([
+                {
+                    role: "user",
+                    parts: [{ text: userMessage }]
+                }
+            ]),
+            generationConfig: {
+                temperature: 0.7,
+                topP: 0.95,
+                topK: 40,
+                maxOutputTokens: 1024
+            }
+        };
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error Details:', errorData);
-                throw new Error(`API request failed: ${response.status}`);
+        let lastError;
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+            if (attempt > 0) {
+                const backoffDelay = addJitter(INITIAL_RETRY_DELAY_MS * Math.pow(2, attempt - 1));
+                console.log(`Retry attempt ${attempt}/${MAX_RETRIES} after ${Math.round(backoffDelay)}ms`);
+                await delay(backoffDelay);
             }
 
-            const data = await response.json();
-            console.log("API Response:", data);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
-            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Unexpected API response format');
+            try {
+                const response = await fetch(PROXY_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('API Error Details:', errorData);
+                    lastError = new Error(`API request failed: ${response.status}`);
+                    if (RETRYABLE_STATUS_CODES.includes(response.status) && attempt < MAX_RETRIES) {
+                        continue;
+                    }
+                    throw lastError;
+                }
+
+                const data = await response.json();
+                console.log("API Response:", data);
+
+                if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    throw new Error('Unexpected API response format');
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                lastError = error;
+                console.error(`API call error (attempt ${attempt + 1}):`, error);
+                const isRetryable = error.name === 'AbortError' || error.name === 'TypeError' ||
+                    (error.message && RETRYABLE_STATUS_CODES.some(code => error.message.includes(String(code))));
+                if (isRetryable && attempt < MAX_RETRIES) {
+                    continue;
+                }
+                throw error;
             }
-        } catch (error) {
-            console.error('API call error:', error);
-            throw error;
         }
+        throw lastError;
     }
 
     // --- Message rendering & parsing helpers ---
@@ -1108,13 +1195,26 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
 
     // Timer functions — non-bypassable, persisted via localStorage
     function startTimer() {
-        startTimerWithDuration(20);
+        startTimerWithDuration(INITIAL_TIMER_SECONDS);
+    }
+
+    function startPostMessageCooldown() {
+        stopTimer();
+        isTimerRunning = true;
+        updateSendButtonState();
+        localStorage.setItem('kgmuLastMsgTime', String(Date.now()));
+        timerDisplay.textContent = 'Please wait...';
+        timerDisplay.classList.add('active');
+        silentBufferTimeout = setTimeout(() => {
+            silentBufferTimeout = null;
+            startTimerWithDuration(POST_MESSAGE_VISIBLE_SECONDS);
+        }, POST_MESSAGE_BUFFER_SECONDS * 1000);
     }
 
     function startTimerWithDuration(seconds) {
         stopTimer();
         let timeLeft = seconds;
-        localStorage.setItem('kgmuLastMsgTime', String(Date.now() - (20 - timeLeft) * 1000));
+        localStorage.setItem('kgmuLastMsgTime', String(Date.now() - (TOTAL_COOLDOWN_MS - timeLeft * 1000)));
         timerDisplay.textContent = `Next reply in: ${timeLeft}s`;
         timerDisplay.classList.add('active');
         isTimerRunning = true;
@@ -1127,13 +1227,12 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     }
 
     function resetTimer() {
-        localStorage.setItem('kgmuLastMsgTime', String(Date.now()));
-        stopTimer();
-        startTimer();
+        startPostMessageCooldown();
     }
 
     function stopTimer() {
         clearInterval(timerInterval);
+        if (silentBufferTimeout) { clearTimeout(silentBufferTimeout); silentBufferTimeout = null; }
         timerDisplay.classList.remove('active');
         isTimerRunning = false;
         updateSendButtonState();
@@ -1147,8 +1246,9 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     const savedLastMsgTime = parseInt(localStorage.getItem('kgmuLastMsgTime') || '0');
     if (savedLastMsgTime > 0) {
         const elapsedOnLoad = Date.now() - savedLastMsgTime;
-        if (elapsedOnLoad < 20000) {
-            startTimerWithDuration(Math.ceil((20000 - elapsedOnLoad) / 1000));
+        if (elapsedOnLoad < TOTAL_COOLDOWN_MS) {
+            const remainingSec = Math.ceil((TOTAL_COOLDOWN_MS - elapsedOnLoad) / 1000);
+            startTimerWithDuration(Math.min(remainingSec, POST_MESSAGE_VISIBLE_SECONDS));
             timerStarted = true;
         }
     }
