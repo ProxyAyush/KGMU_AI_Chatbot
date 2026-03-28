@@ -49,7 +49,8 @@ Use these precise routes and coordinates to guide users.
   - Gate 17: Shatabdi Phase 1 & 2 Entry.
 
 ## 2. THE "ACROSS THE ROAD" CLINICAL BELT
-*Instruction: To reach these, exit Gate 2 and cross the main road (Shah Mina Rd).*
+*Instruction: All these are located on the same continuous access road (Shah Mina Rd) opposite the main campus gates.*
+- **The Sequence:** Old Dental -> Queen Mary’s (OBGYN) -> Psychiatry -> LARI Cardiology -> New Cardiology/CTVS -> Geriatric Psychiatry.
 - **Queen Mary’s Hospital (OBGYN):** [GMap Link](https://maps.app.goo.gl/HTJvBuEDlZuX4IqUHy0Kpkh87KhelBXL88syu21pP_S4GrbVWd8ARTv174gqz_LL33m9TeqHILEKCluY3Pvz3IDvFQmAPabQ44x7e2gEjRa4bbevrSIGpkJDctoIIfawtnun0OIJey2ekApA==)
 - **LARI Cardiology:** [GMap Link](https://maps.app.goo.gl/MXemH77br37nAwrk8). One of North India's most influential cardiology hubs.
 - **Psychiatry & Geriatrics:** Adjacent to LARI.
