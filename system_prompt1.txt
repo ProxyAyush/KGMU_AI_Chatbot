@@ -7,17 +7,15 @@
 Updated: 2026-07-24
 Use these entries for questions about the latest KGMU notices, tenders, quotations, or examinations.
 
-1. [Tender/Quotation] 2026-07-21 — Short Term Recruitment for Senior Resident (Un-reg.) Through Walk-in-interview on 29th July, 2026
-   Reference: 21695/SR/2026
-   Source: https://www.kgmu.org/tenders.php
-
-2. [Tender/Quotation] 2026-07-21 — Quotation Notice
+1. [Tender/Quotation] 2026-07-22 - Installation work of New RO/Water coolers, Iron Stand ete for various Department, KGMU, Lucknow, Kindly submit your Quotation/Estimate for providing the following work in sealed envelope to the undersigned in the interest of patient
+   Reference: 653/EE/26
+   Source: https://www.kgmu.org/upload_file/user_download/a039425ed82303c92e51b89ffb71e196.pdf
+2. [Tender/Quotation] 2026-07-21 - Servicing of Cummins make 320 KVA DG Set no 2 in Gandhi ward kgmu lucknow
+   Reference: 650/Notice/EE//26
+   Source: https://www.kgmu.org/upload_file/user_download/35604593ff502232043f2b2958c35384.pdf
+3. [Tender/Quotation] 2026-07-21 - Procurement of following item on proprietary/single quotation basis for different departments
    Reference: AMR/AMSP/121/2026
-   Source: https://www.kgmu.org/tenders.php
-
-3. [Tender/Quotation] 2026-07-18 — Quotation Notice
-   Reference: 633/EE/26
-   Source: https://www.kgmu.org/tenders.php
+   Source: https://www.kgmu.org/upload_file/user_download/4c66004bef7dba3ad2968a819ac32c3f.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
