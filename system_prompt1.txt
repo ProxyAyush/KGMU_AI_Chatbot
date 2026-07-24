@@ -20,38 +20,38 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-07-24 17:16 IST
+Updated: 2026-07-24 19:51 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-22 â€” Quotation Notice â€” Ref. 653/EE/26
+1. 2026-07-22 — Providing of 50 mm. G.I & CPVC pipe of water connection for 16 Nos. Humidifire from first floor & Second floor at
+   Ref: 25/AEBMed/26
+   URL: https://www.kgmu.org/upload_file/user_download/1d8af48dcc6a6cacda86d2edc6a490a4.pdf
+2. 2026-07-22 — Quotation Notice — Ref. 653/EE/26
    Ref: 653/EE/26
    URL: https://www.kgmu.org/upload_file/user_download/a039425ed82303c92e51b89ffb71e196.pdf
-2. 2026-07-21 â€” Servicing of Cummins make 320 KVA DG Set no 2 in Gandhi ward kgmu lucknow
+3. 2026-07-21 — Servicing of Cummins make 320 KVA DG Set no 2 in Gandhi ward kgmu lucknow
    Ref: 650/Notice/EE//26
    URL: https://www.kgmu.org/upload_file/user_download/35604593ff502232043f2b2958c35384.pdf
-3. 2026-07-21 â€” Quotation Notice â€” Ref. AMR/AMSP/121/2026
-   Ref: AMR/AMSP/121/2026
-   URL: https://www.kgmu.org/upload_file/user_download/4c66004bef7dba3ad2968a819ac32c3f.pdf
 
 ## LATEST GENERAL NOTICES
-1. 2026-07-16 â€” Bachelor Admission 2026 Instructions
+1. 2026-07-16 — Bachelor Admission 2026 Instructions
    Ref: 553/KGMUIPMS/2026
    URL: https://www.kgmu.org/upload_file/user_download/2207cb2a6ac52c5f5d9311d63bb6739d.pdf
-2. 2026-07-10 â€” Short Term Recruitment for SR (Un reg.) 17-07-2026
+2. 2026-07-10 — Short Term Recruitment for SR (Un reg.) 17-07-2026
    Ref: 20772/SR/2026
    URL: https://www.kgmu.org/upload_file/user_download/cba99e3ba2f941fac820b33997f349ad.pdf
-3. 2026-07-06 â€” Cochrane Systematic Review and Meta-analysis workshop in November 12-14, 2026 in
+3. 2026-07-06 — Cochrane Systematic Review and Meta-analysis workshop in November 12-14, 2026 in
    URL: https://www.kgmu.org/upload_file/user_download/8578458084da0c36d9b08f877b140e22.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-07-02 â€” Fee & Form Notice for BMLS, B.Sc. Optometry, PBT 2nd Semester, B.Sc. Radiotherapy Technology 3rd & 1st Year Regular
+1. 2026-07-02 — Fee & Form Notice for BMLS, B.Sc. Optometry, PBT 2nd Semester, B.Sc. Radiotherapy Technology 3rd & 1st Year Regular
    Ref: 385/Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/7fa4fad4547cfa6c4de8dbe6ca5dfac3.pdf
-2. 2026-07-02 â€” Fee & Form Notice at MBBS 3rd Prof. Part-I (Phase 3.1) Regular Examination-2026 (Failed & Remainder Students) (Only for
+2. 2026-07-02 — Fee & Form Notice at MBBS 3rd Prof. Part-I (Phase 3.1) Regular Examination-2026 (Failed & Remainder Students) (Only for
    Ref: 384 Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/6e4c5f65aabf6411b989956d9b19dc79.pdf
-3. 2026-07-02 â€” MBBS 3rd Professional Part-1(Phase-3.1) Regular Examination-2026(Only for KGMU Students)
+3. 2026-07-02 — MBBS 3rd Professional Part-1(Phase-3.1) Regular Examination-2026(Only for KGMU Students)
    Ref: 383/Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/75eb975fd69380c800574f88a9698cbe.pdf
 
