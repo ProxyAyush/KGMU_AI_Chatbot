@@ -1,0 +1,74 @@
+name: Update KGMU latest notices
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 06:00 Asia/Kolkata (00:30 UTC)
+    - cron: "30 0 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-kgmu-latest-notices
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install system OCR dependencies
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr
+
+      - name: Install dependencies
+        run: pip install -r requirements-updates.txt reportlab Pillow
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Fetch and inject latest three
+        run: python scripts/update_kgmu_updates.py
+
+      - name: Verify only generated files changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only)"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(system_prompt1\.txt|latest_updates\.json)$' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo "Unexpected changed files:"
+            echo "$unexpected"
+            exit 1
+          fi
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("system_prompt1.txt").read_text(encoding="utf-8")
+          assert text.count("<!-- AUTO_KGMU_UPDATES_START -->") == 1
+          assert text.count("<!-- AUTO_KGMU_UPDATES_END -->") == 1
+          block = text.split("<!-- AUTO_KGMU_UPDATES_START -->", 1)[1].split("<!-- AUTO_KGMU_UPDATES_END -->", 1)[0]
+          assert block.count("\n1. [") == 1
+          assert block.count("\n2. [") == 1
+          assert block.count("\n3. [") == 1
+          PY
+
+      - name: Commit only when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No update."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add system_prompt1.txt latest_updates.json
+          git commit -m "Update latest KGMU notices"
+          git push
