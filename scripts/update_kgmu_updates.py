@@ -229,8 +229,26 @@ def build_session() -> requests.Session:
 
     session.headers.update(
         {
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html,application/pdf,*/*",
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/126.0.0.0 Safari/537.36"
+            ),
+            "Accept": (
+                "text/html,application/xhtml+xml,application/xml;"
+                "q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8"
+            ),
+            "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
+            "Cache-Control": "max-age=0",
+            "Referer": "https://www.kgmu.org/",
+            "Sec-Ch-Ua": '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+            "Sec-Ch-Ua-Mobile": "?0",
+            "Sec-Ch-Ua-Platform": '"Windows"',
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-User": "?1",
+            "Upgrade-Insecure-Requests": "1",
         }
     )
 
@@ -241,18 +259,27 @@ def fetch_html(
     session: requests.Session,
     url: str,
 ) -> str:
-    response = session.get(
-        url,
-        timeout=(12, 40),
-    )
-
-    response.raise_for_status()
-    response.encoding = (
-        response.apparent_encoding
-        or "utf-8"
-    )
-
-    return response.text
+    import time
+    last_response_text = ""
+    for attempt in range(3):
+        try:
+            response = session.get(
+                url,
+                timeout=(15, 45),
+            )
+            response.raise_for_status()
+            response.encoding = (
+                response.apparent_encoding
+                or "utf-8"
+            )
+            last_response_text = response.text
+            if len(last_response_text) >= 500:
+                return last_response_text
+        except Exception:
+            if attempt == 2:
+                raise
+        time.sleep(2)
+    return last_response_text
 
 
 def extract_reference(
