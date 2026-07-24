@@ -4,19 +4,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-07-24 17:16 IST
+Updated: 2026-07-24 17:17 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-22 — Quotation Notice — Ref. 653/EE/26
-   Ref: 653/EE/26
-   URL: https://www.kgmu.org/upload_file/user_download/a039425ed82303c92e51b89ffb71e196.pdf
-2. 2026-07-21 — Servicing of Cummins make 320 KVA DG Set no 2 in Gandhi ward kgmu lucknow
-   Ref: 650/Notice/EE//26
-   URL: https://www.kgmu.org/upload_file/user_download/35604593ff502232043f2b2958c35384.pdf
-3. 2026-07-21 — Quotation Notice — Ref. AMR/AMSP/121/2026
-   Ref: AMR/AMSP/121/2026
-   URL: https://www.kgmu.org/upload_file/user_download/4c66004bef7dba3ad2968a819ac32c3f.pdf
+1. 2026-06-09 — Procurement of following Items on proprietary/single quotation basis for Department of Obs & Gynae
+   Ref: OG/2320/26
+   URL: https://www.kgmu.org/upload_file/user_download/09b37a20918201df6d7ba42691c9462d.pdf
+2. 2026-04-15 — Notice for Procurement of Proprietary Items
+   Ref: Bio/2026/55
+   URL: https://www.kgmu.org/upload_file/user_download/11bec12e27e5f87082af1a63ff777cab.pdf
+3. 2026-02-05 — Notice No. 2743 dated 05.02.2026 – Custom Bid Invitation
+   Ref: 2743 dated 05.02.2026
+   URL: https://www.kgmu.org/upload_file/user_download/43eb3732e7fdc3b6cf2015a02d755d9a.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2026-07-16 — Bachelor Admission 2026 Instructions
