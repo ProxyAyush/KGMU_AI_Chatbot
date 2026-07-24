@@ -162,7 +162,7 @@ def extract_dates(text: str) -> list[date]:
 
     patterns = (
         r"\b(\d{1,2})[-/.](\d{1,2})[-/.](20\d{2})\b",
-        r"\b(20\d{2})[-/.](\d{1,2})[-/. constraints](\d{1,2})\b".replace(" constraints", ""),
+        r"\b(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})\b",
     )
 
     for pattern_index, pattern in enumerate(patterns):
