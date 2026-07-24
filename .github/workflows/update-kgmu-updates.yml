@@ -1,13 +1,11 @@
-name: Update KGMU live notices
+name: Update KGMU live data
 
 on:
   workflow_dispatch:
-
   schedule:
     # GitHub Actions cron is UTC.
     # 00:30 UTC = 06:00 Asia/Kolkata.
     - cron: "30 0 * * *"
-
     # 12:30 UTC = 18:00 Asia/Kolkata.
     - cron: "30 12 * * *"
 
@@ -15,51 +13,51 @@ permissions:
   contents: write
 
 concurrency:
-  group: update-kgmu-live-notices
+  group: kgmu-live-data-update
   cancel-in-progress: false
 
 jobs:
   update:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements-updates.txt
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
 
-      - name: Install PDF and OCR tools
+      - name: Install OCR tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-hin
+          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-hin
 
-      - name: Install Python dependencies
-        run: pip install -r requirements-updates.txt reportlab Pillow
-
-      - name: Run tests
-        run: python -m unittest discover -s tests -v
-
-      - name: Fetch and inject live data
-        run: python scripts/update_kgmu_updates.py
-
-      - name: Commit and push changes
-        shell: bash
+      - name: Install dependencies
         run: |
-          set -euo pipefail
-          if git diff --quiet; then
-            echo "No update."
-            exit 0
-          fi
+          python -m pip install --upgrade pip
+          pip install -r requirements-updates.txt
+
+      - name: Compile and test
+        run: |
+          python -m py_compile scripts/kgmu_notice_sources.py scripts/update_kgmu_updates.py verify_output.py
+          python -m unittest discover -s tests -v
+
+      - name: Update
+        run: python scripts/update_kgmu_updates.py --prompt system_prompt1.txt --live-data latest_updates.json --archive-root archive-live-data
+
+      - name: Validate
+        run: python verify_output.py latest_updates.json
+
+      - name: Block binary downloads
+        run: |
+          if git status --porcelain | grep -Ei '\.(pdf|png|jpe?g|tiff?|webp)$'; then exit 1; fi
+
+      - name: Commit
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add system_prompt1.txt latest_updates.json archive-live-data
-          git commit -m "Update latest KGMU notices (v4 live-data)"
+          git commit -m "chore: refresh KGMU live updates"
           git push

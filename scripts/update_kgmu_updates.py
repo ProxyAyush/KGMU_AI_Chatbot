@@ -22,13 +22,32 @@ from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+# Ensure scripts/ directory is on the path so kgmu_notice_sources imports cleanly
+if str(Path(__file__).parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).parent))
+from kgmu_notice_sources import (  # noqa: E402
+    ListingRecord,
+    parse_unified_notice_board,
+    select_latest,
+    deduplicate_records,
+    validate_listing_html,
+    safe_title,
+    group_unified_records,
+    classify_record,
+)
+
 
 BASE = "https://www.kgmu.org/"
 
+NOTICE_BOARD_URL = urljoin(BASE, "kgmu_notice_board.php")
+TENDER_PAGE_URL  = urljoin(BASE, "tenders.php")
+EXAM_PAGE_URL    = urljoin(BASE, "exam_notice.php")
+
+# ponytail: SOURCES kept for parse_listing calls from supplemental pages
 SOURCES = (
-    ("notice", urljoin(BASE, "kgmu_notice_board.php"), 0),
-    ("tender", urljoin(BASE, "tenders.php"), 1),
-    ("exam", urljoin(BASE, "exam_notice.php"), 2),
+    ("notice", NOTICE_BOARD_URL, 0),
+    ("tender", TENDER_PAGE_URL, 1),
+    ("exam",   EXAM_PAGE_URL,   2),
 )
 
 HOMEPAGE = BASE
@@ -1182,220 +1201,146 @@ def archive_previous_snapshot(
     return destination
 
 
+def _listing_record_to_item(rec: ListingRecord, priority: int) -> Item:
+    """Convert a kgmu_notice_sources.ListingRecord into an Item for the
+    existing render/archive/snapshot pipeline."""
+    return Item(
+        title=rec.title,
+        published=rec.listing_date,
+        url=rec.url,
+        source=rec.category,
+        source_priority=priority,
+        notice_no=rec.ref or "",
+        extraction=rec.via,
+    )
+
+
 def run(
     prompt_path: Path,
     live_data_path: Path,
     archive_root: Path,
     now: datetime | None = None,
 ) -> int:
-    run_time = (
-        now
-        or datetime.now(tz=IST)
-    )
-
+    run_time = now or datetime.now(tz=IST)
     session = build_session()
-
-    all_items: list[Item] = []
     errors: list[str] = []
 
-    for source, url, priority in SOURCES:
-        try:
-            page = fetch_html(
-                session,
-                url,
-            )
-
-            parsed = parse_listing(
-                page,
-                source,
-                url,
-                priority,
-                today=run_time.astimezone(
-                    IST
-                ).date(),
-            )
-
-            all_items.extend(parsed)
-
-            print(
-                f"{source}: "
-                f"parsed {len(parsed)} dated items"
-            )
-
-        except Exception as error:
-            message = (
-                f"{source}: "
-                f"{type(error).__name__}: "
-                f"{error}"
-            )
-
-            errors.append(message)
-            print(
-                message,
-                file=sys.stderr,
-            )
-
-    missing_sources = {
-        category
-        for category in CATEGORY_ORDER
-        if not any(
-            item.source == category
-            for item in all_items
-        )
-    }
-
-    if missing_sources:
-        try:
-            homepage = fetch_html(
-                session,
-                HOMEPAGE,
-            )
-
-            for category in missing_sources:
-                all_items.extend(
-                    parse_listing(
-                        homepage,
-                        category,
-                        HOMEPAGE,
-                        3,
-                        today=run_time.astimezone(
-                            IST
-                        ).date(),
-                    )
-                )
-
-        except Exception as error:
-            errors.append(
-                (
-                    "homepage fallback: "
-                    f"{type(error).__name__}: "
-                    f"{error}"
-                )
-            )
-
-    candidates = deduplicate(
-        all_items
-    )
-
-    candidates_for_enrichment: list[Item] = []
-
-    for category in CATEGORY_ORDER:
-        category_candidates = [
-            item
-            for item in candidates
-            if item.source == category
-        ][:10]
-
-        candidates_for_enrichment.extend(
-            category_candidates
-        )
-
-    enriched, enrichment_errors = enrich_items(
-        candidates_for_enrichment,
-        session,
-        maximum_documents=MAX_OCR_DOCUMENTS,
-    )
-
-    errors.extend(
-        enrichment_errors
-    )
-
-    selection = select_latest_by_category(
-        enriched,
-        count_per_category=3,
-    )
-
-    if not selection_is_complete(
-        selection
-    ):
-        counts = {
-            category: len(
-                selection.get(
-                    category,
-                    [],
-                )
-            )
-            for category in CATEGORY_ORDER
-        }
-
+    # ── 1. Primary: unified notice board (listing date is canonical) ──────────
+    board_records: list[ListingRecord] = []
+    try:
+        board_html = fetch_html(session, NOTICE_BOARD_URL)
+        board_records = parse_unified_notice_board(board_html)
+        grouped = group_unified_records(board_records)
         print(
-            (
-                "Refusing to modify live data: "
-                "fewer than three valid unique "
-                "items in one or more categories: "
-                f"{counts}"
-            ),
+            f"notice-board: parsed {len(board_records)} records "
+            f"({len(grouped['notice'])} notice, "
+            f"{len(grouped['tender'])} tender, "
+            f"{len(grouped['exam'])} exam)"
+        )
+    except Exception as exc:
+        msg = f"notice-board: {type(exc).__name__}: {exc}"
+        errors.append(msg)
+        print(msg, file=sys.stderr)
+
+    # ── 2. Supplemental: dedicated exam page (lower priority) ─────────────────
+    exam_records: list[ListingRecord] = []
+    try:
+        exam_html = fetch_html(session, EXAM_PAGE_URL)
+        # Re-use existing parse_listing for item extraction, then wrap as ListingRecord
+        today = run_time.astimezone(IST).date()
+        raw_exam_items = parse_listing(exam_html, "exam", EXAM_PAGE_URL, 2, today=today)
+        for it in raw_exam_items:
+            exam_records.append(ListingRecord(
+                title=it.title,
+                url=it.url,
+                listing_date=it.published,
+                ref=it.notice_no or None,
+                source_url="exam-page",
+                source_position=10000,  # lower priority than board
+                category="exam",
+                via=it.extraction,
+                date_source="listing" if it.extraction == "listing" else it.extraction,
+            ))
+        print(f"exam-page: parsed {len(exam_records)} items")
+    except Exception as exc:
+        msg = f"exam-page: {type(exc).__name__}: {exc}"
+        errors.append(msg)
+        print(msg, file=sys.stderr)
+
+    # ── 3. Supplemental: dedicated tender page ────────────────────────────────
+    tender_records: list[ListingRecord] = []
+    try:
+        tender_html = fetch_html(session, TENDER_PAGE_URL)
+        today = run_time.astimezone(IST).date()
+        raw_tender_items = parse_listing(tender_html, "tender", TENDER_PAGE_URL, 1, today=today)
+        for it in raw_tender_items:
+            tender_records.append(ListingRecord(
+                title=it.title,
+                url=it.url,
+                listing_date=it.published,
+                ref=it.notice_no or None,
+                source_url="tender-page",
+                source_position=10000,
+                category="tender",
+                via=it.extraction,
+                date_source="listing" if it.extraction == "listing" else it.extraction,
+            ))
+        print(f"tender-page: parsed {len(tender_records)} items")
+    except Exception as exc:
+        msg = f"tender-page: {type(exc).__name__}: {exc}"
+        errors.append(msg)
+        print(msg, file=sys.stderr)
+
+    # ── 4. Merge all sources, deduplicate, apply safe_title ──────────────────
+    all_records = board_records + exam_records + tender_records
+    all_records = deduplicate_records(all_records)
+
+    # ── 5. Select top-3 per category (fail-closed) ────────────────────────────
+    selection: dict[str, list[Item]] = {}
+    for category in CATEGORY_ORDER:
+        try:
+            chosen = select_latest(all_records, category, limit=3)
+            # Apply safe_title to tenders (fixes OCR garbage like 653/EE/26)
+            chosen = [safe_title(r) if category == "tender" else r for r in chosen]
+            priority_map = {"tender": 1, "notice": 0, "exam": 2}
+            selection[category] = [
+                _listing_record_to_item(r, priority_map[category]) for r in chosen
+            ]
+        except ValueError as exc:
+            msg = f"{category}: {exc}"
+            errors.append(msg)
+            print(msg, file=sys.stderr)
+            selection[category] = []
+
+    # ── 6. Fail-closed guard ──────────────────────────────────────────────────
+    if not selection_is_complete(selection):
+        counts = {cat: len(selection.get(cat, [])) for cat in CATEGORY_ORDER}
+        print(
+            f"Refusing to modify live data: fewer than three valid unique "
+            f"items in one or more categories: {counts}",
             file=sys.stderr,
         )
-
         for error in errors:
-            print(
-                error,
-                file=sys.stderr,
-            )
-
+            print(error, file=sys.stderr)
         return 2
 
     if not prompt_path.exists():
-        print(
-            (
-                "Prompt does not exist: "
-                f"{prompt_path}"
-            ),
-            file=sys.stderr,
-        )
-
+        print(f"Prompt does not exist: {prompt_path}", file=sys.stderr)
         return 3
 
-    original_prompt = prompt_path.read_text(
-        encoding="utf-8"
-    )
+    original_prompt = prompt_path.read_text(encoding="utf-8")
+    prompt_block = render_prompt_block(selection, run_time)
+    updated_prompt = replace_prompt_block(original_prompt, prompt_block)
+    snapshot = create_snapshot(selection, run_time, errors)
 
-    prompt_block = render_prompt_block(
-        selection,
-        run_time,
-    )
-
-    updated_prompt = replace_prompt_block(
-        original_prompt,
-        prompt_block,
-    )
-
-    snapshot = create_snapshot(
-        selection,
-        run_time,
-        errors,
-    )
-
-    # Archive only after all scraping, extraction, validation, prompt rendering,
-    # and snapshot generation have succeeded.
-    #
-    # The archive must contain the previous latest_updates.json, not the new one.
-    archived = archive_previous_snapshot(
-        live_data_path,
-        archive_root,
-        run_time,
-    )
-
+    archived = archive_previous_snapshot(live_data_path, archive_root, run_time)
     if archived:
-        print(
-            (
-                "Archived previous snapshot: "
-                f"{archived}"
-            )
-        )
+        print(f"Archived previous snapshot: {archived}")
 
-    write_compact_json(
-        live_data_path,
-        snapshot,
-    )
+    write_compact_json(live_data_path, snapshot)
 
     if updated_prompt != original_prompt:
-        prompt_path.write_text(
-            updated_prompt,
-            encoding="utf-8",
-            newline="\n",
-        )
+        prompt_path.write_text(updated_prompt, encoding="utf-8", newline="\n")
 
     for category in CATEGORY_ORDER:
         for item in selection[category]:
@@ -1403,9 +1348,7 @@ def run(
                 item.published,
                 category,
                 item.extraction,
-                clean_inferred_title(
-                    item.title
-                ),
+                clean_inferred_title(item.title),
                 item.url,
                 sep=" | ",
             )
