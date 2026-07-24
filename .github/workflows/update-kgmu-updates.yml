@@ -24,6 +24,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+          cache-dependency-path: "requirements-updates.txt"
 
       - name: Install system OCR dependencies
         run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr
