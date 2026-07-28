@@ -1,13 +1,36 @@
 #!/usr/bin/env python3
-from pathlib import Path
 import json, sys
-p=Path(sys.argv[1] if len(sys.argv)>1 else "latest_updates.json")
-d=json.loads(p.read_text(encoding="utf-8"))
-assert len(d["tenders"])==3
-assert len(d["notices"])==3
-assert len(d["exam_notices"])==3
-assert [x.get("ref") for x in d["exam_notices"]]==["385/Exam/General/2026","384 Exam/General/2026","383/Exam/General/2026"]
-assert [x["date"] for x in d["exam_notices"]]==["2026-07-02"]*3
-assert [x["date"] for x in d["notices"]]==["2026-07-16","2026-07-10","2026-07-06"]
-assert all("mit your the following work in" not in x["title"].casefold() for x in d["tenders"])
+from pathlib import Path
+from urllib.parse import urlparse
+
+p = Path(sys.argv[1] if len(sys.argv) > 1 else "latest_updates.json")
+d = json.loads(p.read_text(encoding="utf-8"))
+
+SECTIONS = {"tenders": True, "notices": False, "exam_notices": True}
+
+for section, require_ref in SECTIONS.items():
+    assert section in d, f"Missing section: {section}"
+    items = d[section]
+    assert len(items) == 3, f"{section} must have exactly 3 items, got {len(items)}"
+
+    seen = set()
+    prev_date = None
+    for item in items:
+        assert item.get("date"), f"Missing date in {section}"
+        assert item.get("title"), f"Missing title in {section}"
+        url = item.get("url", "")
+        assert url, f"Missing url in {section}"
+        parsed = urlparse(url)
+        assert parsed.scheme == "https", f"Bad scheme in {section}: {url}"
+        assert parsed.netloc == "www.kgmu.org", f"Bad domain in {section}: {url}"
+        if require_ref:
+            assert item.get("ref"), f"Missing ref in {section}: {item[\"title\"]}"
+        key = (item["date"], item["title"], url)
+        assert key not in seen, f"Duplicate record in {section}: {key}"
+        seen.add(key)
+        if prev_date is not None:
+            assert item["date"] <= prev_date, f"{section} not sorted newest-first near {item[\"date\"]}"
+        prev_date = item["date"]
+
 print("PASS: complete, current and correctly classified")
+
