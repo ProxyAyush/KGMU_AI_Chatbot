@@ -30,7 +30,8 @@ for section, require_ref in SECTIONS.items():
         assert key not in seen, f"Duplicate record in {section}: {key}"
         seen.add(key)
         if prev_date is not None:
-            assert item["date"] <= prev_date, f"{section} not sorted newest-first near {item[\"date\"]}"
+            item_date = item["date"]
+            assert item_date <= prev_date, f"{section} not sorted newest-first near {item_date}"
         prev_date = item["date"]
 
 print("PASS: complete, current and correctly classified")
