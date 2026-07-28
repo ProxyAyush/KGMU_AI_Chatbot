@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-07-28 11:52 IST
+Updated: 2026-07-28 20:32 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-23 — Servicing of kirloskar make 320 KVA DG Set in CVTS Department, KGMU Lucknow
+1. 2026-07-27 — Dismantling & Re-installation of old and existing split ac 1.5 ton at Department of Physiology
+   Ref: 678/EE/(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/5bf1fa77f21062c8b63fb299967f5868.pdf
+2. 2026-07-27 — Quotation Notice — Ref. 679/EE/(E/M)
+   Ref: 679/EE/(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/108e9a3924be753b6ae9bc41e48ffe92.pdf
+3. 2026-07-23 — Servicing of kirloskar make 320 KVA DG Set in CVTS Department, KGMU Lucknow
    Ref: 665 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/d9618dd7503da6cd7746226abaa115fb.pdf
-2. 2026-07-23 — Medical gas pipelines work in PICU Trauma Center kgmu lucknow
-   Ref: 667 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/7819154720fd1bae664bc3b44558cafd.pdf
-3. 2026-07-23 — Servicing of Cummins make 160 KVA DG Set in QMH Department, KGMU Lucknow
-   Ref: 669 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/27992f6c34b670582e4217b23dcf55ad.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2026-07-16 — Bachelor Admission 2026 Instructions
