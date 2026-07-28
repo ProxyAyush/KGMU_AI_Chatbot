@@ -17,15 +17,16 @@ for section, require_ref in SECTIONS.items():
     prev_date = None
     for item in items:
         assert item.get("date"), f"Missing date in {section}"
-        assert item.get("title"), f"Missing title in {section}"
+        title = item.get("title")
+        assert title, f"Missing title in {section}"
         url = item.get("url", "")
         assert url, f"Missing url in {section}"
         parsed = urlparse(url)
         assert parsed.scheme == "https", f"Bad scheme in {section}: {url}"
         assert parsed.netloc == "www.kgmu.org", f"Bad domain in {section}: {url}"
         if require_ref:
-            assert item.get("ref"), f"Missing ref in {section}: {item[\"title\"]}"
-        key = (item["date"], item["title"], url)
+            assert item.get("ref"), f"Missing ref in {section}: {title}"
+        key = (item["date"], title, url)
         assert key not in seen, f"Duplicate record in {section}: {key}"
         seen.add(key)
         if prev_date is not None:
