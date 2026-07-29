@@ -20,29 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-07-29 09:19 IST
+Updated: 2026-07-29 20:22 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-27 — Dismantling & Re-installation of old and existing split ac 1.5 ton at Department of Physiology
-   Ref: 678/EE/(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/5bf1fa77f21062c8b63fb299967f5868.pdf
-2. 2026-07-27 — Quotation Notice — Ref. 679/EE/(E/M)
-   Ref: 679/EE/(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/108e9a3924be753b6ae9bc41e48ffe92.pdf
-3. 2026-07-23 — Servicing of kirloskar make 320 KVA DG Set in CVTS Department, KGMU Lucknow
-   Ref: 665 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/d9618dd7503da6cd7746226abaa115fb.pdf
+1. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
+   Ref: 694 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
+2. 2026-07-28 — Servicing of kirloskar make 30 KVA DG set IT cell KGMU lucknow
+   Ref: 696 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/168004fa8ee8c155b67c954fc94a5feb.pdf
+3. 2026-07-28 — Servicing of greaves make 250 KVA DG set QMH kgmu lucknow
+   Ref: 693 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/7b836e13404ff07ac2b7e0be6e7f341e.pdf
 
 ## LATEST GENERAL NOTICES
-1. 2026-07-16 — Bachelor Admission 2026 Instructions
-   Ref: 553/KGMUIPMS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/2207cb2a6ac52c5f5d9311d63bb6739d.pdf
-2. 2026-07-10 — Short Term Recruitment for SR (Un reg.) 17-07-2026
-   Ref: 20772/SR/2026
-   URL: https://www.kgmu.org/upload_file/user_download/cba99e3ba2f941fac820b33997f349ad.pdf
-3. 2026-07-06 — Cochrane Systematic Review and Meta-analysis workshop in November 12-14, 2026 in
-   URL: https://www.kgmu.org/upload_file/user_download/8578458084da0c36d9b08f877b140e22.pdf
+1. 2026-07-29 — Advertisement for the post of Junior Research Assistant under the UP-CST funded research project titled “Circulating
+   Ref: Advertisement Notice
+   URL: https://www.kgmu.org/upload_file/user_download/39e5e631d343eedd68252123a8fb4204.pdf
+2. 2026-07-28 — Supply and installation of 400 Ampere 4 Pole Automatic Transfer Switch of 250 KVA Cummins make DG Set No-4 installed at
+   Ref: 691 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/5e01a292aaf5a107b04e7c4f379d6eb1.pdf
+3. 2026-07-28 — Medical gas pipelines work in ICU Geriatric mental health department kgmu lucknow
+   Ref: 687 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/d0198d3e6fc7a950b7a666afe81f27ae.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-07-27 — Regarding PCPNDT Admit Card Distribuded
