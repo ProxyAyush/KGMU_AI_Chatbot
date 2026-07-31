@@ -20,7 +20,7 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-07-31 09:30 IST
+Updated: 2026-07-31 20:30 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
@@ -35,15 +35,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/7b836e13404ff07ac2b7e0be6e7f341e.pdf
 
 ## LATEST GENERAL NOTICES
-1. 2026-07-29 — Advertisement for the post of Junior Research Assistant under the UP-CST funded research project titled “Circulating
+1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
+   Ref: Recruitment Notice
+   URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
+2. 2026-07-29 — Advertisement for the post of Junior Research Assistant under the UP-CST funded research project titled “Circulating
    Ref: Advertisement Notice
    URL: https://www.kgmu.org/upload_file/user_download/39e5e631d343eedd68252123a8fb4204.pdf
-2. 2026-07-28 — Supply and installation of 400 Ampere 4 Pole Automatic Transfer Switch of 250 KVA Cummins make DG Set No-4 installed at
+3. 2026-07-28 — Supply and installation of 400 Ampere 4 Pole Automatic Transfer Switch of 250 KVA Cummins make DG Set No-4 installed at
    Ref: 691 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/5e01a292aaf5a107b04e7c4f379d6eb1.pdf
-3. 2026-07-28 — Medical gas pipelines work in ICU Geriatric mental health department kgmu lucknow
-   Ref: 687 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/d0198d3e6fc7a950b7a666afe81f27ae.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-07-27 — Regarding PCPNDT Admit Card Distribuded
