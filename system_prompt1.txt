@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-03 09:36 IST
+Updated: 2026-08-03 20:56 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-30 — BD Bactec MGIT Supplement
+1. 2026-08-01 — Quotation Notice — Ref. 2026_KGMUL_1174057_1
+   Ref: 2026_KGMUL_1174057_1
+   URL: https://www.kgmu.org/upload_file/user_download/f7529642c5f7d416fbc4281a6a255a99.pdf
+2. 2026-07-30 — BD Bactec MGIT Supplement
    Ref: GEM/2026/B/7853727
    URL: https://www.kgmu.org/upload_file/user_download/2a9396333c6dab927a68514bced844cd.pdf
-2. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
+3. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
    Ref: 694 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
-3. 2026-07-28 — Servicing of kirloskar make 30 KVA DG set IT cell KGMU lucknow
-   Ref: 696 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/168004fa8ee8c155b67c954fc94a5feb.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -40,7 +40,7 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
 2. 2026-07-31 — Advertise the vacant project (Spiking) positions
    Ref: 605/R-Cell-26
-   URL: https://www.kgmu.org/upload_file/user_download/040859f8baac8a529a8e9518c90082a4.PDF
+   URL: https://www.kgmu.org/upload_file/user_download/86097f537228cb1ab13ae6fbaaf1c70e.pdf
 3. 2026-07-29 — Advertisement for the post of Junior Research Assistant under the UP-CST funded research project titled “Circulating
    Ref: Advertisement Notice
    URL: https://www.kgmu.org/upload_file/user_download/39e5e631d343eedd68252123a8fb4204.pdf
