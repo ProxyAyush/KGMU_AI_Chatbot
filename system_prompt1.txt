@@ -20,41 +20,41 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-04 09:18 IST
+Updated: 2026-08-04 20:33 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-01 — Quotation Notice — Ref. 2026_KGMUL_1174057_1
-   Ref: 2026_KGMUL_1174057_1
-   URL: https://www.kgmu.org/upload_file/user_download/f7529642c5f7d416fbc4281a6a255a99.pdf
-2. 2026-07-30 — BD Bactec MGIT Supplement
-   Ref: GEM/2026/B/7853727
-   URL: https://www.kgmu.org/upload_file/user_download/2a9396333c6dab927a68514bced844cd.pdf
-3. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
-   Ref: 694 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
+1. 2026-08-04 — BD BACTEC MGIT Tubes 7ml
+   Ref: GEM/2026/B/7849725
+   URL: https://www.kgmu.org/upload_file/user_download/8622b6a6bbb5ae231699365eab6f4ef4.pdf
+2. 2026-08-03 — Supply and Laying of armoured cable for linking of PA system at Shatabdi Phase-1 & Phase-2
+   Ref: 32/AEB Med/26
+   URL: https://www.kgmu.org/upload_file/user_download/ac0a6190d2fc81ae3085958cb330c548.pdf
+3. 2026-08-03 — S.I.T.C of Simplex Make Addressable fire Smoke Detector at Physiology Department KGMU Lucknow
+   Ref: 31/Aeb Med/26
+   URL: https://www.kgmu.org/upload_file/user_download/710c12e34f4fe7243a484cf20239b90a.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-07-31 — Advertise the vacant project (Spiking) positions
+2. 2026-08-03 — Letter no 715996 Regarding NEET SS 2022 DM/Mch Batch Time Schedule
+   Ref: Notice
+   URL: https://www.kgmu.org/upload_file/user_download/6181140f58fcf52e9c2229caf46acdf8.pdf
+3. 2026-07-31 — Advertise the vacant project (Spiking) positions
    Ref: 605/R-Cell-26
    URL: https://www.kgmu.org/upload_file/user_download/86097f537228cb1ab13ae6fbaaf1c70e.pdf
-3. 2026-07-29 — Advertisement for the post of Junior Research Assistant under the UP-CST funded research project titled “Circulating
-   Ref: Advertisement Notice
-   URL: https://www.kgmu.org/upload_file/user_download/39e5e631d343eedd68252123a8fb4204.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-07-27 — Regarding PCPNDT Admit Card Distribuded
+1. 2026-08-03 — Fee Notice for Affilated College at B.Sc. Nursing 1st to 4th Year Supple. Examination-2026
+   Ref: 7068/Coe/Nursing/Confi./2026
+   URL: https://www.kgmu.org/upload_file/user_download/a00ceb9998e58034b09f25d6ac36e02e.pdf
+2. 2026-07-27 — Regarding PCPNDT Admit Card Distribuded
    Ref: 500/exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/1ad22bbe9759a7c6fd60175ce6ec2cb9.pdf
-2. 2026-07-02 — Fee & Form Notice for BMLS, B.Sc. Optometry, PBT 2nd Semester, B.Sc. Radiotherapy Technology 3rd & 1st Year Regular
+3. 2026-07-02 — Fee & Form Notice for BMLS, B.Sc. Optometry, PBT 2nd Semester, B.Sc. Radiotherapy Technology 3rd & 1st Year Regular
    Ref: 385/Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/7fa4fad4547cfa6c4de8dbe6ca5dfac3.pdf
-3. 2026-07-02 — Fee & Form Notice at MBBS 3rd Prof. Part-I (Phase 3.1) Regular Examination-2026 (Failed & Remainder Students) (Only for
-   Ref: 384 Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/6e4c5f65aabf6411b989956d9b19dc79.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
