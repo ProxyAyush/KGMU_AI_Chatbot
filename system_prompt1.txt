@@ -20,7 +20,7 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-05 09:13 IST
+Updated: 2026-08-05 20:26 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
@@ -46,15 +46,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/86097f537228cb1ab13ae6fbaaf1c70e.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-08-03 — Fee Notice for Affilated College at B.Sc. Nursing 1st to 4th Year Supple. Examination-2026
-   Ref: 7068/Coe/Nursing/Confi./2026
-   URL: https://www.kgmu.org/upload_file/user_download/a00ceb9998e58034b09f25d6ac36e02e.pdf
-2. 2026-07-27 — Regarding PCPNDT Admit Card Distribuded
-   Ref: 500/exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/1ad22bbe9759a7c6fd60175ce6ec2cb9.pdf
-3. 2026-07-02 — Fee & Form Notice for BMLS, B.Sc. Optometry, PBT 2nd Semester, B.Sc. Radiotherapy Technology 3rd & 1st Year Regular
-   Ref: 385/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/7fa4fad4547cfa6c4de8dbe6ca5dfac3.pdf
+1. 2026-08-05 — Regarding Fee & form Notice for BDS 3rd Professional Regular Examination-2026
+   Ref: 565/Exam/General/26
+   URL: https://www.kgmu.org/upload_file/user_download/760dd8ff936a61bb5fb164165e49cc49.pdf
+2. 2026-08-05 — Regarding Fee & form Notice for MBBS 2nd Professional (Phase-2) Regular Examination-2026 (Failed & Remanded Students)
+   Ref: 564/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/946afb47d2de4e164c13a0777ea99298.pdf
+3. 2026-08-05 — Regarding Fee & form Notice for MBBS 2nd Professional (Phase-2) Regular Examination-2026 (Only for KGMU students)
+   Ref: 563/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/484bc9920fd99ba2d773439d9700c531.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
