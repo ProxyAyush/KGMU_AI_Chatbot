@@ -20,30 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-05 20:26 IST
+Updated: 2026-08-06 20:26 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-04 — BD BACTEC MGIT Tubes 7ml
-   Ref: GEM/2026/B/7849725
-   URL: https://www.kgmu.org/upload_file/user_download/8622b6a6bbb5ae231699365eab6f4ef4.pdf
-2. 2026-08-03 — Supply and Laying of armoured cable for linking of PA system at Shatabdi Phase-1 & Phase-2
-   Ref: 32/AEB Med/26
-   URL: https://www.kgmu.org/upload_file/user_download/ac0a6190d2fc81ae3085958cb330c548.pdf
-3. 2026-08-03 — S.I.T.C of Simplex Make Addressable fire Smoke Detector at Physiology Department KGMU Lucknow
-   Ref: 31/Aeb Med/26
-   URL: https://www.kgmu.org/upload_file/user_download/710c12e34f4fe7243a484cf20239b90a.pdf
+1. 2026-08-05 — Providing of temporary Lighting on the occasion of 80th Independence day (15th August) at Main Hospital Building (PRO
+   Ref: 719/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/b9d6d721a820069ca2b7f4047ed5418e.pdf
+2. 2026-08-05 — Providing of temporary Lighting on the occasion of 80th Independence day (15th August) at V.C. Camp office & Registrar
+   Ref: 720/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/acd6d7309e506e28e43fe1f3aa86fd4f.pdf
+3. 2026-08-04 — Quotation Notice — Ref. SurgeryGen
+   Ref: SurgeryGen
+   URL: https://www.kgmu.org/upload_file/user_download/0cc8ebbb790862dcc49944f259fa570d.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-08-03 — Letter no 715996 Regarding NEET SS 2022 DM/Mch Batch Time Schedule
+2. 2026-08-06 — Bachelor Admission 2026 Instructions
+   Ref: 761/KGMUIPMS/
+   URL: https://www.kgmu.org/upload_file/user_download/be7ebaabc6f29a3ab8d2622fb1a4c178.pdf
+3. 2026-08-03 — Letter no 715996 Regarding NEET SS 2022 DM/Mch Batch Time Schedule
    Ref: Notice
    URL: https://www.kgmu.org/upload_file/user_download/6181140f58fcf52e9c2229caf46acdf8.pdf
-3. 2026-07-31 — Advertise the vacant project (Spiking) positions
-   Ref: 605/R-Cell-26
-   URL: https://www.kgmu.org/upload_file/user_download/86097f537228cb1ab13ae6fbaaf1c70e.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-08-05 — Regarding Fee & form Notice for BDS 3rd Professional Regular Examination-2026
