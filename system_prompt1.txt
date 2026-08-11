@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-11 08:05 IST
+Updated: 2026-08-11 19:26 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-10 — Facility Management Services - LumpSum Based Healthcare; Patient Support Services; Consumables to be provided by service
+1. 2026-08-11 — Quotation Notice — Ref. U/172
+   Ref: U/172
+   URL: https://www.kgmu.org/upload_file/user_download/238028754baeeffb70a57990968788e8.pdf
+2. 2026-08-10 — Facility Management Services - LumpSum Based Healthcare; Patient Support Services; Consumables to be provided by service
    Ref: GEM/2026/B/7897558
    URL: https://www.kgmu.org/upload_file/user_download/5ee2484299533b2ea2674a113811375a.pdf
-2. 2026-08-08 — Procurement of items on proprietary/single quotation basis for Dept of Obs and Gynae
+3. 2026-08-08 — Procurement of items on proprietary/single quotation basis for Dept of Obs and Gynae
    Ref: OG/3212/26
    URL: https://www.kgmu.org/upload_file/user_download/e7ee4208cb8c0f0bba6055574702ee2e.pdf
-3. 2026-08-07 — SITC of medical gas pipelines work in pulmonary & critical care medicine department kgmu lucknow
-   Ref: 733 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/4be2274c1c6f611d141611df5d068a40.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -46,15 +46,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/6181140f58fcf52e9c2229caf46acdf8.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-08-07 — Regarding Practical Examination Date at PCPNDT Examination Month of December 2025 & July 2026
-   Ref: 581/Exam/general/2026
-   URL: https://www.kgmu.org/upload_file/user_download/c6083f03567554ee0fd3ca049042f722.pdf
-2. 2026-08-05 — Regarding Fee & form Notice for BDS 3rd Professional Regular Examination-2026
-   Ref: 565/Exam/General/26
-   URL: https://www.kgmu.org/upload_file/user_download/760dd8ff936a61bb5fb164165e49cc49.pdf
-3. 2026-08-05 — Regarding Fee & form Notice for MBBS 2nd Professional (Phase-2) Regular Examination-2026 (Failed & Remanded Students)
-   Ref: 564/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/946afb47d2de4e164c13a0777ea99298.pdf
+1. 2026-08-11 — Regarding Fee & Form Notice for BDS 1st Professional (Regular) Examination-2026
+   Ref: 590/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/7f68cea5381513f0a23c1f3eca3be59c.pdf
+2. 2026-08-11 — Regarding Fee & Form Notice for MBBS 1st. Prof. (Phase-1) Regular Examination-2026(Failed & Remanded Students) (Only for
+   Ref: 588/Exam/general/2026
+   URL: https://www.kgmu.org/upload_file/user_download/14cbf51a2a3d2599b36cf2b215db1956.pdf
+3. 2026-08-11 — Regarding Fee & Form Notice for MBBS 1st. Prof. (Phase-1) Regular Examination-2026 (Only for KGMU Students)
+   Ref: 587/Exam/general/26
+   URL: https://www.kgmu.org/upload_file/user_download/9d318a7517b33945dbf66d9379bc9bcd.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
