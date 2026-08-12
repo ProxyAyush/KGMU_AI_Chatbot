@@ -20,7 +20,7 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-11 19:26 IST
+Updated: 2026-08-12 19:29 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
@@ -38,23 +38,23 @@ Use these categorized entries when answering questions about recent KGMU tenders
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-08-06 — Bachelor Admission 2026 Instructions
-   Ref: 761/KGMUIPMS/
-   URL: https://www.kgmu.org/upload_file/user_download/be7ebaabc6f29a3ab8d2622fb1a4c178.pdf
-3. 2026-08-03 — Letter no 715996 Regarding NEET SS 2022 DM/Mch Batch Time Schedule
-   Ref: Notice
-   URL: https://www.kgmu.org/upload_file/user_download/6181140f58fcf52e9c2229caf46acdf8.pdf
+2. 2026-08-12 — Non PG JR Result
+   Ref: 24024/S.R./J.R./2026
+   URL: https://www.kgmu.org/upload_file/user_download/dde4d0e3d9a50db6b356ed180525eaa3.pdf
+3. 2026-08-11 — Result Short Term Recruitment for Senior Resident (Un-reg.) Through Walk-in-interview on 29th July, 2026
+   Ref: 23899/S.R./J.R./2026
+   URL: https://www.kgmu.org/upload_file/user_download/6a26d0dc65a7fbfb308fa42ec6b2899a.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-08-11 — Regarding Fee & Form Notice for BDS 1st Professional (Regular) Examination-2026
+1. 2026-08-11 — MD/MS(Regular) Examination-2026
+   Ref: 589/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/6854326082f61f70dcdae5740bb1546b.pdf
+2. 2026-08-11 — Regarding Fee & Form Notice for BDS 1st Professional (Regular) Examination-2026
    Ref: 590/Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/7f68cea5381513f0a23c1f3eca3be59c.pdf
-2. 2026-08-11 — Regarding Fee & Form Notice for MBBS 1st. Prof. (Phase-1) Regular Examination-2026(Failed & Remanded Students) (Only for
+3. 2026-08-11 — Regarding Fee & Form Notice for MBBS 1st. Prof. (Phase-1) Regular Examination-2026(Failed & Remanded Students) (Only for
    Ref: 588/Exam/general/2026
    URL: https://www.kgmu.org/upload_file/user_download/14cbf51a2a3d2599b36cf2b215db1956.pdf
-3. 2026-08-11 — Regarding Fee & Form Notice for MBBS 1st. Prof. (Phase-1) Regular Examination-2026 (Only for KGMU Students)
-   Ref: 587/Exam/general/26
-   URL: https://www.kgmu.org/upload_file/user_download/9d318a7517b33945dbf66d9379bc9bcd.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
