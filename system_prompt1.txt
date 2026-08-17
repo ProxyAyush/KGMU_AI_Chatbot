@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-17 07:33 IST
+Updated: 2026-08-17 18:52 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-11 — Quotation Notice — Ref. U/172
-   Ref: U/172
-   URL: https://www.kgmu.org/upload_file/user_download/238028754baeeffb70a57990968788e8.pdf
-2. 2026-08-10 — Facility Management Services - LumpSum Based Healthcare; Patient Support Services; Consumables to be provided by service
-   Ref: GEM/2026/B/7897558
-   URL: https://www.kgmu.org/upload_file/user_download/5ee2484299533b2ea2674a113811375a.pdf
-3. 2026-08-08 — Procurement of items on proprietary/single quotation basis for Dept of Obs and Gynae
-   Ref: OG/3212/26
-   URL: https://www.kgmu.org/upload_file/user_download/e7ee4208cb8c0f0bba6055574702ee2e.pdf
+1. 2026-08-17 — Supply and fixing of LED Cove light and repairing of ceiling fan & LED cove light for ground floor of Lecture Theatre at
+   Ref: 758/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/299c626cc7ad01c57c7f4b208952711a.pdf
+2. 2026-08-17 — Supply and fixing of LED Cove light and repairing of ceiling fan in meeting Hall, Practical Class room & HOD room of
+   Ref: 759/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/dfdc290f5bf805ee88b2b1b354bb7a65.pdf
+3. 2026-08-17 — Supply and fixing of electronic meter for dozer pump with multiport valve & send media etc. for Swimming pool at
+   Ref: 760/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/42d6103b1bf6ee32331ebb2129064d47.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
