@@ -20,30 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-19 07:31 IST
+Updated: 2026-08-19 18:56 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-17 — Supply and fixing of LED Cove light and repairing of ceiling fan & LED cove light for ground floor of Lecture Theatre at
+1. 2026-08-19 — Procurement of following item proprietary/single quotation basis for Department of Neurosurgery
+   Ref: NS/1418
+   URL: https://www.kgmu.org/upload_file/user_download/9b842de124beb77f23797ca54c794d2f.pdf
+2. 2026-08-19 — Procurement of following item proprietary/single quotation basis for Department of Neurosurgery
+   Ref: NS/1417
+   URL: https://www.kgmu.org/upload_file/user_download/2fcf2727aebdd23babfa883c386ba435.pdf
+3. 2026-08-17 — Supply and fixing of LED Cove light and repairing of ceiling fan & LED cove light for ground floor of Lecture Theatre at
    Ref: 758/EE(E/M)
    URL: https://www.kgmu.org/upload_file/user_download/299c626cc7ad01c57c7f4b208952711a.pdf
-2. 2026-08-17 — Supply and fixing of LED Cove light and repairing of ceiling fan in meeting Hall, Practical Class room & HOD room of
-   Ref: 759/EE(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/dfdc290f5bf805ee88b2b1b354bb7a65.pdf
-3. 2026-08-17 — Supply and fixing of electronic meter for dozer pump with multiport valve & send media etc. for Swimming pool at
-   Ref: 760/EE(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/42d6103b1bf6ee32331ebb2129064d47.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-08-13 — Har Ghar Tiranga Abhiyaan 2026
-   Ref: 1016/DSW/2026
-   URL: https://www.kgmu.org/upload_file/user_download/daf7405696fab65a0f443549249fdc93.pdf
-3. 2026-08-12 — Non PG JR Result
-   Ref: 24024/S.R./J.R./2026
-   URL: https://www.kgmu.org/upload_file/user_download/dde4d0e3d9a50db6b356ed180525eaa3.pdf
+2. 2026-08-18 — Advertisement for recruitment of project staff in the project entitled "PrECISE " funded by ICMR
+   Ref: Advertisement Notice
+   URL: https://www.kgmu.org/upload_file/user_download/d83a172cf3f505c824fdd7720bbefa41.pdf
+3. 2026-08-18 — Notice regarding decision of 137th Institutional Ethics Committee meeting held on 18th September, 2024
+   Ref: 13/R-cell/26
+   URL: https://www.kgmu.org/upload_file/user_download/dca1372f1535313f6c086a7db58eeb1c.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-08-11 — MD/MS(Regular) Examination-2026
