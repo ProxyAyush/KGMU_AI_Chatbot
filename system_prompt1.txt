@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-25 07:30 IST
+Updated: 2026-08-25 18:59 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-20 — Medical gas pipelines work in pediatric emergency trauma center kgmu lucknow
+1. 2026-08-25 — Dismantling & Re-Installation of Old and existing 2.0 Ton capacity split type AC at KGMU College of Nursing
+   Ref: 811/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/ee9300ed31d476a48f84bd0b4855ad65.pdf
+2. 2026-08-24 — S.I.T.C. of Edward Make Addressable Fire Smoke Detector for Bone Bank at RALC campus
+   Ref: 33/AEB Med/26
+   URL: https://www.kgmu.org/upload_file/user_download/255937bd472c24ba91595bbee342dc24.pdf
+3. 2026-08-20 — Medical gas pipelines work in pediatric emergency trauma center kgmu lucknow
    Ref: 784 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/0e7ae241116169744545af83ceb056ec.pdf
-2. 2026-08-20 — Medical gas pipelines work in critical care medicine at trauma center kgmu lucknow
-   Ref: 780 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/58bb505be6fa763e602d213256096203.pdf
-3. 2026-08-20 — Medical gas pipelines work emergency medicine at trauma center kgmu lucknow
-   Ref: 783 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/5e11908bf396bbe31c5c2b23afcd0055.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
