@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-08-26 19:05 IST
+Updated: 2026-08-27 15:37 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-25 — Dismantling & Re-Installation of Old and existing 2.0 Ton capacity split type AC at KGMU College of Nursing
+1. 2026-08-25 — Binding and Stitching Services - Binding and Stitching; Binding of Loose print Journals; Journals
+   Ref: GEM/2026/B/7960626
+   URL: https://www.kgmu.org/upload_file/user_download/34059bde97ec68027bef3065262e4d46.pdf
+2. 2026-08-25 — Servicing of air compressor in orthopedic surgery department kgmu
+   Ref: 810/Notice/EE//26
+   URL: https://www.kgmu.org/upload_file/user_download/cb8c7b3bbda6cf87641d0a83f412ea9a.pdf
+3. 2026-08-25 — Dismantling & Re-Installation of Old and existing 2.0 Ton capacity split type AC at KGMU College of Nursing
    Ref: 811/EE(E/M)
    URL: https://www.kgmu.org/upload_file/user_download/ee9300ed31d476a48f84bd0b4855ad65.pdf
-2. 2026-08-24 — S.I.T.C. of Edward Make Addressable Fire Smoke Detector for Bone Bank at RALC campus
-   Ref: 33/AEB Med/26
-   URL: https://www.kgmu.org/upload_file/user_download/255937bd472c24ba91595bbee342dc24.pdf
-3. 2026-08-20 — Medical gas pipelines work in pediatric emergency trauma center kgmu lucknow
-   Ref: 784 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/0e7ae241116169744545af83ceb056ec.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
