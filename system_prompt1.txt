@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-01 10:58 IST
+Updated: 2026-09-01 22:20 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-08-29 — Supply and Laying of Fire Smoke Detector armoured cable at Department of Urology
-   Ref: 34/AEBMech/26
-   URL: https://www.kgmu.org/upload_file/user_download/6015cf6dd7f5b68eb3ae7fa906bd00fc.pdf
-2. 2026-08-27 — Quotation Notice — Ref. NS/1486
-   Ref: NS/1486
-   URL: https://www.kgmu.org/upload_file/user_download/daf498a647fe5ee58814a3080999105b.pdf
-3. 2026-08-27 — Procurement of item on proprietary/single quotation basis for Department of Medicine
-   Ref: 2448/Med./2026
-   URL: https://www.kgmu.org/upload_file/user_download/4c72e0be03865dc18267233ab0afe2c1.pdf
+1. 2026-09-01 — Repairing, Servicing & Overhauling of Air Curtains Installed at New OPD Main Gate
+   Ref: 838/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/79d94726f70655c51477b7dcade55760.pdf
+2. 2026-09-01 — Dismantling & Re-Installing of Old and existing 1.5 Ton capacity split type AC for various Department/Places at
+   Ref: 839/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/9e6ad128993c2c9bbcf471d10b3127a5.pdf
+3. 2026-09-01 — Name of Work:- S.I.T.C. of Simplex Make Addressable Fire Smoke Detector for Lecture Theatre at Physiology Department
+   Ref: 35/AEBMech/26
+   URL: https://www.kgmu.org/upload_file/user_download/beccfb0a40f2465314911d6af7319b99.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
