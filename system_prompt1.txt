@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-04 10:25 IST
+Updated: 2026-09-04 22:02 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
-   Ref: 694 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
-2. 2026-07-28 — Servicing of kirloskar make 30 KVA DG set IT cell KGMU lucknow
-   Ref: 696 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/168004fa8ee8c155b67c954fc94a5feb.pdf
-3. 2026-07-28 — Servicing of greaves make 250 KVA DG set QMH kgmu lucknow
-   Ref: 693 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/7b836e13404ff07ac2b7e0be6e7f341e.pdf
+1. 2026-09-03 — Quotation Notice — Ref. 846/EE/(E/M)
+   Ref: 846/EE/(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/1ab561ca4d8de85c2c2fc1bc90d64b26.pdf
+2. 2026-09-03 — Quotation Notice — Ref. 845/EE/(E/M)/26
+   Ref: 845/EE/(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/13a4b2ca331ca7412658197a19182110.pdf
+3. 2026-09-01 — Repairing, Servicing & Overhauling of Air Curtains Installed at New OPD Main Gate
+   Ref: 838/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/79d94726f70655c51477b7dcade55760.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
