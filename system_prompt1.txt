@@ -20,7 +20,7 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-09 10:29 IST
+Updated: 2026-09-09 22:20 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
@@ -41,9 +41,9 @@ Use these categorized entries when answering questions about recent KGMU tenders
 2. 2026-09-28 — Advertisement for the Position of ‘Junior Research Assistant’, for the CST-UP Project under Dr. Durgesh K. Dwivedi
    Ref: Advertisement Notice
    URL: https://www.kgmu.org/upload_file/user_download/af0af60b477e90d943689926a7741bf9.pdf
-3. 2026-08-27 — Senior Resident (Un-reg.) Walk-in-interview Result
-   Ref: 25384/SR/JR/26
-   URL: https://www.kgmu.org/upload_file/user_download/241b1b705b64cd2896501a9ce53d8db7.pdf
+3. 2026-09-14 — Advertisement for certificate course in pain &palliative care for the nurses
+   Ref: Anaesth/PMU/183/2026
+   URL: https://www.kgmu.org/upload_file/user_download/63cd656e4f04fa629edf8f766a13a0f6.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-09-08 — Regarding Revised Examination Scheme of MD/MS (Regular) Examination to be held in the Month of September-2026
