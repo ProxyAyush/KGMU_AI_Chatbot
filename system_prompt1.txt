@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-11 10:29 IST
+Updated: 2026-09-11 22:11 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-10 — Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 (11 to 15 September 2026)
-   Ref: 1066/KGMUIPMS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/0ae29ab1f2824cbf74f8fb2c98116964.pdf
-2. 2026-09-09 — Repairing of Kirloskar make 125 KVA DG Set No.01 ATS Panel for Automation installed in T.G Hostel, KGMU Lucknow
-   Ref: 881 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/f2236bcf02902d93a66e048dd07150cc.pdf
-3. 2026-09-09 — Medical Gas Pipe line Work in Triage Area Room aat Shatabdi phase-2, KGMU Lucknow
-   Ref: 880 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/0bbf3702ab6abb6d4ec25e968f655489.pdf
+1. 2026-09-11 — Procurement of following item on proprietary/single quotation basis for different departments
+   Ref: 1194/2026
+   URL: https://www.kgmu.org/upload_file/user_download/dfd2037f50ab112a2601c7c7542be2ad.pdf
+2. 2026-09-11 — Procurement of following item on proprietary/single quotation basis for different departments
+   Ref: 1193/2026
+   URL: https://www.kgmu.org/upload_file/user_download/0be69df29ce75a1f07dc506ffa46725d.pdf
+3. 2026-09-10 — Quotation Notice — Ref. 804/M-10/2026
+   Ref: 804/M-10/2026
+   URL: https://www.kgmu.org/upload_file/user_download/e8671b53b172abe859b8ba991e431802.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
