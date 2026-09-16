@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-15 10:39 IST
+Updated: 2026-09-16 10:34 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-12 — Procurement of following item on Proprietary/Single Quotation Basis for Department of C.V.T.S., K.G.M.U., Lucknow
+1. 2026-09-15 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
+   Ref: 381/Lib/2026
+   URL: https://www.kgmu.org/upload_file/user_download/f5db446a9e8e954eea7bbd3ca1b11772.pdf
+2. 2026-09-14 — To locate the faulty location & jointing of 240sq.mm. x 3.5 core armourd cable of MRI Feeder pillar at
+   Ref: 895/EE/E/M/26
+   URL: https://www.kgmu.org/upload_file/user_download/4f50be511ba1689836112906dfaeb31f.pdf
+3. 2026-09-12 — Procurement of following item on Proprietary/Single Quotation Basis for Department of C.V.T.S., K.G.M.U., Lucknow
    Ref: C/14/CVTS/2026
    URL: https://www.kgmu.org/upload_file/user_download/eefca18e247f7cdf5e84f52740ff7d03.pdf
-2. 2026-09-12 — Procurement of following item on proprietary/single quotation basis for different departments
-   Ref: 1212/2026
-   URL: https://www.kgmu.org/upload_file/user_download/3fd6ef1db5ae9ce32b09cddf25e8844d.pdf
-3. 2026-09-12 — Quotation Notice — Ref. 1213/2026
-   Ref: 1213/2026
-   URL: https://www.kgmu.org/upload_file/user_download/8edf8b7fa9963ff816f470a9b75e2cb1.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -41,9 +41,9 @@ Use these categorized entries when answering questions about recent KGMU tenders
 2. 2026-09-28 — Advertisement for the Position of ‘Junior Research Assistant’, for the CST-UP Project under Dr. Durgesh K. Dwivedi
    Ref: Advertisement Notice
    URL: https://www.kgmu.org/upload_file/user_download/af0af60b477e90d943689926a7741bf9.pdf
-3. 2026-09-14 — Advertisement for certificate course in pain &palliative care for the nurses
-   Ref: Anaesth/PMU/183/2026
-   URL: https://www.kgmu.org/upload_file/user_download/63cd656e4f04fa629edf8f766a13a0f6.pdf
+3. 2026-09-14 — ESMA Circular
+   Ref: 99/GA/2026
+   URL: https://www.kgmu.org/upload_file/user_download/81292c3aa4b11762e02015bc96e8fad0.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-09-14 — Fee & Form Notice for Master In Hospital Administration (MHA) Regular Examination-2026
