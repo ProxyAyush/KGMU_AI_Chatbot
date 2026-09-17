@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-16 10:34 IST
+Updated: 2026-09-17 10:37 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
 1. 2026-09-15 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
    Ref: 381/Lib/2026
    URL: https://www.kgmu.org/upload_file/user_download/f5db446a9e8e954eea7bbd3ca1b11772.pdf
-2. 2026-09-14 — To locate the faulty location & jointing of 240sq.mm. x 3.5 core armourd cable of MRI Feeder pillar at
+2. 2026-09-14 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Renewal
+   Ref: 459/Lib/2026
+   URL: https://www.kgmu.org/upload_file/user_download/73154f3d6a59e520e3f1ea9eae78b6f0.pdf
+3. 2026-09-14 — To locate the faulty location & jointing of 240sq.mm. x 3.5 core armourd cable of MRI Feeder pillar at
    Ref: 895/EE/E/M/26
    URL: https://www.kgmu.org/upload_file/user_download/4f50be511ba1689836112906dfaeb31f.pdf
-3. 2026-09-12 — Procurement of following item on Proprietary/Single Quotation Basis for Department of C.V.T.S., K.G.M.U., Lucknow
-   Ref: C/14/CVTS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/eefca18e247f7cdf5e84f52740ff7d03.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
