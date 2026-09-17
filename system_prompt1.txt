@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-17 10:37 IST
+Updated: 2026-09-17 22:42 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-15 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
+1. 2026-09-17 — Procurement of following items on proprietary/single quotation basis for Department of Urology
+   Ref: U/190
+   URL: https://www.kgmu.org/upload_file/user_download/565d47fe7c910141599f00663c47435d.pdf
+2. 2026-09-16 — Servicing of Cummins make 320KVA DG Set in Transit hostel at RALC KGMU lucknow
+   Ref: 910 Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/dc948e50d5eb155ccb01f1a422aaebb8.pdf
+3. 2026-09-15 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
    Ref: 381/Lib/2026
    URL: https://www.kgmu.org/upload_file/user_download/f5db446a9e8e954eea7bbd3ca1b11772.pdf
-2. 2026-09-14 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Renewal
-   Ref: 459/Lib/2026
-   URL: https://www.kgmu.org/upload_file/user_download/73154f3d6a59e520e3f1ea9eae78b6f0.pdf
-3. 2026-09-14 — To locate the faulty location & jointing of 240sq.mm. x 3.5 core armourd cable of MRI Feeder pillar at
-   Ref: 895/EE/E/M/26
-   URL: https://www.kgmu.org/upload_file/user_download/4f50be511ba1689836112906dfaeb31f.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -46,15 +46,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/81292c3aa4b11762e02015bc96e8fad0.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-09-14 — Fee & Form Notice for Master In Hospital Administration (MHA) Regular Examination-2026
+1. 2026-09-17 — Regarding fee & Form Notice for MBBS 3rd Prof. Part I (Phase-3.1) Supplementary Examination-2026 (Only for KGMU
+   Ref: 774/Exam/General/26
+   URL: https://www.kgmu.org/upload_file/user_download/7741919fec593c3f6e6e05ae18f0a266.pdf
+2. 2026-09-17 — Regarding fee & Form Notice for MBBS 3rd Prof. Part I (Phase-3.1) Supplementary Examination-2026 (Only for Affiliated
+   Ref: 775/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/8e2919f783404890d45bd931fc8b3d9d.pdf
+3. 2026-09-14 — Fee & Form Notice for Master In Hospital Administration (MHA) Regular Examination-2026
    Ref: 756 Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/e95429f41475a8997617e0dfedff1e64.pdf
-2. 2026-09-14 — BDS 2nd Professional(Regular) Examination-2026
-   Ref: 755/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/0d86877643fb1b684ca22c11f76ac2e7.pdf
-3. 2026-09-08 — Regarding Revised Examination Scheme of MD/MS (Regular) Examination to be held in the Month of September-2026
-   Ref: 711/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/70a76613aeeaa397c93b452a34a70adb.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
