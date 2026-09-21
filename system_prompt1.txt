@@ -20,27 +20,27 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-20 21:54 IST
+Updated: 2026-09-21 23:47 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-17 — Procurement of following items on proprietary/single quotation basis for Department of Urology
+1. 2026-09-21 — Procurement of following items on proprietary/single quotation basis for Department of Ophthalmology
+   Ref: 3041/OPH/2026
+   URL: https://www.kgmu.org/upload_file/user_download/c43b866e5b0eaf6ae5475bb75941e960.pdf
+2. 2026-09-17 — Procurement of following items on proprietary/single quotation basis for Department of Urology
    Ref: U/190
    URL: https://www.kgmu.org/upload_file/user_download/565d47fe7c910141599f00663c47435d.pdf
-2. 2026-09-16 — Servicing of Cummins make 320KVA DG Set in Transit hostel at RALC KGMU lucknow
+3. 2026-09-16 — Servicing of Cummins make 320KVA DG Set in Transit hostel at RALC KGMU lucknow
    Ref: 910 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/dc948e50d5eb155ccb01f1a422aaebb8.pdf
-3. 2026-09-15 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
-   Ref: 381/Lib/2026
-   URL: https://www.kgmu.org/upload_file/user_download/f5db446a9e8e954eea7bbd3ca1b11772.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-09-28 — Advertisement for the Position of ‘Junior Research Assistant’, for the CST-UP Project under Dr. Durgesh K. Dwivedi
+2. 2026-09-21 — Post marketing Analysis of Centchroman (Prospective study) in Uttar Pradesh, India (Department of Obstetrics and
    Ref: Advertisement Notice
-   URL: https://www.kgmu.org/upload_file/user_download/af0af60b477e90d943689926a7741bf9.pdf
+   URL: https://www.kgmu.org/upload_file/user_download/f42c977a59180ba389ab7c75f82b176d.pdf
 3. 2026-09-14 — ESMA Circular
    Ref: 99/GA/2026
    URL: https://www.kgmu.org/upload_file/user_download/81292c3aa4b11762e02015bc96e8fad0.pdf
