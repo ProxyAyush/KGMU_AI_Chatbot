@@ -20,30 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-25 10:43 IST
+Updated: 2026-09-25 22:58 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-22 — Supply & fixing of floor mat in Otis make lifts installed at super deluxe(private ward) and IDH building, KGMU Lucknow
-   Ref: 928 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/16c4b7c5242d142cbe8a7515ffd6d6ca.pdf
-2. 2026-09-22 — Servicing of kirloskar make 45 KVA DG set in Guest house, KGMU lucknow
-   Ref: 933 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/3d270c174bd9f181477fc1047b1530a1.pdf
-3. 2026-09-22 — Quotation Notice — Ref. 155/2026
-   Ref: 155/2026
-   URL: https://www.kgmu.org/upload_file/user_download/70e6f820095324971b1ceee7c25678ad.pdf
+1. 2026-09-25 — Procurement of the following item on proprietary/single quotation basis for Intramural project "Prognostic Outcomes of
+   Ref: 1427/2026
+   URL: https://www.kgmu.org/upload_file/user_download/2fa0acb3bb62ffea652dc90b2d0148ac.pdf
+2. 2026-09-24 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Renewal
+   Ref: 306/Lib/2026
+   URL: https://www.kgmu.org/upload_file/user_download/d2e22c475fb391470a23422d4436b568.pdf
+3. 2026-09-24 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
+   Ref: 375/Lib/2026
+   URL: https://www.kgmu.org/upload_file/user_download/35bbee219a00194464b3777a3a08c19e.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-09-21 — Post marketing Analysis of Centchroman (Prospective study) in Uttar Pradesh, India (Department of Obstetrics and
+2. 2026-09-25 — Regarding Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 2nd Round
+   Ref: 1166/KGMUIPMS/2026
+   URL: https://www.kgmu.org/upload_file/user_download/6ed6eac547c417de5e71039988992dc7.pdf
+3. 2026-09-21 — Post marketing Analysis of Centchroman (Prospective study) in Uttar Pradesh, India (Department of Obstetrics and
    Ref: Advertisement Notice
    URL: https://www.kgmu.org/upload_file/user_download/f42c977a59180ba389ab7c75f82b176d.pdf
-3. 2026-09-14 — ESMA Circular
-   Ref: 99/GA/2026
-   URL: https://www.kgmu.org/upload_file/user_download/81292c3aa4b11762e02015bc96e8fad0.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-09-17 — Regarding fee & Form Notice for MBBS 3rd Prof. Part I (Phase-3.1) Supplementary Examination-2026 (Only for KGMU
