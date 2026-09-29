@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-09-29 11:29 IST
+Updated: 2026-09-29 23:43 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-25 — Procurement of the following item on proprietary/single quotation basis for Intramural project "Prognostic Outcomes of
-   Ref: 1427/2026
-   URL: https://www.kgmu.org/upload_file/user_download/2fa0acb3bb62ffea652dc90b2d0148ac.pdf
-2. 2026-09-24 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Renewal
-   Ref: 306/Lib/2026
-   URL: https://www.kgmu.org/upload_file/user_download/d2e22c475fb391470a23422d4436b568.pdf
-3. 2026-09-24 — Inviting online observations/comments from the vendors on the website kgmu.org / kgmcindia.edu for the Subscription of
-   Ref: 375/Lib/2026
-   URL: https://www.kgmu.org/upload_file/user_download/35bbee219a00194464b3777a3a08c19e.pdf
+1. 2026-09-29 — Repairing & Rewinding of Mud Pump 1.5/2.0 HP motor, Exhaust fan 24”, Tullu Pump 1.5 HP & Motor of Grass cutting machine
+   Ref: 978/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/cb24670b2b536b9ff953ef508b3fdda6.pdf
+2. 2026-09-29 — Procurement of following Items on proprietary/single quotation basis for Department of Urology
+   Ref: U/192
+   URL: https://www.kgmu.org/upload_file/user_download/d28dd0f00f74fa26fea248d4bcd8dc26.pdf
+3. 2026-09-28 — Dismantling & reinstallation of old and exiting 1.5 ton capacity split ac for various places/Department
+   Ref: 976/EE(E/M)
+   URL: https://www.kgmu.org/upload_file/user_download/d29e811d67d1d836e98172dcd4119c7c.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
