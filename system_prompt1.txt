@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-03 11:05 IST
+Updated: 2026-10-04 11:41 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-01 — Providing of temporary Lighting on occasion of Gandhi Jayanti (2nd October 2026) at Main Hospital Building (PRO
+1. 2026-10-03 — Procurement of item proprietary/single quotation basis or Department of Neurosurgery
+   Ref: NS/1775
+   URL: https://www.kgmu.org/upload_file/user_download/771368df6d1d878b4b73b85e5d1d7306.pdf
+2. 2026-10-01 — Quotation Notice — Ref. 992/Notice/EE/26
+   Ref: 992/Notice/EE/26
+   URL: https://www.kgmu.org/upload_file/user_download/1c990477bd7beb7722e7585a338121c9.pdf
+3. 2026-10-01 — Providing of temporary Lighting on occasion of Gandhi Jayanti (2nd October 2026) at Main Hospital Building (PRO
    Ref: 983/EE(E/M)
    URL: https://www.kgmu.org/upload_file/user_download/708ee6b5b7274b8abfaf604f415f6a74.pdf
-2. 2026-09-29 — Repairing & Rewinding of Mud Pump 1.5/2.0 HP motor, Exhaust fan 24”, Tullu Pump 1.5 HP & Motor of Grass cutting machine
-   Ref: 978/EE(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/cb24670b2b536b9ff953ef508b3fdda6.pdf
-3. 2026-09-29 — Procurement of following Items on proprietary/single quotation basis for Department of Urology
-   Ref: U/192
-   URL: https://www.kgmu.org/upload_file/user_download/d28dd0f00f74fa26fea248d4bcd8dc26.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
