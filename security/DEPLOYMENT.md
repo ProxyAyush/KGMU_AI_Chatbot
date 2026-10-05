@@ -1,3 +1,11 @@
+# Current deployment: Turnstile removed
+
+The owner requested removal of the chatbot Turnstile challenge and explicitly confirmed deployment. The matching Worker was deployed manually as active version `f20a8613` on 6 October 2026 IST. The frontend now sends only `message` and `history`; it does not load Turnstile. The Worker does not require a Turnstile token or secret. Existing unused Turnstile variables can remain. Rate limiter bindings, exact origin checks, input caps, server-owned prompts, safe rendering and Firebase Enterprise App Check initialization remain. Keep App Check enforcement off pending live storage verification. The earlier HTTP 503 requires response/log diagnosis if it remains.
+
+The historical setup notes below describe the earlier Turnstile version and are retained as deployment history; do not re-enable Turnstile when deploying the current files.
+
+---
+
 # Deployment status and gate
 
 This branch prepares a coordinated security update for KGMU. It is not ready to merge until the existing Cloudflare Worker and Firebase configuration are prepared.

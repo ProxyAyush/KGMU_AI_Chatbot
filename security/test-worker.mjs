@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import worker from './worker.mjs';
 let calls=[], mode='ok', sent;
-const env = {GEMINI_API_KEY:'test-key',TURNSTILE_SECRET_KEY:'test-secret',CHAT_RATE_LIMITER:{limit:async()=>({success:true})},GLOBAL_RATE_LIMITER:{limit:async()=>({success:true})}};
+const env = {GEMINI_API_KEY:'test-key',CHAT_RATE_LIMITER:{limit:async()=>({success:true})},GLOBAL_RATE_LIMITER:{limit:async()=>({success:true})}};
 globalThis.fetch = async (url, init) => {
   calls.push(String(url));
   if (String(url).includes('siteverify')) return Response.json({success:mode!=='bad-token',hostname:mode==='wrong-host'?'evil.example':'kgmu.org',action:mode==='wrong-action'?'other':'kgmu_chat'});
@@ -12,7 +12,7 @@ globalThis.fetch = async (url, init) => {
   if(mode==='blocked') return Response.json({promptFeedback:{blockReason:'SAFETY'}});
   return Response.json({candidates:[{content:{parts:[{text:'private thought',thought:true},{text:'KGMU answer'}]}}]});
 };
-const body={message:'Where is KGMU?',history:[],turnstileToken:'proof'};
+const body={message:'Where is KGMU?',history:[]};
 function req(data=body,origin='https://kgmu.org',path='/',method='POST') {
   const headers={'Content-Type':'application/json','CF-Connecting-IP':'192.0.2.1'};
   if(origin!==null) headers.Origin=origin;
@@ -32,11 +32,9 @@ await check('preflight',req(body,'https://kgmu.org','/','OPTIONS'),204);
 await check('client prompt override',req({...body,systemInstruction:{}}),400);
 await check('oversize question',req({...body,message:'x'.repeat(4001)}),400);
 await check('body cap',req({...body,message:'x'.repeat(100001)}),413);
-await check('missing token',req({...body,turnstileToken:''}),403);
-await check('invalid token',req(),403,'bad-token');assert.equal(calls.length,1);
-await check('wrong hostname',req(),403,'wrong-host');
-await check('wrong action',req(),403,'wrong-action');
+await check('unexpected verification field rejected',req({...body,turnstileToken:'proof'}),400);
 const ok=await check('successful answer',req(),200);assert.deepEqual(await ok.json(),{text:'KGMU answer'});
+assert.equal(calls.some(url=>url.includes('siteverify')),false);
 assert.equal(sent.contents.length,1);assert.equal(sent.contents[0].parts[0].text,body.message);
 assert.ok(sent.systemInstruction.parts[0].text.startsWith('Trusted KGMU prompt.'));
 assert.equal(sent.generationConfig.maxOutputTokens,1024);
