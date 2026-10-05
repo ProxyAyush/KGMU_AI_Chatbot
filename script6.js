@@ -913,39 +913,7 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         promise.catch(() => securityScripts.delete(src));
         return promise;
     }
-    async function getVerificationToken() {
-        const configResponse = await fetch(PROXY_URL + '/client-config', {signal: AbortSignal.timeout(5000)});
-        if (!configResponse.ok) throw new Error('Verification configuration unavailable');
-        const config = await configResponse.json();
-        if (!config.turnstileSiteKey || config.turnstileSiteKey.startsWith('REPLACE_')) throw new Error('Turnstile setup required');
-        if (!window.turnstile) await loadSecurityScript('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit');
-        return new Promise((resolve, reject) => {
-            const container = document.createElement('div');
-            container.setAttribute('aria-label', 'Security verification');
-            chatBody.appendChild(container);
-            let widget, settled = false;
-            const finish = (error, token) => {
-                if (settled) return;
-                settled = true; clearTimeout(timer);
-                if (widget !== undefined) window.turnstile.remove(widget);
-                container.remove();
-                if (error) reject(error); else resolve(token);
-            };
-            const timer = setTimeout(() => finish(new Error('Verification timeout')), 25000);
-            try {
-                widget = window.turnstile.render(container, {
-                    sitekey: config.turnstileSiteKey, action: 'kgmu_chat', appearance: 'interaction-only',
-                    callback: token => finish(null, token),
-                    'error-callback': () => finish(new Error('Verification failed')),
-                    'expired-callback': () => finish(new Error('Verification expired')),
-                    'timeout-callback': () => finish(new Error('Verification timeout'))
-                });
-                scrollToBottom();
-            } catch (error) { finish(error); }
-        });
-    }
     async function callGeminiAPI(userMessage) {
-        const turnstileToken = await getVerificationToken();
         const history = messages.slice(0, -1).slice(-8).map(turn => ({role:turn.role,text:turn.parts.map(p=>p.text).join('\n').slice(0,8000)}));
         while (history.length && (history[0].role !== 'user' || history.reduce((n,t)=>n+t.text.length, userMessage.length) > 20000)) history.shift();
         const controller = new AbortController();
@@ -953,7 +921,7 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         try {
             const response = await fetch(PROXY_URL, {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({message:userMessage,history,turnstileToken}), signal:controller.signal
+                body:JSON.stringify({message:userMessage,history}), signal:controller.signal
             });
             if (!response.ok) throw new Error(`API request failed: ${response.status}`);
             const data = await response.json();
