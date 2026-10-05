@@ -1,0 +1,15 @@
+{
+  "name": "kgmu-gemini-proxy",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "observability": {"enabled": true},
+  "vars": {
+    "TURNSTILE_SITE_KEY": "REPLACE_WITH_PUBLIC_TURNSTILE_SITE_KEY",
+    "FIREBASE_APP_CHECK_SITE_KEY": "REPLACE_WITH_PUBLIC_RECAPTCHA_V3_SITE_KEY"
+  },
+  "ratelimits": [
+    {"name": "CHAT_RATE_LIMITER", "namespace_id": "62001", "simple": {"limit": 6, "period": 60}},
+    {"name": "GLOBAL_RATE_LIMITER", "namespace_id": "62002", "simple": {"limit": 120, "period": 60}}
+  ]
+}
