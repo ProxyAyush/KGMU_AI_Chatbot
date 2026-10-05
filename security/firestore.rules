@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // IMPORTANT: Firestore App Check enforcement is mandatory in the console.
+    // These rules preserve the existing daily-document/random-field structure.
+    match /QA-CHATBOT/{day} {
+      function validEntry(key) {
+        let entry = request.resource.data[key];
+        return (key.matches('qa_[a-f0-9]{32}') || key.matches('qa_[0-9]{13}_[a-z0-9]{1,16}'))
+          && entry is map
+          && entry.keys().hasAll(['question','answer','timestamp','consent','consentTimestamp'])
+          && entry.keys().hasOnly(['question','answer','timestamp','consent','consentTimestamp'])
+          && entry.question is string && entry.question.size() > 0 && entry.question.size() <= 4000
+          && entry.answer is string && entry.answer.size() > 0 && entry.answer.size() <= 8000
+          && entry.timestamp == request.time
+          && entry.consent == true
+          && entry.consentTimestamp is string && entry.consentTimestamp.size() <= 40;
+      }
+      function validDay() {
+        return day.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}')
+          && day == string(request.time.year()) + '-'
+             + (request.time.month() < 10 ? '0' : '') + string(request.time.month()) + '-'
+             + (request.time.day() < 10 ? '0' : '') + string(request.time.day());
+      }
+      allow read, delete: if false;
+      allow create: if validDay() && request.resource.data.keys().size() == 1
+        && validEntry(request.resource.data.keys()[0]);
+      allow update: if validDay()
+        && request.resource.data.diff(resource.data).affectedKeys().size() == 1
+        && request.resource.data.diff(resource.data).addedKeys().size() == 1
+        && validEntry(request.resource.data.keys().removeAll(resource.data.keys())[0]);
+    }
+    // Do not deploy this entire file if the project serves unrelated collections;
+    // integrate only the QA-CHATBOT match and remove overlapping broad allow rules.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

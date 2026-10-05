@@ -1,0 +1,1 @@
+{"name":"kgmu-hardening-review","private":true,"scripts":{"test":"node test-worker.mjs","test:browser":"node test-browser.cjs","test:rules":"firebase emulators:exec --only firestore --project demo-kgmu-hardening \"node test-firestore.mjs\""}}

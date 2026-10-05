@@ -618,7 +618,10 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     const TOTAL_COOLDOWN_MS = (POST_MESSAGE_VISIBLE_SECONDS + POST_MESSAGE_BUFFER_SECONDS) * 1000;
 
     // Retry & Resilience Configuration
-    const API_TIMEOUT_MS = 32000;
+    const MAX_RETRIES = 3;
+    const INITIAL_RETRY_DELAY_MS = 2000;
+    const RETRYABLE_STATUS_CODES = [429, 503, 529];
+    const API_TIMEOUT_MS = 30000;
     const MAX_HISTORY_MESSAGES = 10;
 
     // Chat State
@@ -628,7 +631,7 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     let awaitingResponse = false;
     let isTimerRunning = false;
     let silentBufferTimeout = null;
-
+    let systemPrompt = "";
 
     // Firebase config fetched from Cloudflare Worker
     let db, chatbotCollection;
@@ -636,28 +639,17 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         const res = await fetch(PROXY_URL + "/firebase-config");
         if (!res.ok) throw new Error("Failed to fetch Firebase config");
         const firebaseConfig = await res.json();
-        const { appCheckSiteKey, ...config } = firebaseConfig;
-        if (!appCheckSiteKey || appCheckSiteKey.startsWith('REPLACE_')) throw new Error('App Check setup required');
-        if (!firebase.apps.length) firebase.initializeApp(config);
-        if (!firebase.appCheck) {
-            const version = firebase.SDK_VERSION;
-            if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('Unknown Firebase version');
-            const suffix = Number(version.split('.')[0]) >= 9 ? '-compat' : '';
-            await loadSecurityScript(`https://www.gstatic.com/firebasejs/${version}/firebase-app-check${suffix}.js`);
-        }
-        if (!firebase.appCheck.ReCaptchaEnterpriseProvider) throw new Error('Firebase SDK requires Enterprise App Check support');
-        firebase.appCheck().activate(new firebase.appCheck.ReCaptchaEnterpriseProvider(appCheckSiteKey), true);
+        firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
         chatbotCollection = db.collection("QA-CHATBOT");
     }
-    let firebaseReady;
+    const firebaseReady = initFirebase();
 
     async function saveToFirestore(question, answer) {
         // DPDP Act compliance: only store data after user has consented
         if (!hasUserConsented()) return;
+        await firebaseReady;
         try {
-            firebaseReady ||= initFirebase().catch(error => { firebaseReady = null; throw error; });
-            await firebaseReady;
             const today = new Date();
             const dateString = today.toISOString().split('T')[0];
             const randomField = generateRandomFieldName();
@@ -679,10 +671,22 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     }
 
     function generateRandomFieldName() {
-        return 'qa_' + crypto.randomUUID().replace(/-/g, '');
+        const timestamp = Date.now();
+        const randomString = Math.random().toString(36).substring(2, 10);
+        return `qa_${timestamp}_${randomString}`;
     }
 
-    // The Worker fetches the same live prompt; the updater is unchanged.
+    // Load system prompt from file
+    fetch('https://raw.githubusercontent.com/ProxyAyush/KGMU_AI_Chatbot/main/system_prompt1.txt')
+        .then(response => response.text())
+        .then(text => {
+            systemPrompt = text;
+            console.log("System prompt loaded successfully");
+        })
+        .catch(error => {
+            console.error('Error loading system prompt:', error);
+            systemPrompt = "You're an AI assistant for KGMU";
+        });
 
     // Premade responses
     const premadeResponses = {
@@ -791,7 +795,6 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
     }
 
     function resetChat() {
-        if (awaitingResponse) return;
         messages = [];
         chatBody.innerHTML = '';
         addBotMessage("Hello! I'm KGMU Assistant — an AI tool for university-related queries. My responses are generated from publicly available KGMU website data and are not official or medical advice.\n\nनमस्ते! मैं KGMU सहायक हूँ — विश्वविद्यालय संबंधी प्रश्नों के लिए एक AI उपकरण। मेरे उत्तर KGMU वेबसाइट से AI-जनित हैं और आधिकारिक या चिकित्सा सलाह नहीं हैं।\n\nHow can I help you? | मैं कैसे मदद कर सकता हूँ?");
@@ -823,7 +826,6 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         }
         const message = userInput.value.trim();
         if (message === '' || awaitingResponse || isTimerRunning) return;
-        if (message.length > 4000) { addBotMessage('Please limit your question to 4,000 characters.'); return; }
 
         addUserMessage(message);
         messages.push({ role: "user", parts: [{ text: message }] });
@@ -862,7 +864,7 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             awaitingResponse = false;
             updateSendButtonState();
             scrollToBottom();
-        }, 80000);
+        }, 45000);
         try {
             const response = await callGeminiAPI(message);
             clearTimeout(typingSafetyTimeout);
@@ -896,70 +898,96 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         updateSendButtonState();
     }
 
-    // Security helpers do not modify the existing site CSS.
-    function sanitizeResponse(text) { return String(text); }
-    const securityScripts = new Map();
-    function loadSecurityScript(src) {
-        if (securityScripts.has(src)) return securityScripts.get(src);
-        const promise = new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            const timer = setTimeout(() => reject(new Error('Security script timeout')), 10000);
-            script.src = src; script.async = true;
-            script.onload = () => { clearTimeout(timer); resolve(); };
-            script.onerror = () => { clearTimeout(timer); reject(new Error('Security script unavailable')); };
-            document.head.appendChild(script);
-        });
-        securityScripts.set(src, promise);
-        promise.catch(() => securityScripts.delete(src));
-        return promise;
+    // --- SANITIZATION FIX ---
+    function sanitizeResponse(text) {
+        return text
+            .replace(/I am a large language model[^.]*\./gi, "")
+            .replace(/trained by Google/gi, "created by KGMU developers")
+            .replace(/Google/g, "KGMU");
     }
-    async function getVerificationToken() {
-        const configResponse = await fetch(PROXY_URL + '/client-config', {signal: AbortSignal.timeout(5000)});
-        if (!configResponse.ok) throw new Error('Verification configuration unavailable');
-        const config = await configResponse.json();
-        if (!config.turnstileSiteKey || config.turnstileSiteKey.startsWith('REPLACE_')) throw new Error('Turnstile setup required');
-        if (!window.turnstile) await loadSecurityScript('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit');
-        return new Promise((resolve, reject) => {
-            const container = document.createElement('div');
-            container.setAttribute('aria-label', 'Security verification');
-            chatBody.appendChild(container);
-            let widget, settled = false;
-            const finish = (error, token) => {
-                if (settled) return;
-                settled = true; clearTimeout(timer);
-                if (widget !== undefined) window.turnstile.remove(widget);
-                container.remove();
-                if (error) reject(error); else resolve(token);
-            };
-            const timer = setTimeout(() => finish(new Error('Verification timeout')), 25000);
-            try {
-                widget = window.turnstile.render(container, {
-                    sitekey: config.turnstileSiteKey, action: 'kgmu_chat', appearance: 'interaction-only',
-                    callback: token => finish(null, token),
-                    'error-callback': () => finish(new Error('Verification failed')),
-                    'expired-callback': () => finish(new Error('Verification expired')),
-                    'timeout-callback': () => finish(new Error('Verification timeout'))
-                });
-                scrollToBottom();
-            } catch (error) { finish(error); }
-        });
+
+    // --- RETRY HELPERS ---
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    function addJitter(baseDelay) {
+        const jitter = baseDelay * 0.25 * (Math.random() * 2 - 1);
+        return Math.max(0, baseDelay + jitter);
+    }
+
+    // --- GEMINI API CALL WITH RETRY + TIMEOUT ---
     async function callGeminiAPI(userMessage) {
-        const turnstileToken = await getVerificationToken();
-        const history = messages.slice(0, -1).slice(-8).map(turn => ({role:turn.role,text:turn.parts.map(p=>p.text).join('\n').slice(0,8000)}));
-        while (history.length && (history[0].role !== 'user' || history.reduce((n,t)=>n+t.text.length, userMessage.length) > 20000)) history.shift();
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
-        try {
-            const response = await fetch(PROXY_URL, {
-                method:'POST', headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({message:userMessage,history,turnstileToken}), signal:controller.signal
-            });
-            if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-            const data = await response.json();
-            if (typeof data.text !== 'string' || !data.text) throw new Error('Unexpected response');
-            return data.text;
-        } finally { clearTimeout(timeoutId); }
+        const requestBody = {
+            systemInstruction: {
+                role: "system",
+                parts: [{ text: systemPrompt }]
+            },
+            contents: messages.slice(-MAX_HISTORY_MESSAGES).concat([
+                {
+                    role: "user",
+                    parts: [{ text: userMessage }]
+                }
+            ]),
+            generationConfig: {
+                temperature: 0.7,
+                topP: 0.95,
+                topK: 40,
+                maxOutputTokens: 1024
+            }
+        };
+
+        let lastError;
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+            if (attempt > 0) {
+                const backoffDelay = addJitter(INITIAL_RETRY_DELAY_MS * Math.pow(2, attempt - 1));
+                console.log(`Retry attempt ${attempt}/${MAX_RETRIES} after ${Math.round(backoffDelay)}ms`);
+                await delay(backoffDelay);
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
+
+            try {
+                const response = await fetch(PROXY_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('API Error Details:', errorData);
+                    lastError = new Error(`API request failed: ${response.status}`);
+                    if (RETRYABLE_STATUS_CODES.includes(response.status) && attempt < MAX_RETRIES) {
+                        continue;
+                    }
+                    throw lastError;
+                }
+
+                const data = await response.json();
+                console.log("API Response:", data);
+
+                if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    throw new Error('Unexpected API response format');
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                lastError = error;
+                console.error(`API call error (attempt ${attempt + 1}):`, error);
+                const isRetryable = error.name === 'AbortError' || error.name === 'TypeError' ||
+                    (error.message && RETRYABLE_STATUS_CODES.some(code => error.message.includes(String(code))));
+                if (isRetryable && attempt < MAX_RETRIES) {
+                    continue;
+                }
+                throw error;
+            }
+        }
+        throw lastError;
     }
 
     // --- Message rendering & parsing helpers ---
@@ -1028,61 +1056,85 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
         return u;
     }
 
-    // Builds only known elements. Raw HTML is always text, never executable markup.
     function parseMarkdown(text) {
         if (typeof text !== 'string') return '';
-        const root = document.createElement('div');
-        function inline(parent, input) {
-            const pattern = /\[([^\]\n]+)\]\(([^)\s]+)\)|https?:\/\/[^\s<>"']+|\*\*([^*\n]+)\*\*|`([^`\n]+)`/g;
-            let pos = 0;
-            for (const match of input.matchAll(pattern)) {
-                parent.appendChild(document.createTextNode(input.slice(pos, match.index)));
-                if (match[1] || /^https?:/.test(match[0])) {
-                    const label = match[1] || match[0];
-                    const raw = (match[2] || match[0]).replace(/\\_/g, '_');
-                    let url;
-                    try {
-                        // Reject explicit non-web schemes before KGMU-relative normalization.
-                        if (/^[a-z][a-z0-9+.-]*:/i.test(raw) && !/^https?:/i.test(raw)) throw new Error();
-                        url = new URL(normalizeUrl(raw));
-                        if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error();
-                    } catch (_) { url = null; }
-                    if (url) {
-                        const a = document.createElement('a');
-                        a.href = url.href; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label;
-                        parent.appendChild(a);
-                    } else parent.appendChild(document.createTextNode(label));
-                } else {
-                    const node = document.createElement(match[3] ? 'strong' : 'code');
-                    node.textContent = match[3] || match[4]; parent.appendChild(node);
-                }
-                pos = match.index + match[0].length;
+
+        let t = text.trim();
+
+        t = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
+        t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+            let cleanUrl = url.trim();
+            cleanUrl = cleanUrl.replace(/\\_/g, '_');
+            cleanUrl = normalizeUrl(cleanUrl);
+            const safeLinkText = escapeHTML(linkText);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${safeLinkText}</a>`;
+        });
+
+        t = t.replace(/\]\([^)]*$/g, '');
+        t = t.replace(/\[[^\]]*$/g, '');
+
+        t = t.replace(/<a\s+([^>]*)>(.*?)<\/a>/gi, (match, attributes, label) => {
+            const hrefMatch = attributes.match(/href=["']?([^"'\s>]+)["']?/i);
+            if (!hrefMatch) return escapeHTML(label);
+
+            const cleanUrl = normalizeUrl(hrefMatch[1]);
+            const cleanLabel = label.replace(/<\/?[^>]+(>|$)/g, '').trim() || cleanUrl;
+
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(cleanLabel)}</a>`;
+        });
+
+        t = t.replace(/(?<!href=["']|">)(https?:\/\/[^\s<>"'\)]+)(?![^<]*<\/a>)/g, (url) => {
+            const cleanUrl = normalizeUrl(url);
+            return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
+        });
+
+        t = t.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+        t = t.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+        t = t.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+        t = t.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+        t = t.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+        t = t.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        t = t.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        t = t.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+        t = t.replace(/^\s*---\s*$/gm, '<hr>');
+
+        t = t.replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => `<ul>${match}</ul>`);
+
+        t = t.replace(/^\s*\d+\.\s+(.*)/gm, '<li>$1</li>');
+        t = t.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
+            if (!match.startsWith('<ul>') && !match.startsWith('<ol>')) {
+                return `<ol>${match}</ol>`;
             }
-            parent.appendChild(document.createTextNode(input.slice(pos)));
-        }
-        let code = null, list = null;
-        for (const line of text.slice(0, 16000).split('\n')) {
-            if (/^\s*```/.test(line)) {
-                list = null;
-                if (code) code = null;
-                else { const pre = document.createElement('pre'); code = document.createElement('code'); pre.appendChild(code); root.appendChild(pre); }
-                continue;
+            return match;
+        });
+
+        const lines = t.split('\n');
+        t = lines.map(line => {
+            const trimmed = line.trim();
+            if (trimmed === '' ||
+                trimmed.startsWith('<h') ||
+                trimmed.startsWith('<ul') ||
+                trimmed.startsWith('<ol') ||
+                trimmed.startsWith('<li') ||
+                trimmed.startsWith('<pre') ||
+                trimmed.startsWith('<hr') ||
+                trimmed.startsWith('<p>') ||
+                trimmed.includes('<a href')) {
+                return line;
             }
-            if (code) { code.textContent += line + '\n'; continue; }
-            const bullet = line.match(/^\s*(?:([-*])|\d+\.)\s+(.+)$/);
-            if (bullet) {
-                const tag = bullet[1] ? 'ul' : 'ol';
-                if (!list || list.tagName.toLowerCase() !== tag) { list = document.createElement(tag); root.appendChild(list); }
-                const li = document.createElement('li'); inline(li, bullet[2]); list.appendChild(li); continue;
-            }
-            list = null;
-            if (!line.trim()) continue;
-            const heading = line.match(/^(#{1,5})\s+(.+)$/);
-            const node = document.createElement(/^\s*---\s*$/.test(line) ? 'hr' : heading ? 'h' + heading[1].length : 'p');
-            if (node.tagName !== 'HR') inline(node, heading ? heading[2] : line);
-            root.appendChild(node);
-        }
-        return root.innerHTML;
+            return `<p>${line}</p>`;
+        }).join('\n');
+
+        t = t.replace(/<p>\s*<\/p>/g, '');
+
+        return t;
     }
 
     function showTypingIndicator() {
