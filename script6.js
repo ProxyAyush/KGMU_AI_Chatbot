@@ -645,7 +645,8 @@ const PROXY_URL = "https://kgmu-gemini-proxy.akaakayeye.workers.dev";
             const suffix = Number(version.split('.')[0]) >= 9 ? '-compat' : '';
             await loadSecurityScript(`https://www.gstatic.com/firebasejs/${version}/firebase-app-check${suffix}.js`);
         }
-        firebase.appCheck().activate(appCheckSiteKey, true);
+        if (!firebase.appCheck.ReCaptchaEnterpriseProvider) throw new Error('Firebase SDK requires Enterprise App Check support');
+        firebase.appCheck().activate(new firebase.appCheck.ReCaptchaEnterpriseProvider(appCheckSiteKey), true);
         db = firebase.firestore();
         chatbotCollection = db.collection("QA-CHATBOT");
     }
