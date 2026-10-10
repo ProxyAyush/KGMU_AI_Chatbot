@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-09 23:58 IST
+Updated: 2026-10-10 11:42 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-12 — Procurement of following item on Proprietary/Single Quotation Basis for Department of C.V.T.S., K.G.M.U., Lucknow
-   Ref: C/14/CVTS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/eefca18e247f7cdf5e84f52740ff7d03.pdf
-2. 2026-09-07 — Procurement of following Items on proprietary/single quotation basis for Department of Obs & Gynae
-   Ref: OG/3581/26
-   URL: https://www.kgmu.org/upload_file/user_download/d4af656b7fbbb2e56753298bf2eedf1b.pdf
-3. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
-   Ref: 694 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
+1. 2026-10-05 — Procurement of Item on Proprietary/Single Quotation Basis for Department of Respiratory Medicine
+   Ref: 1794/resp/2026
+   URL: https://www.kgmu.org/upload_file/user_download/36fbeb91040cff13878feb75aeba1267.pdf
+2. 2026-10-05 — High Speed Drill System for Neurosurgery & Spinal Surgery(Q3)
+   Ref: GEM/2026/B/8117695
+   URL: https://www.kgmu.org/upload_file/user_download/83de65d3796d8829775897c7c887a939.pdf
+3. 2026-10-05 — C Arm Fluoroscope X - Ray Machine (V2) (Q2)
+   Ref: GEM/2026/B/8117561
+   URL: https://www.kgmu.org/upload_file/user_download/7ea4055b7d0fc4d397f99412bbd04e63.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
