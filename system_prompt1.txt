@@ -20,41 +20,41 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-16 10:19 IST
+Updated: 2026-10-17 21:20 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-05 — Procurement of Item on Proprietary/Single Quotation Basis for Department of Respiratory Medicine
-   Ref: 1794/resp/2026
-   URL: https://www.kgmu.org/upload_file/user_download/36fbeb91040cff13878feb75aeba1267.pdf
-2. 2026-10-05 — High Speed Drill System for Neurosurgery & Spinal Surgery(Q3)
-   Ref: GEM/2026/B/8117695
-   URL: https://www.kgmu.org/upload_file/user_download/83de65d3796d8829775897c7c887a939.pdf
-3. 2026-10-05 — C Arm Fluoroscope X - Ray Machine (V2) (Q2)
-   Ref: GEM/2026/B/8117561
-   URL: https://www.kgmu.org/upload_file/user_download/7ea4055b7d0fc4d397f99412bbd04e63.pdf
+1. 2026-10-16 — Supply, Installation testing & commissioning of Air Compressor Package along with Refrigerated Type Air Dryer at CSSD
+   Ref: 1947/Notice/26
+   URL: https://www.kgmu.org/upload_file/user_download/d69bf9ff257487e649ff977f38b4aee7.pdf
+2. 2026-10-16 — Defective Automatic Transfer Switch 630Amp. Generator Panel of 320 KVA Cummins make DG Set No 02 installed at Gandhi
+   Ref: 10481?Notice/EE(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/9235b2347d5aaa9817b4c81d7ad8fc06.pdf
+3. 2026-10-15 — Endpoint Protection Platform (EPP) (Q2)
+   Ref: GEM/2026/B/8164504
+   URL: https://www.kgmu.org/upload_file/user_download/d0667d00363a97f10b63fa9d708a3d12.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-09-25 — Regarding Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 2nd Round
-   Ref: 1166/KGMUIPMS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/6ed6eac547c417de5e71039988992dc7.pdf
-3. 2026-09-21 — Post marketing Analysis of Centchroman (Prospective study) in Uttar Pradesh, India (Department of Obstetrics and
-   Ref: Advertisement Notice
-   URL: https://www.kgmu.org/upload_file/user_download/f42c977a59180ba389ab7c75f82b176d.pdf
+2. 2026-10-17 — Revised Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 3rd Round Document
+   Ref: 2011/KGMUIPMS/2026
+   URL: https://www.kgmu.org/upload_file/user_download/7a7ebbbc4a3529298a4a59f9d1423628.pdf
+3. 2026-10-13 — Regarding Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 3rd Round
+   Ref: 1290/KGMUIPMS/2026
+   URL: https://www.kgmu.org/upload_file/user_download/f7bd57eb55964eaf5617bbde67f29e8b.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-10-01 — Regarding Fee & Form Notice at B.Sc. Optometry final Exit (Supple.) Examination-2026
-   Ref: 936/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/3910aee55b4f48d0fe390abaf11236b8.pdf
-2. 2026-09-17 — Regarding fee & Form Notice for MBBS 3rd Prof. Part I (Phase-3.1) Supplementary Examination-2026 (Only for KGMU
-   Ref: 774/Exam/General/26
-   URL: https://www.kgmu.org/upload_file/user_download/7741919fec593c3f6e6e05ae18f0a266.pdf
-3. 2026-09-17 — Regarding fee & Form Notice for MBBS 3rd Prof. Part I (Phase-3.1) Supplementary Examination-2026 (Only for Affiliated
-   Ref: 775/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/8e2919f783404890d45bd931fc8b3d9d.pdf
+1. 2026-10-16 — Regarding Fee & Form Notice for M.Phil Clinical Psychology 1st Year (Regular) & B.Sc. Radiotherapy Technology 2nd Year
+   Ref: 1011/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/1510e1adee872c0f139b48287f5dd4fc.pdf
+2. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for PAMS Cadre Students)
+   Ref: 996/Exam/general/2026
+   URL: https://www.kgmu.org/upload_file/user_download/73039f92e0593cec4c5056188e4cb94d.pdf
+3. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for NEET Cadre Students)
+   Ref: 995/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/acb45f3004356f8d5d09e48af252f75d.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
