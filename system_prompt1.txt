@@ -20,7 +20,7 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-21 10:38 IST
+Updated: 2026-10-22 10:41 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
@@ -30,9 +30,9 @@ Use these categorized entries when answering questions about recent KGMU tenders
 2. 2026-10-21 — OG408726 - PRE BID MEETING NOTICE ON 21.10.2026 (AUTOCLAVE)
    Ref: OG408726
    URL: https://www.kgmu.org/upload_file/user_download/f2184ffa3640be4441b6ed7abc86a5ac.jpg
-3. 2026-10-16 — Supply, Installation testing & commissioning of Air Compressor Package along with Refrigerated Type Air Dryer at CSSD
-   Ref: 1947/Notice/26
-   URL: https://www.kgmu.org/upload_file/user_download/d69bf9ff257487e649ff977f38b4aee7.pdf
+3. 2026-10-17 — Operating Table (V2) (Q2)
+   Ref: GEM/2026/B/8175825
+   URL: https://www.kgmu.org/upload_file/user_download/ecdadd7998878006ae1b6d508b3db3b5.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
