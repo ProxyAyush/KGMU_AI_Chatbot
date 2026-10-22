@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-22 10:41 IST
+Updated: 2026-10-22 23:09 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-21 — OG408826 - PRE BID NOTICE ON 21.10.2026 (MANIKIN)
-   Ref: OG408826
-   URL: https://www.kgmu.org/upload_file/user_download/a874f4e358b99f85516360a52106bdb9.jpg
-2. 2026-10-21 — OG408726 - PRE BID MEETING NOTICE ON 21.10.2026 (AUTOCLAVE)
-   Ref: OG408726
-   URL: https://www.kgmu.org/upload_file/user_download/f2184ffa3640be4441b6ed7abc86a5ac.jpg
-3. 2026-10-17 — Operating Table (V2) (Q2)
-   Ref: GEM/2026/B/8175825
-   URL: https://www.kgmu.org/upload_file/user_download/ecdadd7998878006ae1b6d508b3db3b5.pdf
+1. 2026-10-22 — Ultrasound Machine (V2) (Q2)
+   Ref: : GEM/2026/B/8188094
+   URL: https://www.kgmu.org/upload_file/user_download/5121252c32e71536de9ba19bd204701b.pdf
+2. 2026-10-22 — Continuous Cardiac Output Monitor (Q2)
+   Ref: GEM/2026/B/8187850
+   URL: https://www.kgmu.org/upload_file/user_download/ca7f4e41a7efa2f94aeeeb3158c6b09e.pdf
+3. 2026-10-22 — High Speed Drill System for Neurosurgery & Spinal Surgery (Q3)
+   Ref: GEM/2026/B/8188185
+   URL: https://www.kgmu.org/upload_file/user_download/2a703c3b385c9b42be70dd20f975631f.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
