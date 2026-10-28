@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-28 11:31 IST
+Updated: 2026-10-28 23:56 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-27 — Renewal Subscription to the Online Platform of "Grammarly for Education”
+1. 2026-10-28 — Quotation Notice — Ref. 2094
+   Ref: 2094 King George's Medical University Uttar Pradesh 1..Finance & Account/2026
+   URL: https://www.kgmu.org/upload_file/user_download/a7e105c91c9bbaa570bd69ce48da2f4d.pdf
+2. 2026-10-28 — Procurement of item on proprietary/ single quotation basis for NIDAN Kendra at Pathology Department
+   Ref: 1575
+   URL: https://www.kgmu.org/upload_file/user_download/dfee037905e121fa4c2a384431c3e446.pdf
+3. 2026-10-27 — Renewal Subscription to the Online Platform of "Grammarly for Education”
    Ref: 361/Lib/2026
    URL: https://www.kgmu.org/upload_file/user_download/1d8546b677f6ed38d0d9280baebea777.pdf
-2. 2026-10-24 — Supply & fixing of Floor mat in Otis make Lifts installed at Various Department/Building
-   Ref: 1096 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/5597694a7da98276d451afafbbc247a2.pdf
-3. 2026-10-24 — Medical Gas Pipe line Work in Critical care TVU ward at Trauma Center, KGMU Lucknow
-   Ref: 1094 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/0a0d57dcbc2f534283b35cd2864b6350.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -46,15 +46,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/f7bd57eb55964eaf5617bbde67f29e8b.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-10-16 — Regarding Fee & Form Notice for M.Phil Clinical Psychology 1st Year (Regular) & B.Sc. Radiotherapy Technology 2nd Year
+1. 2026-10-28 — Regarding examination form and fee notice of MBBS 1st and 2nd prof. supple exam
+   Ref: No../.066.../Exam/ General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/c9117aef6ad6dd819414fbfc755005ee.pdf
+2. 2026-10-16 — Regarding Fee & Form Notice for M.Phil Clinical Psychology 1st Year (Regular) & B.Sc. Radiotherapy Technology 2nd Year
    Ref: 1011/Exam/General/2026
    URL: https://www.kgmu.org/upload_file/user_download/1510e1adee872c0f139b48287f5dd4fc.pdf
-2. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for PAMS Cadre Students)
+3. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for PAMS Cadre Students)
    Ref: 996/Exam/general/2026
    URL: https://www.kgmu.org/upload_file/user_download/73039f92e0593cec4c5056188e4cb94d.pdf
-3. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for NEET Cadre Students)
-   Ref: 995/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/acb45f3004356f8d5d09e48af252f75d.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
