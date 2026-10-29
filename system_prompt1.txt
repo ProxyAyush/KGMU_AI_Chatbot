@@ -20,30 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-10-29 11:43 IST
+Updated: 2026-10-30 00:06 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-09-12 — Procurement of following item on Proprietary/Single Quotation Basis for Department of C.V.T.S., K.G.M.U., Lucknow
-   Ref: C/14/CVTS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/eefca18e247f7cdf5e84f52740ff7d03.pdf
-2. 2026-09-07 — Procurement of following Items on proprietary/single quotation basis for Department of Obs & Gynae
-   Ref: OG/3581/26
-   URL: https://www.kgmu.org/upload_file/user_download/d4af656b7fbbb2e56753298bf2eedf1b.pdf
-3. 2026-07-28 — Servicing of greaves make 200 KVA DG set microbiology department kgmu lucknow
-   Ref: 694 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/811671216db1271952c691259b331451.pdf
+1. 2026-10-29 — Biosafety Cabinet (V2) (Q2)
+   Ref: GEM/2026/B/8214469
+   URL: https://www.kgmu.org/upload_file/user_download/f9c50ffbfaaca77680d31e4fd4fc41d1.pdf
+2. 2026-10-29 — OPG Machine (V2) (Q2)
+   Ref: GEM/2026/B/8214546
+   URL: https://www.kgmu.org/upload_file/user_download/55040ac423ad02d57583b1eccbfd761e.pdf
+3. 2026-10-29 — Microscopes - Pathological and Research as per IS 4381, IS 5204, IS 4381, IS 5204 (Q3)
+   Ref: GEM/2026/B/8214613
+   URL: https://www.kgmu.org/upload_file/user_download/fd30fbf2d6b4cff75073a72ab4f68981.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-10-17 — Revised Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 3rd Round Document
-   Ref: 2011/KGMUIPMS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/7a7ebbbc4a3529298a4a59f9d1423628.pdf
-3. 2026-10-13 — Regarding Instructions for Allied and Healthcare Sciences (Paramedical) Diploma Admission Batch 2026-27 3rd Round
-   Ref: 1290/KGMUIPMS/2026
-   URL: https://www.kgmu.org/upload_file/user_download/f7bd57eb55964eaf5617bbde67f29e8b.pdf
+2. 2026-10-28 — Walk in interview Result Date 23.10.2016 (Senior Resident Un-registered)
+   Ref: 32408/S.R/J.R/2026
+   URL: https://www.kgmu.org/upload_file/user_download/9419229f07c738c13fc20b2a03227dd3.pdf
+3. 2026-10-28 — Walk-in interview Result Date 24.10.2026 (Demonstrator Medical Physics)
+   Ref: 32395/S.R/J.R/2026
+   URL: https://www.kgmu.org/upload_file/user_download/5b863465876d06fd77a498540e5da202.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-10-28 — Regarding examination form and fee notice of MBBS 1st and 2nd prof. supple exam
