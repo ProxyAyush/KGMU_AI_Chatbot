@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-01 23:32 IST
+Updated: 2026-11-02 12:06 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-29 — Supply installation, testing commissioning of Automation system in sliding entrance glass door 02 Nos on Ist Floor & 02
+1. 2026-10-31 — Quotation Notice — Ref. OG/4290/26
+   Ref: OG/4290/26
+   URL: https://www.kgmu.org/upload_file/user_download/ff3450d775788d93e68dddb06101e0bd.pdf
+2. 2026-10-29 — Supply installation, testing commissioning of Automation system in sliding entrance glass door 02 Nos on Ist Floor & 02
    Ref: 1115 Notice/EE(E/M)/26
    URL: https://www.kgmu.org/upload_file/user_download/27d4e63d4b3d9045f5005c0dc6d25b6f.pdf
-2. 2026-10-29 — Quotation Notice — Ref. 7181/Transport Cell/2026
+3. 2026-10-29 — Quotation Notice — Ref. 7181/Transport Cell/2026
    Ref: 7181/Transport Cell/2026
    URL: https://www.kgmu.org/upload_file/user_download/12910cd28ed05c4da3410bc45be6ea86.pdf
-3. 2026-10-29 — Quotation Notice — Ref. 1114/Notice/EE/26
-   Ref: 1114/Notice/EE/26
-   URL: https://www.kgmu.org/upload_file/user_download/0e06949829d5700f1e56a2821223d151.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
