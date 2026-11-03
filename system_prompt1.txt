@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-03 12:36 IST
+Updated: 2026-11-04 01:14 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-10-31 — Quotation Notice — Ref. OG/4290/26
-   Ref: OG/4290/26
-   URL: https://www.kgmu.org/upload_file/user_download/ff3450d775788d93e68dddb06101e0bd.pdf
-2. 2026-10-29 — Supply installation, testing commissioning of Automation system in sliding entrance glass door 02 Nos on Ist Floor & 02
-   Ref: 1115 Notice/EE(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/27d4e63d4b3d9045f5005c0dc6d25b6f.pdf
-3. 2026-10-29 — Quotation Notice — Ref. 7181/Transport Cell/2026
-   Ref: 7181/Transport Cell/2026
-   URL: https://www.kgmu.org/upload_file/user_download/12910cd28ed05c4da3410bc45be6ea86.pdf
+1. 2026-11-03 — PROCUREMENT OF ITEM ON A PROPRIETARY/SINGLE SOURCE BASIS
+   Ref: 2159/PS/2026
+   URL: https://www.kgmu.org/upload_file/user_download/1fbe933f17f8a06aa9a302f34947b9a8.pdf
+2. 2026-11-02 — To Provide mic system in wards of Surgical Gastroenterology at Shatabdi Hospital Phase-1
+   Ref: 1185/EE/(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/b95fbe0bc2c302db69848dbdf78697bd.pdf
+3. 2026-11-02 — To Provide mic system in ICU of Surgical Gastroenterology at Shatabdi Hospital Phase-1
+   Ref: 1184/EE/(E/M)/26
+   URL: https://www.kgmu.org/upload_file/user_download/aa273a8af14b59c5eef69578f84a2401.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
