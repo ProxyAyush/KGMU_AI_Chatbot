@@ -20,30 +20,30 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-05 01:28 IST
+Updated: 2026-11-07 11:53 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-04 — Consumables for existing hybrid OT endovaascular suite
+1. 2026-11-04 — Procurement of Item on proprietary/single quotation basis for Department of Surgical Gastroenterology
+   Ref: SG/683/2026
+   URL: https://www.kgmu.org/upload_file/user_download/4118fa96a86e04b28b550248446cfeff.pdf
+2. 2026-11-04 — Consumables for existing hybrid OT endovaascular suite
    Ref: GEM/2026/B/8229912
    URL: https://www.kgmu.org/upload_file/user_download/58a2653a17fd36ed729e43a417b8b26b.pdf
-2. 2026-11-04 — Advanced Bone Mineral Densitometer
+3. 2026-11-04 — Advanced Bone Mineral Densitometer
    Ref: GEM/2026/B/8221610
    URL: https://www.kgmu.org/upload_file/user_download/efc8e8a589e3ffd8baf23dab7df6f0d2.pdf
-3. 2026-11-04 — Quotation Notice — Ref. GEM/2026/B/8220620
-   Ref: GEM/2026/B/8220620
-   URL: https://www.kgmu.org/upload_file/user_download/7e16348a4d390f47857facef00082be1.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
    Ref: Recruitment Notice
    URL: https://www.kgmu.org/upload_file/user_download/728ca20147d6892fefa5185cc64034cc.pdf
-2. 2026-10-28 — Walk in interview Result Date 23.10.2016 (Senior Resident Un-registered)
+2. 2026-11-05 — Atal Bihari Vajpayee Scientific Convention Center 85
+   Ref: 218/ABVSCC/2026
+   URL: https://www.kgmu.org/upload_file/user_download/c8778e028cdf5f3b639d646cfce7daf2.pdf
+3. 2026-10-28 — Walk in interview Result Date 23.10.2016 (Senior Resident Un-registered)
    Ref: 32408/S.R/J.R/2026
    URL: https://www.kgmu.org/upload_file/user_download/9419229f07c738c13fc20b2a03227dd3.pdf
-3. 2026-10-28 — Walk-in interview Result Date 24.10.2026 (Demonstrator Medical Physics)
-   Ref: 32395/S.R/J.R/2026
-   URL: https://www.kgmu.org/upload_file/user_download/5b863465876d06fd77a498540e5da202.pdf
 
 ## LATEST EXAMINATION NOTICES
 1. 2026-10-28 — Regarding examination form and fee notice of MBBS 1st and 2nd prof. supple exam
