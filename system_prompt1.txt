@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-14 01:27 IST
+Updated: 2026-11-14 12:22 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-12 — Supply and fixing of Sign Board bearing the Name Electrical Panel & Restricted Area only authorized person in Electrical
-   Ref: 1262/EE/(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/2dca855d7034d2dd4b5c9745180025c4.pdf
-2. 2026-11-12 — Replacement & Providing of speaker/speaker wire, lead & Repairing of sound system in various Department of Old OPD
-   Ref: 1261/EE/(E/M)/26
-   URL: https://www.kgmu.org/upload_file/user_download/6126e13fe95cac5c233456748a1cc5d5.pdf
-3. 2026-11-12 — Quotation Notice — Ref. 1253/EE/(E/M)
-   Ref: 1253/EE/(E/M)
-   URL: https://www.kgmu.org/upload_file/user_download/1581f3e526de079d31e1a4670932af7e.pdf
+1. 2026-11-13 — PROCUREMENT OF ITEM ON A PROPRIETARY/SINGLE SOURCE BASIS
+   Ref: 1479/KGMU/P.C/2026
+   URL: https://www.kgmu.org/upload_file/user_download/ade4b59362c4275bc369f83ef87014e2.pdf
+2. 2026-11-12 — Portable Suction Machine (V2) (Q2)
+   Ref: GEM/2026/B/8267172
+   URL: https://www.kgmu.org/upload_file/user_download/bf30c3194af1979ae3f8fc58de10091f.pdf
+3. 2026-11-12 — Quotation Notice — Ref. GEM/2026/B/8266974
+   Ref: GEM/2026/B/8266974
+   URL: https://www.kgmu.org/upload_file/user_download/7be56c667e9c4f4702af65fadcfd91a4.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
