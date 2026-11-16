@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-14 12:22 IST
+Updated: 2026-11-16 12:33 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-13 — PROCUREMENT OF ITEM ON A PROPRIETARY/SINGLE SOURCE BASIS
-   Ref: 1479/KGMU/P.C/2026
-   URL: https://www.kgmu.org/upload_file/user_download/ade4b59362c4275bc369f83ef87014e2.pdf
-2. 2026-11-12 — Portable Suction Machine (V2) (Q2)
-   Ref: GEM/2026/B/8267172
-   URL: https://www.kgmu.org/upload_file/user_download/bf30c3194af1979ae3f8fc58de10091f.pdf
-3. 2026-11-12 — Quotation Notice — Ref. GEM/2026/B/8266974
-   Ref: GEM/2026/B/8266974
-   URL: https://www.kgmu.org/upload_file/user_download/7be56c667e9c4f4702af65fadcfd91a4.pdf
+1. 2026-11-13 — Quotation Notice — Ref. GEM/2026/B/8234458
+   Ref: GEM/2026/B/8234458
+   URL: https://www.kgmu.org/upload_file/user_download/30004503c33e6c9b471e6d64f57aebd5.pdf
+2. 2026-11-13 — Instrument of high end Precision surgery for supper fine vessels. For Micro surgery and supermicro
+   Ref: GEM/2026/B/8234374
+   URL: https://www.kgmu.org/upload_file/user_download/5c575f1f8c0173bbbc433868141fb766.pdf
+3. 2026-11-13 — Complete walk away system for automated viral load testing
+   Ref: GEM/2026/B/8234229
+   URL: https://www.kgmu.org/upload_file/user_download/9e2e162db5421732a15eaf533a996e01.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
