@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-17 13:48 IST
+Updated: 2026-11-19 02:19 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-16 — Procurement of item on Proprietary/single quotation basis for Department of Cardiology
+1. 2026-11-16 — Quotation Notice — Ref. 1279/Notice/EE/26
+   Ref: 1279/Notice/EE/26
+   URL: https://www.kgmu.org/upload_file/user_download/a4c2d3758b2372ae55f6f029c1cfd610.pdf
+2. 2026-11-16 — Procurement of item on Proprietary/single quotation basis for Department of Cardiology
    Ref: 2002/Cardio/26
    URL: https://www.kgmu.org/upload_file/user_download/d9aac121738167c9effaee003b3c856e.pdf
-2. 2026-11-16 — Procurement of item on Proprietary/single quotation basis for Department of Cardiology
+3. 2026-11-16 — Procurement of item on Proprietary/single quotation basis for Department of Cardiology
    Ref: 2003/Cardio/26
    URL: https://www.kgmu.org/upload_file/user_download/c1f88cfa5d04083ee4eea7feebef6a4b.pdf
-3. 2026-11-13 — Quotation Notice — Ref. GEM/2026/B/8234458
-   Ref: GEM/2026/B/8234458
-   URL: https://www.kgmu.org/upload_file/user_download/30004503c33e6c9b471e6d64f57aebd5.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
