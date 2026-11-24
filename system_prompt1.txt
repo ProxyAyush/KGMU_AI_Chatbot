@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-23 01:25 IST
+Updated: 2026-11-24 05:45 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-20 — Procurement of item on Proprietary/Single Quotation Basis for Critical Care Unit (TVU), Department of Anaesthesiology
+1. 2026-11-23 — Procurement of item on proprietary/ single quotation basis for NIDAN Kendra at Pathology Department
+   Ref: 1711
+   URL: https://www.kgmu.org/upload_file/user_download/1cbc3b7085edbdb6cde5c7d5118dd03d.pdf
+2. 2026-11-21 — Uninstallation, Shifting and Re-Installation of old Existing water coolers, Aquaguard & RO for various Department at
+   Ref: 1310/EE/E/M/26
+   URL: https://www.kgmu.org/upload_file/user_download/30f857085d43e4143f0ea531b5dfb2a5.pdf
+3. 2026-11-20 — Procurement of item on Proprietary/Single Quotation Basis for Critical Care Unit (TVU), Department of Anaesthesiology
    Ref: 423/CCU/26
    URL: https://www.kgmu.org/upload_file/user_download/a79adfc2012d6ad67bf2aae4214771e5.pdf
-2. 2026-11-19 — Procurement of the item on proprietary/ single quotation basis for Intramunal project "Prognostic Outcomes of diverse
-   Ref: 1702/2026
-   URL: https://www.kgmu.org/upload_file/user_download/453745039539f5fbe7d0479deb4cbb8d.pdf
-3. 2026-11-16 — Quotation Notice — Ref. 1279/Notice/EE/26
-   Ref: 1279/Notice/EE/26
-   URL: https://www.kgmu.org/upload_file/user_download/a4c2d3758b2372ae55f6f029c1cfd610.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
