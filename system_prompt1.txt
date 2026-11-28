@@ -20,19 +20,19 @@
 
 <!-- AUTO_KGMU_UPDATES_START -->
 # CURRENT KGMU UPDATES
-Updated: 2026-11-26 14:15 IST
+Updated: 2026-11-29 01:58 IST
 Use these categorized entries when answering questions about recent KGMU tenders, general notices, and examinations. Preserve official Hindi titles when the source is in Hindi.
 
 ## LATEST TENDERS
-1. 2026-11-26 — General Orthopedic Instrument Set
-   Ref: 26-11-2026
-   URL: https://www.kgmu.org/upload_file/user_download/060ec1343605d62e9c79432c55d7ffb8.pdf
-2. 2026-11-25 — Quotation Notice — Ref. 135, Dated ŌĆō 25.11.2026
-   Ref: 135, Dated ŌĆō 25.11.2026
-   URL: https://www.kgmu.org/upload_file/user_download/f38963403890560c8b96920497ed7c3f.pdf
-3. 2026-11-25 — Ventricular Assist Device VAD
-   Ref: GEM/2026/B/8302346
-   URL: https://www.kgmu.org/upload_file/user_download/59a36ac567240da8ecdc8656cefe5232.pdf
+1. 2026-11-28 — Ultrasound Machine (V2) (Q2)
+   Ref: GEM/2026/B/8327608
+   URL: https://www.kgmu.org/upload_file/user_download/1e8e4e1586131550f1edfac3c5f5a674.pdf
+2. 2026-11-28 — Quotation Notice — Ref. GEM/2026/B/8303601
+   Ref: GEM/2026/B/8303601
+   URL: https://www.kgmu.org/upload_file/user_download/f1b1361606f195bc114d4c3764071840.pdf
+3. 2026-11-28 — Super Micro Surgical Instruments
+   Ref: GEM/2026/B/8303662
+   URL: https://www.kgmu.org/upload_file/user_download/6f65861098920e972c6ad308fa78fcb6.pdf
 
 ## LATEST GENERAL NOTICES
 1. 2027-07-31 — Application are invited from eligible India citizens for the following position under the SIB SHInE
@@ -46,15 +46,15 @@ Use these categorized entries when answering questions about recent KGMU tenders
    URL: https://www.kgmu.org/upload_file/user_download/fb053885ccf77d9fab2c317d92f2d279.pdf
 
 ## LATEST EXAMINATION NOTICES
-1. 2026-10-28 — Regarding examination form and fee notice of MBBS 1st and 2nd prof. supple exam
+1. 2026-11-27 — Regarding Final Examination Scheme-2027
+   Ref: 2037/Exam/General/2026
+   URL: https://www.kgmu.org/upload_file/user_download/a7bbaca5a97dce9ec35f38cd980b78a3.pdf
+2. 2026-11-27 — Publication of Eligible and Ineligible Candidates' Lists for the Limited Departmental Competitive Examination (LDCE) and
+   Ref: Notice
+   URL: https://www.kgmu.org/upload_file/user_download/b5a53e83eb0e7c07b3508f82c70f8df2.pdf
+3. 2026-10-28 — Regarding examination form and fee notice of MBBS 1st and 2nd prof. supple exam
    Ref: No../.066.../Exam/ General/2026
    URL: https://www.kgmu.org/upload_file/user_download/c9117aef6ad6dd819414fbfc755005ee.pdf
-2. 2026-10-16 — Regarding Fee & Form Notice for M.Phil Clinical Psychology 1st Year (Regular) & B.Sc. Radiotherapy Technology 2nd Year
-   Ref: 1011/Exam/General/2026
-   URL: https://www.kgmu.org/upload_file/user_download/1510e1adee872c0f139b48287f5dd4fc.pdf
-3. 2026-10-15 — Regarding Fee & Form Notice for PCPNDT Examination-2026 (Only for PAMS Cadre Students)
-   Ref: 996/Exam/general/2026
-   URL: https://www.kgmu.org/upload_file/user_download/73039f92e0593cec4c5056188e4cb94d.pdf
 
 <!-- AUTO_KGMU_UPDATES_END -->
 
